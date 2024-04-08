@@ -14,13 +14,17 @@
             <Picker x:Name="mokkimuokkaus" Title="valitse mökki" HorizontalOptions="Center">
 
             </Picker>
+            <Picker x:Name="test" Title="test123" HorizontalOptions="Center">
+
+            </Picker>
             <!-- UUDEN NAPIN KOODI -->
             <Button
                  x:Name="DatabaseBtn"
                  Text="Connect to database"
                  SemanticProperties.Hint="Connects to database"
                  Clicked="OnDatabaseClicked"
-                 HorizontalOptions="Fill" />
+                 HorizontalOptions="Fill" />
+
             <Button
                 x:Name="CounterBtn"
                 Text="Click me"
