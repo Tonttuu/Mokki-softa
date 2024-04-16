@@ -8,12 +8,12 @@ using MySqlConnector; // Tuodaan MySqlConnector -kirjasto
 namespace Mokki_softa
 {
     public class DatabaseConnector
-    {
+    {   // piilota nämä, oma file tms?? kuten conn.php toisessa projektissa
         private readonly string server = "localhost";
         private readonly string port = "3307";
         private readonly string uid = "root";
         private readonly string pwd = "Ruutti";
-        private readonly string database = "hovi";
+        private readonly string database = "vn";
         public DatabaseConnector()
         {
         }
