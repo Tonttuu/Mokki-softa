@@ -3,34 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mokki_softa.MainPage">
 
-
+    <!-- alustava form test  -->
     <ScrollView>
-        <VerticalStackLayout  Spacing="25"
-                              Padding="30,0"
-                              VerticalOptions="Center">
-            <Picker x:Name="aluemuokkaus" Title="valitse alue" HorizontalOptions="Center">
+        <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Start">
+            <Entry x:Name="entryMokkiNimi" Placeholder="Mökin nimi" HorizontalOptions="Center" WidthRequest="500" />
+            <Entry x:Name="entryKatuosoite" Placeholder="Katuosoite" HorizontalOptions="Center" WidthRequest="500" />
+            <Entry x:Name="entryHinta" Placeholder="Hinta" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="500" />
+            <Entry x:Name="entryKuvaus" Placeholder="Kuvaus" HorizontalOptions="Center" WidthRequest="500" />
+            <Entry x:Name="entryHenkilomaara" Placeholder="Henkilömäärä" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="500" />
+            <Entry x:Name="entryVarustelu" Placeholder="Varustelu" HorizontalOptions="Center" WidthRequest="500" />
+            <Entry x:Name="entryAlueId" Placeholder="Alue ID" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="500" />
+            <Entry x:Name="entryPostinro" Placeholder="Postinumero" HorizontalOptions="Center" WidthRequest="500" />
 
-            </Picker>
-            <Picker x:Name="mokkimuokkaus" Title="valitse mökki" HorizontalOptions="Center">
-
-            </Picker>
-            <Picker x:Name="test" Title="test123" HorizontalOptions="Center">
-
-            </Picker>
-            <!-- UUDEN NAPIN KOODI -->
-            <Button
-                 x:Name="DatabaseBtn"
-                 Text="Connect to database"
-                 SemanticProperties.Hint="Connects to database"
-                 Clicked="OnDatabaseClicked"
-                 HorizontalOptions="Fill" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+            <Button Text="Submit" Clicked="OnSubmitClicked" HorizontalOptions="Center" WidthRequest="500" />
         </VerticalStackLayout>
     </ScrollView>
 

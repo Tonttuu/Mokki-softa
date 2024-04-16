@@ -22,20 +22,48 @@ namespace Mokki_softa
             }
             catch (MySqlException ex)
             {
-                await DisplayAlert("Failure", ex.Message, "OK");
+                await DisplayAlert("Tietokanta yhteys epäonnistui", ex.Message, "OK");
             }
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private async void OnSubmitClicked(object sender, EventArgs e)
         {
-            count++;
+            // Numeeristen kenttien tarkistus, sanitoidaan syöttöä
+            if (!double.TryParse(entryHinta.Text, out double hinta) ||
+                !int.TryParse(entryHenkilomaara.Text, out int henkilomaara) ||
+                !int.TryParse(entryAlueId.Text, out int alueId))
+            {
+                await DisplayAlert("Virhe", "Hinnan, Henkilömäärän, sekä AlueIDn täytyy olla numeerisia.", "OK");
+                return;
+            }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
+            var mokki = new Mokki
+            {
+                Mokkinimi = entryMokkiNimi.Text,
+                Katuosoite = entryKatuosoite.Text,
+                Hinta = hinta,
+                Kuvaus = entryKuvaus.Text,
+                Henkilomaara = henkilomaara,
+                Varustelu = entryVarustelu.Text,
+                AlueId = alueId,
+                Postinro = entryPostinro.Text
+            };
+
+            bool isSuccess = await SaveDataToDatabase(mokki);
+            if (isSuccess)
+            {
+                await DisplayAlert("Onnistui!", "Tiedot lisätty", "OK");
+            }
             else
-                CounterBtn.Text = $"Clicked {count} times";
+            {
+                await DisplayAlert("Virhe", "Tietojen lisäys epäonnistui", "OK");
+            }
+        }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        private async Task<bool> SaveDataToDatabase(Mokki mokki)
+        {
+            //WIP
+            return await Task.FromResult(true);
         }
     }
 
