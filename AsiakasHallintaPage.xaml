@@ -20,10 +20,9 @@
             <Entry x:Name="entryPostiNro" Placeholder="Postinumero" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
             <Entry x:Name="entryPuhNro" Placeholder="Puhelinnumero" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
             <Entry x:Name="entryEmail" Placeholder="Sähköposti" HorizontalOptions="Center" WidthRequest="300" />
-            <Label Text="Asiakas ID" FontSize="20"  HorizontalOptions="Center"/>
-            <Entry x:Name="entryAsiakasID" Placeholder="TÄYTÄ VAIN, JOS POISTAT ASIAKKAAN TIEDOT" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
-
             <Button Text="Lisää tiedot" Clicked="OnAsiakasSubmitClicked" HorizontalOptions="Center" WidthRequest="300" />
+            <Label Text="Asiakas ID" FontSize="15"  HorizontalOptions="Center"/>
+            <Entry x:Name="entryAsiakasID" Placeholder="TÄYTÄ VAIN, JOS POISTAT ASIAKKAAN TIEDOT" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
             <Button Text="Poista tiedot" Clicked="OnAsiakasDeleteClicked" HorizontalOptions="Center" WidthRequest="300" />
 
         </VerticalStackLayout>

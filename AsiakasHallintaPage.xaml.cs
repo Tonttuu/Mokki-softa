@@ -10,13 +10,12 @@ namespace Mokki_softa
         }
         
 
-        // asiakkaan tietojen lisääminen tietokantaan
+        // Asiakkaan tietojen lisääminen tietokantaan - funktio(t)
         public async void OnAsiakasSubmitClicked(object sender, EventArgs e)
         {
             // Numeeristen kenttien tarkistus, sanitoidaan syöttöä
             if (!double.TryParse(entryPostiNro.Text, out double hinta) ||
                 !int.TryParse(entryPuhNro.Text, out int henkilomaara)) //||
-                //!int.TryParse(entryAlueId.Text, out int alueId))
             {
                 await DisplayAlert("Virhe", "Puhelinnumeron ja postinumeron täytyy olla numeerisia.", "OK");
                 return;
@@ -25,7 +24,7 @@ namespace Mokki_softa
             var appSettings = ConfigurationProvider.GetAppSettings();
             var dbConnector = new DatabaseConnector(appSettings);
 
-            bool isSuccess = await SaveDataToDatabase(/*mokki,*/ dbConnector);
+            bool isSuccess = await SaveDataToDatabase(dbConnector);
             if (isSuccess)
             {
                 await DisplayAlert("Onnistui!", "Tiedot lisätty", "OK");
@@ -36,7 +35,7 @@ namespace Mokki_softa
             }
         }
         
-        private async Task<bool> SaveDataToDatabase(/*Mokki mokki, */DatabaseConnector dbConnector)
+        private async Task<bool> SaveDataToDatabase(DatabaseConnector dbConnector)
         {
             try
             {
@@ -66,7 +65,7 @@ namespace Mokki_softa
         }
 
 
-        // Asiakkaan poistaminen tietokannasta
+        // Asiakkaan poistaminen tietokannasta - funktio(t)
         public async void OnAsiakasDeleteClicked(object sender, EventArgs e)
 {
     if (!int.TryParse(entryAsiakasID.Text, out int asiakasId))
@@ -97,6 +96,7 @@ namespace Mokki_softa
     }
 }
 
+// Tarkistetaan, että onko poistettava asiakas tietokannassa.
 private async Task<bool> CheckIfCustomerExists(int asiakasId, DatabaseConnector dbConnector)
 {
     try
@@ -114,11 +114,12 @@ private async Task<bool> CheckIfCustomerExists(int asiakasId, DatabaseConnector 
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Virhe asiakkaan olemassaolon tarkistuksessa: {ex.Message}");
+        Console.WriteLine($"Virhe asiakkaan tarkistuksessa: {ex.Message}");
         return false;
     }
 }
 
+// jos asiakas tietokannassa => Poistetaan asiakkaan tiedot.
 private async Task<bool> RemoveCustomerData(int asiakasId, DatabaseConnector dbConnector)
 {
     try
