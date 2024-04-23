@@ -60,11 +60,52 @@ namespace Mokki_softa
             }
         }
 
+/*
         private async Task<bool> SaveDataToDatabase(Mokki mokki)
         {
             //WIP
             return await Task.FromResult(true);
         }
     }
+*/
+
+
+    private async Task<bool> SaveDataToDatabase(Mokki mokki)
+{
+    try
+    {
+        using (var connection = new DatabaseConnector()._getConnection())
+        {
+            await connection.OpenAsync();
+
+            string query = "INSERT INTO mokki (mokkinimi, katuosoite, hinta, kuvaus, henkilomaara, varustelu, alue_id ,postinro) " +
+                           "VALUES (@mokkinimi, @katuosoite, @hinta, @kuvaus, @henkilomaara, @varustelu, @alue_id, @postinro)";
+            
+            using (var command = new MySqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@mokkinimi", mokki.Mokkinimi);
+                command.Parameters.AddWithValue("@katuosoite", mokki.Katuosoite);
+                command.Parameters.AddWithValue("@hinta", mokki.Hinta);
+                command.Parameters.AddWithValue("@kuvaus", mokki.Kuvaus);
+                command.Parameters.AddWithValue("@henkilomaara", mokki.Henkilomaara);
+                command.Parameters.AddWithValue("@varustelu", mokki.Varustelu);
+                command.Parameters.AddWithValue("@alue_id", mokki.AlueId);
+                command.Parameters.AddWithValue("@postinro", mokki.Postinro);
+                
+                int rowsAffected = await command.ExecuteNonQueryAsync();
+                return rowsAffected > 0;
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Virhe tallennettaessa tietoja tietokantaan: " + ex.Message);
+        return false;
+    }
+    }
+}
+
+
+
 
 }
