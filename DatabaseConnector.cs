@@ -8,19 +8,19 @@ using MySqlConnector; // Tuodaan MySqlConnector -kirjasto
 namespace Mokki_softa
 {
     public class DatabaseConnector
-    {   // piilota nämä, oma file tms?? kuten conn.php toisessa projektissa
-        private readonly string server = "localhost";
-        private readonly string port = "3307";
-        private readonly string uid = "root";
-        private readonly string pwd = "Ruutti";
-        private readonly string database = "vn";
-        public DatabaseConnector()
+    {
+        private readonly AppSettings _appSettings;
+
+        public DatabaseConnector(AppSettings appSettings)
         {
+            _appSettings = appSettings;
         }
-        public MySqlConnection _getConnection()
+
+        public MySqlConnection GetConnection()
         {
             string connectionString =
-           $"Server={server};Port={port};uid={uid};password={pwd};database={database}";
+                $"Server={_appSettings.Server};Port={_appSettings.Port};uid={_appSettings.UserId};" +
+                $"password={_appSettings.Password};database={_appSettings.Database}";
 
             MySqlConnection connection = new MySqlConnection(connectionString);
             return connection;

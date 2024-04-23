@@ -4,8 +4,16 @@
              x:Class="Mokki_softa.MainPage">
 
     <!-- alustava form test  -->
-    <ScrollView>
-        <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Start">
+
+    <Grid ColumnSpacing="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <VerticalStackLayout Grid.Column="0" Padding="10" Spacing="25">
+            <Label Text="Täytä nämä kentät lisätäksesi mökin tietokantaan" HorizontalTextAlignment="Center" HorizontalOptions="Center" WidthRequest="500" />
             <Entry x:Name="entryMokkiNimi" Placeholder="Mökin nimi" HorizontalOptions="Center" WidthRequest="500" />
             <Entry x:Name="entryKatuosoite" Placeholder="Katuosoite" HorizontalOptions="Center" WidthRequest="500" />
             <Entry x:Name="entryHinta" Placeholder="Hinta" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="500" />
@@ -15,10 +23,17 @@
             <Entry x:Name="entryAlueId" Placeholder="Alue ID" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="500" />
             <Entry x:Name="entryPostinro" Placeholder="Postinumero" HorizontalOptions="Center" WidthRequest="500" />
 
-            <Button Text="Submit" Clicked="OnSubmitClicked" HorizontalOptions="Center" WidthRequest="500" />
+            <Button Text="Lisää tietokantaan" Clicked="OnMokkiSubmitClicked" HorizontalOptions="Center" WidthRequest="500" />
         </VerticalStackLayout>
-    </ScrollView>
 
-    
+        <!-- aluueet form-->
+        <VerticalStackLayout Grid.Column="1" Padding="10" Spacing="25">
+            <Label Text="Alueet" FontAttributes="Bold"/>
+            <!-- Name Field -->
+            <Entry x:Name="entryAlueNimi" Placeholder="Nimi"/>
+            <!-- Buttons -->
+            <Button Text="Save Alue" Clicked="OnSaveAlueClicked"/>
+        </VerticalStackLayout>
+    </Grid>
 
 </ContentPage>
