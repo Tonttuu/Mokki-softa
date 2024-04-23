@@ -45,7 +45,6 @@ namespace Mokki_softa
 
                 string query = "INSERT INTO asiakas (postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) " +
                                "VALUES (@postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro)";
-
                 using var cmd = new MySqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@postinro", entryPostiNro.Text);
                 cmd.Parameters.AddWithValue("@etunimi", entryEtuNimi.Text);

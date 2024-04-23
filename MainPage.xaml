@@ -26,7 +26,7 @@
             <Button Text="Lisää tietokantaan" Clicked="OnMokkiSubmitClicked" HorizontalOptions="Center" WidthRequest="500" />
         </VerticalStackLayout>
 
-        <!-- asiakashallinta form sivulle siirtyminen-->
+        <!-- asiakashallinta sivulle siirtyminen-->
         <VerticalStackLayout Grid.Column="1" Padding="10" Spacing="25">
             <!-- Buttons -->
             <Button Text="Siirry Asiakashallintaan" Clicked="Asiakashallinta_Clicked"/>
