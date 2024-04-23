@@ -15,9 +15,8 @@ namespace Mokki_softa
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+            var appSettings = ConfigurationProvider.GetAppSettings();
+            builder.Services.AddSingleton(new DatabaseConnector(appSettings));
 
             return builder.Build();
         }
