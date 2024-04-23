@@ -9,6 +9,13 @@ namespace Mokki_softa
             InitializeComponent();
         }
 
+        // Väliaikainen - Asiakashallinta-sivulle siirtyminen (testaus)
+        public async void Asiakashallinta_Clicked(object sender, EventArgs e)
+        {
+            AsiakasHallintaPage asiakasHallintaPage = new AsiakasHallintaPage(); 
+            await Navigation.PushAsync(asiakasHallintaPage);
+        }
+
         private async void OnDatabaseClicked(object sender, EventArgs e)
         {
             var appSettings = ConfigurationProvider.GetAppSettings();
