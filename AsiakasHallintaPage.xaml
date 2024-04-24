@@ -14,6 +14,13 @@
 
         <VerticalStackLayout Grid.Column="0" Padding="10" Spacing="25">
             <Label Text="Täytä nämä kentät lisätäksesi asiakkaan tiedot tietokantaan" HorizontalTextAlignment="Center" HorizontalOptions="Center" WidthRequest="300" />
+            
+            <Picker x:Name="pickerAsiakkaat"
+            Title="Valitse asiakas"
+            WidthRequest="300"
+            HorizontalOptions="FillAndExpand"
+            SelectedIndexChanged="OnAsiakasSelectedIndexChanged" />
+
             <Entry x:Name="entryEtuNimi" Placeholder="Etunimi" HorizontalOptions="Center" WidthRequest="300" />
             <Entry x:Name="entrySukuNimi" Placeholder="Sukunimi" HorizontalOptions="Center" WidthRequest="300" />
             <Entry x:Name="entryLahisoite" Placeholder="Lahiosoite" HorizontalOptions="Center" WidthRequest="300" />
@@ -21,8 +28,6 @@
             <Entry x:Name="entryPuhNro" Placeholder="Puhelinnumero" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
             <Entry x:Name="entryEmail" Placeholder="Sähköposti" HorizontalOptions="Center" WidthRequest="300" />
             <Button Text="Lisää tai päivitä tiedot" Clicked="OnAsiakasSubmitClicked" HorizontalOptions="Center" WidthRequest="300" />
-            <Label Text="Asiakas ID" FontSize="15"  HorizontalOptions="Center"/>
-            <Entry x:Name="entryAsiakasID" Placeholder="TÄYTÄ VAIN, JOS POISTAT ASIAKKAAN TIEDOT" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
             <Button Text="Poista tiedot" Clicked="OnAsiakasDeleteClicked" HorizontalOptions="Center" WidthRequest="300" />  
 
 
