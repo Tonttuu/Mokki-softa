@@ -27,7 +27,7 @@
             <Entry x:Name="entryPostiNro" Placeholder="Postinumero" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
             <Entry x:Name="entryPuhNro" Placeholder="Puhelinnumero" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
             <Entry x:Name="entryEmail" Placeholder="Sähköposti" HorizontalOptions="Center" WidthRequest="300" />
-            <Button Text="Lisää tai päivitä tiedot" Clicked="OnAsiakasSubmitClicked" HorizontalOptions="Center" WidthRequest="300" />
+            <Button Text="Lisää/Päivitä tiedot" Clicked="OnAsiakasSubmitClicked" HorizontalOptions="Center" WidthRequest="300" />
             <Button Text="Poista tiedot" Clicked="OnAsiakasDeleteClicked" HorizontalOptions="Center" WidthRequest="300" />  
 
 

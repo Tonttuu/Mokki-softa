@@ -9,36 +9,11 @@ namespace Mokki_softa
             InitializeComponent();
             var appSettings = ConfigurationProvider.GetAppSettings();
             var dbConnector = new DatabaseConnector(appSettings);
-            LoadCustomersIntoPicker(dbConnector); // Asiakkaat pickeriin
+            LoadCustomersIntoPicker(dbConnector); // Asiakkaat Pickeriin
         }
     
 
-// Tarkistetaan, että onko poistettava asiakas tietokannassa.
-private async Task<bool> CheckIfCustomerExists(int asiakasId, DatabaseConnector dbConnector)
-{
-    try
-    {
-        using var conn = dbConnector.GetConnection();
-        await conn.OpenAsync();
-
-        string query = "SELECT COUNT(*) FROM asiakas WHERE asiakas_id = @asiakasId";
-
-        using var cmd = new MySqlCommand(query, conn);
-        cmd.Parameters.AddWithValue("@asiakasId", asiakasId);
-
-        long count = (long)await cmd.ExecuteScalarAsync();
-        return count > 0;
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Virhe asiakkaan tarkistuksessa: {ex.Message}");
-        return false;
-    }
-}
-
-
-
-// Asiakkaan poisto
+// Asiakkaan tietpojen poisto
 public async void OnAsiakasDeleteClicked(object sender, EventArgs e)
 {
     if (pickerAsiakkaat.SelectedItem == null)
@@ -52,9 +27,6 @@ public async void OnAsiakasDeleteClicked(object sender, EventArgs e)
     var appSettings = ConfigurationProvider.GetAppSettings();
     var dbConnector = new DatabaseConnector(appSettings);
 
-   // bool isCustomerExists = await CheckIfCustomerExists(asiakasId, dbConnector);
-   // if (isCustomerExists)
-   // {
         bool isSuccess = await RemoveCustomerData(asiakasId, dbConnector);
         if (isSuccess)
         {
@@ -68,7 +40,6 @@ public async void OnAsiakasDeleteClicked(object sender, EventArgs e)
         {
             await DisplayAlert("Virhe", "Asiakkaan tietojen poisto epäonnistui!", "OK");
         }
-    //}
 
 }
 private void ClearFields()
@@ -83,10 +54,7 @@ private void ClearFields()
 
 
 
-
-
-
-// jos asiakas tietokannassa => Poistetaan asiakkaan tiedot.
+// Asiakkaan tietojen poisto
 private async Task<bool> RemoveCustomerData(int asiakasId, DatabaseConnector dbConnector)
 {
     try
@@ -108,14 +76,14 @@ private async Task<bool> RemoveCustomerData(int asiakasId, DatabaseConnector dbC
     }
 }
   
+// Asiakkaan tietojen lisääminen tai päivittäminen
 private async Task<bool> SaveOrUpdateDataToDatabase(int asiakasId, DatabaseConnector dbConnector)
 {
     try
     {
         using var conn = dbConnector.GetConnection();
         await conn.OpenAsync();
-
-        // Tarkista ensin, onko asiakas jo olemassa
+        // Tarkistaan, onko pickeristä valittu jo olemassa oleva asiakas.
         string checkQuery = "SELECT COUNT(*) FROM asiakas WHERE asiakas_id = @asiakasId";
         using var checkCmd = new MySqlCommand(checkQuery, conn);
         checkCmd.Parameters.AddWithValue("@asiakasId", asiakasId);
@@ -123,7 +91,7 @@ private async Task<bool> SaveOrUpdateDataToDatabase(int asiakasId, DatabaseConne
 
         if (count > 0)
         {
-            // Päivitä asiakkaan tiedot
+            // Päivitä olemassa olevan asiakkaan tiedot
             string updateQuery = "UPDATE asiakas SET postinro = @postinro, etunimi = @etunimi, sukunimi = @sukunimi, lahiosoite = @lahiosoite, email = @email, puhelinnro = @puhelinnro";
             updateQuery += " WHERE asiakas_id = @asiakasId";
 
@@ -142,7 +110,7 @@ private async Task<bool> SaveOrUpdateDataToDatabase(int asiakasId, DatabaseConne
         }
         else
         {
-            // Lisää uusi asiakas
+            // Lisätään uusi asiakas tietokantaan
             string insertQuery = "INSERT INTO asiakas (postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) " +
                                 "VALUES (@postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro)";
 
@@ -168,6 +136,7 @@ private async Task<bool> SaveOrUpdateDataToDatabase(int asiakasId, DatabaseConne
 
 
 
+// Asiakkaan lisäys/tietojen päivitys nappi & tarkistukset
 public async void OnAsiakasSubmitClicked(object sender, EventArgs e)
 {
     // Tarkista, että kaikki kentät ovat täytettyjä
@@ -193,6 +162,7 @@ public async void OnAsiakasSubmitClicked(object sender, EventArgs e)
         if (isSuccess)
         {
             await DisplayAlert("Onnistui!", "Tiedot päivitetty", "OK");
+             ClearFields();
         }
         else
         {
@@ -207,7 +177,7 @@ public async void OnAsiakasSubmitClicked(object sender, EventArgs e)
         {
             await DisplayAlert("Onnistui!", "Uusi asiakas lisätty", "OK");
            // await LoadCustomersIntoPicker(dbConnector);
-       //     ClearFields();
+            ClearFields();
         }
         else
         {
@@ -216,6 +186,7 @@ public async void OnAsiakasSubmitClicked(object sender, EventArgs e)
     }
 }
 
+// Uuden asiakkaan tietojen talletus
 private async Task<bool> SaveNewCustomerData(DatabaseConnector dbConnector)
 {
     try
@@ -247,7 +218,7 @@ private async Task<bool> SaveNewCustomerData(DatabaseConnector dbConnector)
 
 
 
-// Asiakkaat pickerissä
+// Asiakkaat pickerissä (ID)
 private async void OnAsiakasSelectedIndexChanged(object sender, EventArgs e)
 {
     var appSettings = ConfigurationProvider.GetAppSettings();
@@ -288,7 +259,7 @@ private async Task LoadCustomersIntoPicker(DatabaseConnector dbConnector)
     }
 }
 
-// Näytä valitun asiakkaan tiedot
+// Näytä pickeristä valitun asiakkaan tiedot entry-kentissä
 private async Task LoadCustomerData(int asiakasId, DatabaseConnector dbConnector)
 {
     try
@@ -319,7 +290,6 @@ private async Task LoadCustomerData(int asiakasId, DatabaseConnector dbConnector
         await DisplayAlert("Virhe", $"Virhe asiakkaiden lataamisessa: {ex.Message}", "OK");
     }
 }
-
 
 // -----------------------------------------------------------------
   }
