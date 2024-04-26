@@ -1,4 +1,4 @@
-﻿using MySqlConnector;
+using MySqlConnector;
 
 namespace Mokki_softa
 {
@@ -7,6 +7,13 @@ namespace Mokki_softa
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        // Väliaikainen - Asiakashallinta-sivulle siirtyminen (testaus)
+        public async void Asiakashallinta_Clicked(object sender, EventArgs e)
+        {
+            AsiakasHallintaPage asiakasHallintaPage = new AsiakasHallintaPage(); 
+            await Navigation.PushAsync(asiakasHallintaPage);
         }
 
         private async void OnDatabaseClicked(object sender, EventArgs e)
