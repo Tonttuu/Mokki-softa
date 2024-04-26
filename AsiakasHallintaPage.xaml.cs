@@ -21,8 +21,10 @@ public async void OnAsiakasDeleteClicked(object sender, EventArgs e)
         await DisplayAlert("Virhe", "Valitse ensin asiakas poistettavaksi.", "OK");
         return;
     }
-
-    int asiakasId = (int)pickerAsiakkaat.SelectedItem;
+   //int asiakasId = (int)pickerAsiakkaat.SelectedItem; //vanha, toimii id:llä
+    // Otetaan valitusta itemistä vain asiakkaan id
+    string selectedItem = (string)pickerAsiakkaat.SelectedItem;
+    int asiakasId = int.Parse(selectedItem.Split(':')[0]);
 
     var appSettings = ConfigurationProvider.GetAppSettings();
     var dbConnector = new DatabaseConnector(appSettings);
@@ -157,7 +159,11 @@ public async void OnAsiakasSubmitClicked(object sender, EventArgs e)
     if (pickerAsiakkaat.SelectedItem != null)
     {
         // Asiakas valittu Pickeristä, päivitä asiakkaan tiedot
-        int asiakasId = (int)pickerAsiakkaat.SelectedItem;
+      //  int asiakasId = (int)pickerAsiakkaat.SelectedItem; //toimii, vanha
+    // Otetaan valitusta itemistä vain asiakkaan id
+    string selectedItem = (string)pickerAsiakkaat.SelectedItem; // korjattu
+    int asiakasId = int.Parse(selectedItem.Split(':')[0]);
+
         bool isSuccess = await SaveOrUpdateDataToDatabase(asiakasId, dbConnector);
         if (isSuccess)
         {
@@ -219,6 +225,7 @@ private async Task<bool> SaveNewCustomerData(DatabaseConnector dbConnector)
 
 
 // Asiakkaat pickerissä (ID)
+/*
 private async void OnAsiakasSelectedIndexChanged(object sender, EventArgs e)
 {
     var appSettings = ConfigurationProvider.GetAppSettings();
@@ -230,8 +237,26 @@ private async void OnAsiakasSelectedIndexChanged(object sender, EventArgs e)
         await LoadCustomerData(selectedCustomerId, dbConnector);
     }
 }
+*/// toimiva yllä_ 
+
+// Muutettu OnAsiakasSelectedIndexChanged, jotta se käsittelee asiakkaan id:n, etunimen ja sukunimen
+private async void OnAsiakasSelectedIndexChanged(object sender, EventArgs e)
+{
+    var appSettings = ConfigurationProvider.GetAppSettings();
+    var dbConnector = new DatabaseConnector(appSettings);
+
+    if (pickerAsiakkaat.SelectedItem != null)
+    {
+        // Otetaan valitusta itemistä asiakkaan id, etunimi ja sukunimi
+        string selectedItem = (string)pickerAsiakkaat.SelectedItem;
+        int asiakasId = int.Parse(selectedItem.Split(':')[0]);
+        await LoadCustomerData(asiakasId, dbConnector);
+    }
+}
+
 
 // Hae kaikki asiakkaat tietokannasta ja aseta ne Pickerin ItemsSourceksi
+/* toimiva alla
 private async Task LoadCustomersIntoPicker(DatabaseConnector dbConnector)
 {
     try
@@ -258,6 +283,40 @@ private async Task LoadCustomersIntoPicker(DatabaseConnector dbConnector)
         await DisplayAlert("Virhe", $"Virhe asiakkaiden lataamisessa Pickeriin: {ex.Message}", "OK");
     }
 }
+*/
+//testaus, uuusi:
+private async Task LoadCustomersIntoPicker(DatabaseConnector dbConnector)
+{
+    try
+    {
+        using var conn = dbConnector.GetConnection();
+        await conn.OpenAsync();
+
+        string query = "SELECT asiakas_id, etunimi, sukunimi FROM asiakas";
+
+        using var cmd = new MySqlCommand(query, conn);
+        using var reader = await cmd.ExecuteReaderAsync();
+
+        List<string> customerNames = new List<string>();
+        while (reader.Read())
+        {
+            int customerId = reader.GetInt32("asiakas_id");
+            string etunimi = reader.GetString("etunimi");
+            string sukunimi = reader.GetString("sukunimi");
+            // Lisätään asiakkaan id ja etu- ja sukunimi listaan
+            customerNames.Add($"{customerId}: {etunimi} {sukunimi}");
+        }
+
+        pickerAsiakkaat.ItemsSource = customerNames;
+    }
+    catch (Exception ex)
+    {
+        await DisplayAlert("Virhe", $"Virhe asiakkaiden lataamisessa Pickeriin: {ex.Message}", "OK");
+    }
+}
+
+
+
 
 // Näytä pickeristä valitun asiakkaan tiedot entry-kentissä
 private async Task LoadCustomerData(int asiakasId, DatabaseConnector dbConnector)
