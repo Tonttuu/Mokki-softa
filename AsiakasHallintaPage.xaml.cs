@@ -38,7 +38,7 @@ public async void OnAsiakasDeleteClicked(object sender, EventArgs e)
         }
         else
         {
-            await DisplayAlert("Virhe", "Asiakkaan tietojen poisto epäonnistui!", "OK");
+            await DisplayAlert("Virhe", "Asiakkaan tietojen poisto epäonnistui.", "OK");
         }
 
 }
@@ -164,7 +164,7 @@ if (string.IsNullOrWhiteSpace(entryPostiNro.Text) ||
         if (isSuccess)
         {
             await DisplayAlert("Onnistui!", "Tiedot päivitetty", "OK");
-            await LoadCustomersIntoPicker(dbConnector); // Päivitetään pickerin data
+            await LoadCustomersIntoPicker(dbConnector); // Päivitetään pickerin data.
             ClearFields(); // Tyhjennetään käyttöliittymän kentät
         }
         else
@@ -184,7 +184,7 @@ if (string.IsNullOrWhiteSpace(entryPostiNro.Text) ||
         }
         else
         {
-            await DisplayAlert("Virhe", "Uuden asiakkaan lisäys epäonnistui", "OK");
+            await DisplayAlert("Virhe", "Uuden asiakkaan lisäys epäonnistui!", "OK");
         }
     }
 }
