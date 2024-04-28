@@ -13,7 +13,7 @@ namespace Mokki_softa
         }
     
 
-// Asiakkaan tietpojen poisto
+// Asiakkaan tietojen poisto
 public async void OnAsiakasDeleteClicked(object sender, EventArgs e)
 {
     if (pickerAsiakkaat.SelectedItem == null)
