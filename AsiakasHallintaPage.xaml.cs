@@ -21,7 +21,6 @@ public async void OnAsiakasDeleteClicked(object sender, EventArgs e)
         await DisplayAlert("Virhe", "Valitse ensin asiakas poistettavaksi.", "OK");
         return;
     }
-   //int asiakasId = (int)pickerAsiakkaat.SelectedItem; //vanha, toimii id:llä
     // Otetaan valitusta itemistä vain asiakkaan id
     string selectedItem = (string)pickerAsiakkaat.SelectedItem;
     int asiakasId = int.Parse(selectedItem.Split(':')[0]);
@@ -32,7 +31,6 @@ public async void OnAsiakasDeleteClicked(object sender, EventArgs e)
         bool isSuccess = await RemoveCustomerData(asiakasId, dbConnector);
         if (isSuccess)
         {
-            
             await DisplayAlert("Onnistui!", "Asiakkaan tiedot poistettu!", "OK");
             await LoadCustomersIntoPicker(dbConnector);
             // Kenttien tyhjennys
@@ -78,7 +76,7 @@ private async Task<bool> RemoveCustomerData(int asiakasId, DatabaseConnector dbC
     }
 }
   
-// Asiakkaan tietojen lisääminen tai päivittäminen
+// Asiakkaan tietojen lisääminen ja/tai päivittäminen
 private async Task<bool> SaveOrUpdateDataToDatabase(int asiakasId, DatabaseConnector dbConnector)
 {
     try
@@ -93,7 +91,7 @@ private async Task<bool> SaveOrUpdateDataToDatabase(int asiakasId, DatabaseConne
 
         if (count > 0)
         {
-            // Päivitä olemassa olevan asiakkaan tiedot
+            // Päivitetään olemassa olevan asiakkaan tiedot
             string updateQuery = "UPDATE asiakas SET postinro = @postinro, etunimi = @etunimi, sukunimi = @sukunimi, lahiosoite = @lahiosoite, email = @email, puhelinnro = @puhelinnro";
             updateQuery += " WHERE asiakas_id = @asiakasId";
 
@@ -115,7 +113,6 @@ private async Task<bool> SaveOrUpdateDataToDatabase(int asiakasId, DatabaseConne
             // Lisätään uusi asiakas tietokantaan
             string insertQuery = "INSERT INTO asiakas (postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) " +
                                 "VALUES (@postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro)";
-
             using var insertCmd = new MySqlCommand(insertQuery, conn);
             insertCmd.Parameters.AddWithValue("@postinro", entryPostiNro.Text);
             insertCmd.Parameters.AddWithValue("@etunimi", entryEtuNimi.Text);
@@ -125,7 +122,6 @@ private async Task<bool> SaveOrUpdateDataToDatabase(int asiakasId, DatabaseConne
             insertCmd.Parameters.AddWithValue("@puhelinnro", entryPuhNro.Text);
 
             int rowsAffected = await insertCmd.ExecuteNonQueryAsync();
-
             return rowsAffected > 0;
         }
     }
@@ -141,34 +137,35 @@ private async Task<bool> SaveOrUpdateDataToDatabase(int asiakasId, DatabaseConne
 // Asiakkaan lisäys/tietojen päivitys nappi & tarkistukset
 public async void OnAsiakasSubmitClicked(object sender, EventArgs e)
 {
-    // Tarkista, että kaikki kentät ovat täytettyjä
-    if (string.IsNullOrWhiteSpace(entryPostiNro.Text) ||
-        string.IsNullOrWhiteSpace(entryEtuNimi.Text) ||
-        string.IsNullOrWhiteSpace(entrySukuNimi.Text) ||
-        string.IsNullOrWhiteSpace(entryLahisoite.Text) ||
-        string.IsNullOrWhiteSpace(entryEmail.Text) ||
-        string.IsNullOrWhiteSpace(entryPuhNro.Text))
-    {
-        await DisplayAlert("Virhe", "Kaikki kentät ovat pakollisia.", "OK");
-        return;
-    }
+    // Tarkistetaan, että kaikki kentät täytetty ja puh nro, posti nro ovat numeerisia.
+if (string.IsNullOrWhiteSpace(entryPostiNro.Text) ||
+    string.IsNullOrWhiteSpace(entryEtuNimi.Text) ||
+    string.IsNullOrWhiteSpace(entrySukuNimi.Text) ||
+    string.IsNullOrWhiteSpace(entryLahisoite.Text) ||
+    string.IsNullOrWhiteSpace(entryEmail.Text) ||
+    string.IsNullOrWhiteSpace(entryPuhNro.Text) ||
+    !int.TryParse(entryPostiNro.Text, out _) ||
+    !int.TryParse(entryPuhNro.Text, out _))
+{
+    await DisplayAlert("Virhe", "Kaikki kentät ovat pakollisia ja postinumeron sekä puhelinnumeron on oltava numeerisia.", "OK");
+    return;
+}
 
     var appSettings = ConfigurationProvider.GetAppSettings();
     var dbConnector = new DatabaseConnector(appSettings);
 
     if (pickerAsiakkaat.SelectedItem != null)
     {
-        // Asiakas valittu Pickeristä, päivitä asiakkaan tiedot
-      //  int asiakasId = (int)pickerAsiakkaat.SelectedItem; //toimii, vanha
     // Otetaan valitusta itemistä vain asiakkaan id
-    string selectedItem = (string)pickerAsiakkaat.SelectedItem; // korjattu
+    string selectedItem = (string)pickerAsiakkaat.SelectedItem;
     int asiakasId = int.Parse(selectedItem.Split(':')[0]);
 
         bool isSuccess = await SaveOrUpdateDataToDatabase(asiakasId, dbConnector);
         if (isSuccess)
         {
             await DisplayAlert("Onnistui!", "Tiedot päivitetty", "OK");
-             ClearFields();
+            await LoadCustomersIntoPicker(dbConnector); // Päivitetään pickerin data
+            ClearFields(); // Tyhjennetään käyttöliittymän kentät
         }
         else
         {
@@ -182,8 +179,8 @@ public async void OnAsiakasSubmitClicked(object sender, EventArgs e)
         if (isSuccess)
         {
             await DisplayAlert("Onnistui!", "Uusi asiakas lisätty", "OK");
-           // await LoadCustomersIntoPicker(dbConnector);
-            ClearFields();
+            await LoadCustomersIntoPicker(dbConnector); // Päivitetään pickerin data
+            ClearFields(); // Tyhjennetään käyttöliittymän kentät
         }
         else
         {
@@ -191,7 +188,6 @@ public async void OnAsiakasSubmitClicked(object sender, EventArgs e)
         }
     }
 }
-
 // Uuden asiakkaan tietojen talletus
 private async Task<bool> SaveNewCustomerData(DatabaseConnector dbConnector)
 {
@@ -224,22 +220,7 @@ private async Task<bool> SaveNewCustomerData(DatabaseConnector dbConnector)
 
 
 
-// Asiakkaat pickerissä (ID)
-/*
-private async void OnAsiakasSelectedIndexChanged(object sender, EventArgs e)
-{
-    var appSettings = ConfigurationProvider.GetAppSettings();
-    var dbConnector = new DatabaseConnector(appSettings);
-
-    if (pickerAsiakkaat.SelectedItem != null)
-    {
-        int selectedCustomerId = (int)pickerAsiakkaat.SelectedItem;
-        await LoadCustomerData(selectedCustomerId, dbConnector);
-    }
-}
-*/// toimiva yllä_ 
-
-// Muutettu OnAsiakasSelectedIndexChanged, jotta se käsittelee asiakkaan id:n, etunimen ja sukunimen
+// Muutettu, jotta se käsittelee asiakkaan id:n, etunimen ja sukunimen
 private async void OnAsiakasSelectedIndexChanged(object sender, EventArgs e)
 {
     var appSettings = ConfigurationProvider.GetAppSettings();
@@ -256,35 +237,6 @@ private async void OnAsiakasSelectedIndexChanged(object sender, EventArgs e)
 
 
 // Hae kaikki asiakkaat tietokannasta ja aseta ne Pickerin ItemsSourceksi
-/* toimiva alla
-private async Task LoadCustomersIntoPicker(DatabaseConnector dbConnector)
-{
-    try
-    {
-        using var conn = dbConnector.GetConnection();
-        await conn.OpenAsync();
-
-        string query = "SELECT asiakas_id FROM asiakas";
-
-        using var cmd = new MySqlCommand(query, conn);
-        using var reader = await cmd.ExecuteReaderAsync();
-
-        List<int> customers = new List<int>();
-        while (reader.Read())
-        {
-            int customerId = reader.GetInt32("asiakas_id");
-            customers.Add(customerId);
-        }
-
-        pickerAsiakkaat.ItemsSource = customers;
-    }
-    catch (Exception ex)
-    {
-        await DisplayAlert("Virhe", $"Virhe asiakkaiden lataamisessa Pickeriin: {ex.Message}", "OK");
-    }
-}
-*/
-//testaus, uuusi:
 private async Task LoadCustomersIntoPicker(DatabaseConnector dbConnector)
 {
     try
@@ -317,7 +269,6 @@ private async Task LoadCustomersIntoPicker(DatabaseConnector dbConnector)
 
 
 
-
 // Näytä pickeristä valitun asiakkaan tiedot entry-kentissä
 private async Task LoadCustomerData(int asiakasId, DatabaseConnector dbConnector)
 {
@@ -334,7 +285,7 @@ private async Task LoadCustomerData(int asiakasId, DatabaseConnector dbConnector
         using var reader = await cmd.ExecuteReaderAsync();
         if (reader.Read())
         {
-            // Aseta asiakastiedot käyttöliittymään
+            // Asetetaan asiakastiedot käyttöliittymään
             entryPostiNro.Text = reader.GetString("postinro");
             entryEtuNimi.Text = reader.GetString("etunimi");
             entrySukuNimi.Text = reader.GetString("sukunimi");
