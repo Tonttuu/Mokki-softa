@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
 
         <VerticalStackLayout Grid.Column="0" Padding="10" Spacing="25">
-            <Label Text="Täytä nämä kentät lisätäksesi asiakkaan tiedot tietokantaan" HorizontalTextAlignment="Center" HorizontalOptions="Center" WidthRequest="300" />
+            <Label Text="Täytä nämä kentät lisätäksesi asiakkaan tiedot tietokantaan. Jos haluat muokata tai poistaa tietoja, valitse ensin asiakas." HorizontalTextAlignment="Center" HorizontalOptions="Center" WidthRequest="300" />
             
             <Picker x:Name="pickerAsiakkaat"
             Title="Valitse asiakas"
