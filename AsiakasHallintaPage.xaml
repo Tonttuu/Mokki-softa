@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mokki_softa.AsiakasHallintaPage">
+
+    <!-- alustava form test  -->
+
+    <Grid ColumnSpacing="25">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <VerticalStackLayout Grid.Column="0" Padding="10" Spacing="25">
+            <Label Text="Täytä nämä kentät lisätäksesi asiakkaan tiedot tietokantaan. Jos haluat muokata tai poistaa tietoja, valitse ensin asiakas." HorizontalTextAlignment="Center" HorizontalOptions="Center" WidthRequest="300" />
+            
+            <Picker x:Name="pickerAsiakkaat"
+            Title="Valitse asiakas"
+            WidthRequest="300"
+            HorizontalOptions="FillAndExpand"
+            SelectedIndexChanged="OnAsiakasSelectedIndexChanged" />
+
+            <Entry x:Name="entryEtuNimi" Placeholder="Etunimi" HorizontalOptions="Center" WidthRequest="300" />
+            <Entry x:Name="entrySukuNimi" Placeholder="Sukunimi" HorizontalOptions="Center" WidthRequest="300" />
+            <Entry x:Name="entryLahisoite" Placeholder="Lahiosoite" HorizontalOptions="Center" WidthRequest="300" />
+            <Entry x:Name="entryPostiNro" Placeholder="Postinumero" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
+            <Entry x:Name="entryPuhNro" Placeholder="Puhelinnumero" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
+            <Entry x:Name="entryEmail" Placeholder="Sähköposti" HorizontalOptions="Center" WidthRequest="300" />
+            <Button Text="Lisää/Päivitä tiedot" Clicked="OnAsiakasSubmitClicked" HorizontalOptions="Center" WidthRequest="300" />
+            <Button Text="Poista tiedot" Clicked="OnAsiakasDeleteClicked" HorizontalOptions="Center" WidthRequest="300" />  
+
+
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>
