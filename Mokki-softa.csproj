@@ -53,10 +53,4 @@
 		<PackageReference Include="MySqlConnector" Version="2.3.6" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Compile Update="MokkiPage.xaml.cs">
-	    <DependentUpon>MokkiPage.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
 </Project>
