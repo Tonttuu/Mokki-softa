@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Mokki_softa.MokkiPage">
+             x:Class="Mokki_softa.MainPage">
 
     <!-- alustava form test  -->
 
     <Grid ColumnSpacing="20">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -22,6 +24,21 @@
             <Entry x:Name="entryPostinro" Placeholder="Postinumero" HorizontalOptions="Center" WidthRequest="500" />
 
             <Button Text="Lisää tietokantaan" Clicked="OnMokkiSubmitClicked" HorizontalOptions="Center" WidthRequest="500" />
+        </VerticalStackLayout>
+
+        <!-- asiakashallinta sivulle siirtyminen-->
+        <VerticalStackLayout Grid.Column="1" Padding="10" Spacing="25">
+            <!-- Buttons -->
+            <Button Text="Siirry Asiakashallintaan" Clicked="Asiakashallinta_Clicked"/>
+        </VerticalStackLayout>
+
+        <!-- aluueet form-->
+        <VerticalStackLayout Grid.Column="1" Padding="10" Spacing="25">
+            <Label Text="Alueet" FontAttributes="Bold"/>
+            <!-- Name Field -->
+            <Entry x:Name="entryAlueNimi" Placeholder="Nimi"/>
+            <!-- Buttons -->
+            <Button Text="Save Alue" Clicked="OnSaveAlueClicked"/>
         </VerticalStackLayout>
     </Grid>
 

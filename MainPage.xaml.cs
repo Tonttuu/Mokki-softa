@@ -2,11 +2,18 @@ using MySqlConnector;
 
 namespace Mokki_softa
 {
-    public partial class MokkiPage : ContentPage
+    public partial class MainPage : ContentPage
     {
-        public MokkiPage()
+        public MainPage()
         {
             InitializeComponent();
+        }
+
+        // Väliaikainen - Asiakashallinta-sivulle siirtyminen (testaus)
+        public async void Asiakashallinta_Clicked(object sender, EventArgs e)
+        {
+            AsiakasHallintaPage asiakasHallintaPage = new AsiakasHallintaPage(); 
+            await Navigation.PushAsync(asiakasHallintaPage);
         }
 
         private async void OnDatabaseClicked(object sender, EventArgs e)
@@ -95,6 +102,38 @@ namespace Mokki_softa
             {
                 Console.WriteLine($"Virhe tietojen lisäyksessä tietokantaan: {ex.Message}");
                 return false;
+            }
+        }
+
+        private async void OnSaveAlueClicked(object sender, EventArgs e)
+        {
+            var nimi = entryAlueNimi.Text;
+
+            if (string.IsNullOrEmpty(nimi))
+            {
+                await DisplayAlert("Virhe", "Syötä alueen nimi.", "OK");
+                return;
+            }
+
+            try
+            {
+                var appSettings = ConfigurationProvider.GetAppSettings();
+                var dbConnector = new DatabaseConnector(appSettings);
+                using var conn = dbConnector.GetConnection();
+                await conn.OpenAsync();
+
+                using var cmd = new MySqlCommand("INSERT INTO alue (nimi) VALUES (@nimi)", conn);
+                cmd.Parameters.AddWithValue("@nimi", nimi);
+
+                var result = await cmd.ExecuteNonQueryAsync();
+                if (result > 0)
+                    await DisplayAlert("Onnistui!", "Alue tallennettu onnistuneesti.", "OK");
+                else
+                    await DisplayAlert("Virhe!", "Alueen tallennus epäonnistui.", "OK");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Tietokantavirhe", $"Virhe: {ex.Message}", "OK");
             }
         }
     }

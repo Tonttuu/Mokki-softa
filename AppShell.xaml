@@ -6,47 +6,9 @@
     xmlns:local="clr-namespace:Mokki_softa"
     Shell.FlyoutBehavior="Disabled">
 
-
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent
-        Title="Village Newbies"
-        ContentTemplate="{DataTemplate local:UusMainPage}"
-        Route="UusMainPage" />
-
-        <ShellContent
-         Title="Asiakashallinta"
-         ContentTemplate="{DataTemplate local:AsiakasHallintaPage}"
-         Route="AsiakasHallintaPage" />
-
-
-        <ShellContent
-         Title="Mökit"
-         ContentTemplate="{DataTemplate local:MokkiPage}"
-         Route="MokkiPage" />
-
-        <ShellContent
-         Title="Palvelut"
-         ContentTemplate="{DataTemplate local:PalvelutPage}"
-         Route="PalvelutPage" />
-
-
-        <ShellContent
-         Title="Varaukset"
-         ContentTemplate="{DataTemplate local:VarauksetPage}"
-         Route="VarauksetPage" />
-
-
-        <ShellContent
-         Title="Alueet"
-         ContentTemplate="{DataTemplate local:AlueetPage}"
-         Route="AlueetPage" />
-
-
-        <ShellContent
-         Title="Laskut"
-         ContentTemplate="{DataTemplate local:LaskutPage}"
-         Route="LaskutPage" />
-
-    </FlyoutItem>
+    <ShellContent
+        Title="Mokki-Softa"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
 
 </Shell>
