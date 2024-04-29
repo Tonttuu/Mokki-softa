@@ -21,13 +21,13 @@
 
         <ShellContent
          Title="Mökit"
-         ContentTemplate="{DataTemplate local:MokitPage}"
-         Route="MokitPage" />
+         ContentTemplate="{DataTemplate local:MokkiPage}"
+         Route="MokkiPage" />
 
         <ShellContent
          Title="Palvelut"
-         ContentTemplate="{DataTemplate local:AsiakasHallintaPage}"
-         Route="AsiakasHallintaPage" />
+         ContentTemplate="{DataTemplate local:PalvelutPage}"
+         Route="PalvelutPage" />
 
 
         <ShellContent

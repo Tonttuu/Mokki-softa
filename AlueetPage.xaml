@@ -3,5 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mokki_softa.AlueetPage">
 
+    <!-- aluueet form-->
+    <VerticalStackLayout Padding="10" Spacing="25" HorizontalOptions="Center" >
+        <Label Text="Alueet" FontAttributes="Bold"/>
+        <!-- Name Field -->
+        <Entry x:Name="entryAlueNimi" Placeholder="Nimi" WidthRequest="500"/>
+        <!-- Buttons -->
+        <Button Text="Save Alue" Clicked="OnSaveAlueClicked" WidthRequest="500"/>
+    </VerticalStackLayout>      
 
 </ContentPage>
