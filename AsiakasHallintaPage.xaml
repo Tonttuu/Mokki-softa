@@ -5,34 +5,42 @@
 
     <!-- alustava form test  -->
 
-    <Grid ColumnSpacing="25">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+ <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <VerticalStackLayout Grid.Column="0" Padding="10" Spacing="25">
-            <Label Text="Täytä nämä kentät lisätäksesi asiakkaan tiedot tietokantaan. Jos haluat muokata tai poistaa tietoja, valitse ensin asiakas." HorizontalTextAlignment="Center" HorizontalOptions="Center" WidthRequest="300" />
+        <!-- Picker & Ohje -->
+        <StackLayout Grid.Row="0" Padding="10" Spacing="20">
+            <Label Text="Täytä kentät lisätäksesi asiakkaan tiedot tietokantaan. Valitse asiakas, jos haluat muokata tai poistaa tietoja." 
+                   HorizontalTextAlignment="Center" />
             
             <Picker x:Name="pickerAsiakkaat"
-            Title="Valitse asiakas"
-            WidthRequest="300"
-            HorizontalOptions="FillAndExpand"
-            SelectedIndexChanged="OnAsiakasSelectedIndexChanged" />
+                    Title="Valitse asiakas"
+                    WidthRequest="300"
+                    HorizontalOptions="Start"
+                    SelectedIndexChanged="OnAsiakasSelectedIndexChanged" />
 
-            <Entry x:Name="entryEtuNimi" Placeholder="Etunimi" HorizontalOptions="Center" WidthRequest="300" />
-            <Entry x:Name="entrySukuNimi" Placeholder="Sukunimi" HorizontalOptions="Center" WidthRequest="300" />
-            <Entry x:Name="entryLahisoite" Placeholder="Lahiosoite" HorizontalOptions="Center" WidthRequest="300" />
-            <Entry x:Name="entryPostiNro" Placeholder="Postinumero" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
-            <Entry x:Name="entryPuhNro" Placeholder="Puhelinnumero" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
-            <Entry x:Name="entryEmail" Placeholder="Sähköposti" HorizontalOptions="Center" WidthRequest="300" />
-            <Button Text="Lisää/Päivitä tiedot" Clicked="OnAsiakasSubmitClicked" HorizontalOptions="Center" WidthRequest="300" />
-            <Button Text="Poista tiedot" Clicked="OnAsiakasDeleteClicked" HorizontalOptions="Center" WidthRequest="300" />  
-
-
-        </VerticalStackLayout>
-
+        </StackLayout>
+        <!-- Entry-kentät ja napit -->
+        <StackLayout Grid.Row="1" Padding="10" Spacing="20">
+            <Entry x:Name="entryEtuNimi" Placeholder="Etunimi" HorizontalOptions="Start" WidthRequest="300" />
+            <Entry x:Name="entrySukuNimi" Placeholder="Sukunimi" HorizontalOptions="Start" WidthRequest="300"/>
+            <Entry x:Name="entryLahisoite" Placeholder="Lahiosoite" HorizontalOptions="Start" WidthRequest="300"/>
+            <Entry x:Name="entryPostiNro" Placeholder="Postinumero" Keyboard="Numeric" HorizontalOptions="Start" WidthRequest="300"/>
+            <Entry x:Name="entryPuhNro" Placeholder="Puhelinnumero" Keyboard="Numeric" HorizontalOptions="Start" WidthRequest="300"/>
+            <Entry x:Name="entryEmail" Placeholder="Sähköposti" HorizontalOptions="Start" WidthRequest="300" />
+            
+            <Grid HorizontalOptions="Start">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Text="Lisää/Päivitä tiedot" Clicked="OnAsiakasSubmitClicked" Grid.Column="0" HorizontalOptions="Start" WidthRequest="200" />
+                <Button Text="Poista tiedot" Clicked="OnAsiakasDeleteClicked" Grid.Column="1" HorizontalOptions="Start" WidthRequest="200"/>
+            </Grid>
+        </StackLayout>
     </Grid>
 
 </ContentPage>
