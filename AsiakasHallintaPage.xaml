@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mokki_softa.AsiakasHallintaPage">
 
+<ScrollView  BackgroundColor="LightSkyBlue">
     <!-- alustava form test  -->
 
     <Grid ColumnSpacing="25">
@@ -34,5 +35,7 @@
         </VerticalStackLayout>
 
     </Grid>
+
+    </ScrollView>
 
 </ContentPage>

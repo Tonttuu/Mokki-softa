@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mokki_softa.MokkiPage">
 
+<ScrollView>
     <!-- alustava form test  -->
 
     <Grid ColumnSpacing="20">
@@ -24,5 +25,7 @@
             <Button Text="Lisää tietokantaan" Clicked="OnMokkiSubmitClicked" HorizontalOptions="Center" WidthRequest="500" />
         </VerticalStackLayout>
     </Grid>
+
+    </ScrollView>
 
 </ContentPage>

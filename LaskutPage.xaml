@@ -3,5 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mokki_softa.LaskutPage">
 
+<ScrollView BackgroundColor="IndianRed">
+    <Grid ColumnDefinitions="100, 250"
+      RowDefinitions="*,*,*,*,*,*"
+      ColumnSpacing="40"
+      RowSpacing="10"
+      Padding="15"
+      HorizontalOptions="Start">
+
+            <StackLayout Padding="5" Spacing="5" HorizontalOptions="Start">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Nimi" TextColor="SaddleBrown" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="0"/>
+                    <Entry x:Name="PalveluNimiEntry" FontSize="20" BackgroundColor="White" TextColor="Black" Grid.Column="1"/>
+                </Grid>
+
+                <!-- Muut lomakkeen osat tässä -->
+                <Label Text="Tyyppi" TextColor="SaddleBrown" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Entry x:Name="TyyppiEntry" FontSize="20" BackgroundColor="White" TextColor="Black"/>
+
+                <Label Text="Kuvaus" TextColor="SaddleBrown" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Entry x:Name="KuvausEntry" FontSize="20" BackgroundColor="White" TextColor="Black"/>
+
+                <Label Text="Hinta" TextColor="SaddleBrown" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Entry x:Name="HintaEntry" FontSize="20" BackgroundColor="White" TextColor="Black"/>
+
+                <Button x:Name="LisaaPalvelu" BackgroundColor="White" Text="Lisää palvelu" TextColor="SaddleBrown" FontSize="20" BorderColor="SaddleBrown" WidthRequest="175"/>
+                <Button x:Name="PoistaPalvelu" BackgroundColor="White" Text="Poista Palvelu" TextColor="SaddleBrown" FontSize="20" BorderColor="SaddleBrown" WidthRequest="175"/>
+                <Button x:Name="PaivitaPalvelu" BackgroundColor="White" Text="Päivitä palvelu" TextColor="SaddleBrown" FontSize="20" BorderColor="SaddleBrown" WidthRequest="175"/>
+                <Button x:Name="TyhjennaPalvelu" BackgroundColor="White" Text="Tyhjennä kentät" TextColor="SaddleBrown" FontSize="20" BorderColor="SaddleBrown" WidthRequest="180"/>
+            </StackLayout>
+
+            <ListView x:Name="LeaderboardList" ItemsSource="{Binding Player}" Grid.Column="1" Grid.ColumnSpan="7" VerticalOptions="StartAndExpand" BackgroundColor="White">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <!-- Tässä ovat listan osat, kuten pelaajan tiedot -->
+                                <Label Text="{Binding FirstName}" FontSize="20" FontAttributes="Bold"/>
+                                <Label Text="{Binding LastName}" FontSize="20" FontAttributes="Bold"/>
+                                <!-- Muut listan osat tässä -->
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+</ScrollView>
 
 </ContentPage>

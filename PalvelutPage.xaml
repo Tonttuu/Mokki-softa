@@ -3,5 +3,201 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mokki_softa.PalvelutPage">
 
+<ScrollView BackgroundColor="RosyBrown" >
+
+<VerticalStackLayout
+    Margin="10"
+    Spacing="10"
+    HorizontalOptions="Center">
+
+    <Grid ColumnDefinitions="100, 250"
+      RowDefinitions="*,*,*,*,*,*"
+      ColumnSpacing="40"
+      RowSpacing="10"
+      Padding="15"
+      HorizontalOptions="Center">
+
+<!-- Jos lista on liian vaikea niin tässä picker-->
+      <Picker x:Name="pickerPalvelu"
+            Title="Valitse olemassaoleva palvelu"
+            WidthRequest="250"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Grid.Column="1"
+            Grid.Row="0"/>
+           <!-- SelectedIndexChanged="OnAlueSelectedIndexChanged" -->
+
+        <Label Text="Nimi"
+               TextColor="SaddleBrown"
+               FontSize="20"
+               Grid.Column="0"
+               Grid.Row="1"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <Entry x:Name="PalveluNimiEntry"
+               FontSize="20"
+               Grid.Column="1"
+               Grid.Row="1"
+               BackgroundColor="White"
+               TextColor="Black"/>
+
+        <Label Text="Tyyppi"
+               TextColor="SaddleBrown"
+               FontSize="20"
+               Grid.Column="0"
+               Grid.Row="2"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <Entry x:Name="TyyppiEntry"
+               FontSize="20"
+               Grid.Column="1"
+               Grid.Row="2"
+               BackgroundColor="White"
+               TextColor="Black"/>
+
+        <Label Text="Kuvaus"
+               TextColor="SaddleBrown"
+               FontSize="20"
+               Grid.Column="0"
+               Grid.Row="3"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <Entry x:Name="KuvausEntry"
+               FontSize="20"
+               Grid.Column="1"
+               Grid.Row="3"
+               BackgroundColor="White"
+               TextColor="Black"/>
+
+               <Label Text="Hinta"
+               TextColor="SaddleBrown"
+               FontSize="20"
+               Grid.Column="0"
+               Grid.Row="4"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <Entry x:Name="HintaEntry"
+               FontSize="20"
+               Grid.Column="1"
+               Grid.Row="4"
+               BackgroundColor="White"
+               TextColor="Black"/>
+
+               <Label Text="Alue"
+               TextColor="SaddleBrown"
+               FontSize="20"
+               Grid.Column="0"
+               Grid.Row="5"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <Entry x:Name="AlueEntry"
+               FontSize="20"
+               Grid.Column="1"
+               Grid.Row="5"
+               BackgroundColor="White"
+               TextColor="Black"/>
+    </Grid>
+
+    <Grid>
+
+    </Grid>
+
+    <HorizontalStackLayout
+    HorizontalOptions="Start"
+    Spacing="20"
+    Padding="10">
+
+    <Button x:Name="LisaaPalvelu"
+            BackgroundColor="White"
+            Text="Lisää palvelu"
+            TextColor="SaddleBrown"
+            FontSize="20"
+            BorderColor="SaddleBrown"
+            WidthRequest="175"
+            Grid.Column="0"
+            Grid.Row="0"/>
+            <!-- Clicked="LisaaPalvelu_Clicked" -->
+
+      <Button x:Name="PoistaPalvelu"
+            BackgroundColor="White"
+            Text="Poista Palvelu"
+            TextColor="SaddleBrown"
+            FontSize="20"
+            BorderColor="SaddleBrown"
+            WidthRequest="175"
+            Grid.Column="1"
+            Grid.Row="0"/>
+            <!-- Clicked="PoistaPalvelu_Clicked" -->
+
+</HorizontalStackLayout>
+
+ <HorizontalStackLayout
+    HorizontalOptions="Start"
+    Spacing="20"
+    Padding="10">
+
+            <Button x:Name="PaivitaPalvelu"
+            BackgroundColor="White"
+            Text="Päivitä palvelu"
+            TextColor="SaddleBrown"
+            FontSize="20"
+            BorderColor="SaddleBrown"
+            WidthRequest="175"
+            Grid.Column="0"
+            Grid.Row="1"/>
+            <!-- Clicked="PaivitaPalvelu_Clicked" -->
+
+      <Button x:Name="TyhjennaPalvelu"
+            BackgroundColor="White"
+            Text="Tyhjennä kentät"
+            TextColor="SaddleBrown"
+            FontSize="20"
+            BorderColor="SaddleBrown"
+            WidthRequest="180"
+            Grid.Column="1"
+            Grid.Row="1"/>
+            <!-- Clicked="TyhjennaPalvelu_Clicked" -->
+</HorizontalStackLayout>
+
+<Grid ColumnDefinitions="*" RowDefinitions="10,*">
+    <Button x:Name="PaivitaLista"
+            BackgroundColor="White"
+            Text="Päivitä lista"
+            TextColor="SaddleBrown"
+            FontSize="20"
+            BorderColor="SaddleBrown"
+            WidthRequest="180"
+            Grid.Column="0"
+            Grid.Row="1"/>
+            <!-- Clicked="TyhjennaPalvelu_Clicked" -->
+</Grid>
+
+ <Frame BorderColor="SaddleBrown" BackgroundColor="White" Grid.ColumnSpan="5">
+     <ListView x:Name="PalvelutList" ItemsSource="{Binding Palvelut}"> <!-- Otetaan Binding lähteeksi Palvelut (ei ole vielä tehty esim. ohjelmointi 2 teht. 12) ObservableCollection -->
+         <ListView.ItemTemplate>
+             <DataTemplate>
+                 <ViewCell>
+                     <Grid ColumnDefinitions="*,*,*,*,*">
+                         <!-- Sidotaan palvelun tiedot omiin label kenttiinsä -->
+                         <Label Text="{Binding Nimi}" FontSize="20" FontAttributes="Bold" Grid.Column="0"/>
+                         <Label Text="{Binding Tyyppi}" FontSize="20" FontAttributes="Bold" Grid.Column="1"/>
+                         <Label Text="{Binding Kuvaus}" FontSize="20" Grid.Column="2"/>
+                         <Label Text="{Binding Alue}" FontSize="20" Grid.Column="3"/>
+                         <Label Text="{Binding Hinta}" FontSize="20" Grid.Column="4"/>
+                     </Grid>
+                 </ViewCell>
+             </DataTemplate>
+         </ListView.ItemTemplate>
+     </ListView>
+ </Frame>
+
+</VerticalStackLayout>
+
+</ScrollView>
 
 </ContentPage>
