@@ -3,39 +3,225 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mokki_softa.AsiakasHallintaPage">
 
-<ScrollView  BackgroundColor="LightSkyBlue">
-    <!-- alustava form test  -->
 
-    <Grid ColumnSpacing="25">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <ScrollView BackgroundColor="LightSkyBlue">
 
-        <VerticalStackLayout Grid.Column="0" Padding="10" Spacing="25">
-            <Label Text="Täytä nämä kentät lisätäksesi asiakkaan tiedot tietokantaan. Jos haluat muokata tai poistaa tietoja, valitse ensin asiakas." HorizontalTextAlignment="Center" HorizontalOptions="Center" WidthRequest="300" />
-            
-            <Picker x:Name="pickerAsiakkaat"
-            Title="Valitse asiakas"
-            WidthRequest="300"
-            HorizontalOptions="FillAndExpand"
-            SelectedIndexChanged="OnAsiakasSelectedIndexChanged" />
+<VerticalStackLayout
+    Margin="10"
+    Spacing="10"
+    HorizontalOptions="Center">
 
-            <Entry x:Name="entryEtuNimi" Placeholder="Etunimi" HorizontalOptions="Center" WidthRequest="300" />
-            <Entry x:Name="entrySukuNimi" Placeholder="Sukunimi" HorizontalOptions="Center" WidthRequest="300" />
-            <Entry x:Name="entryLahisoite" Placeholder="Lahiosoite" HorizontalOptions="Center" WidthRequest="300" />
-            <Entry x:Name="entryPostiNro" Placeholder="Postinumero" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
-            <Entry x:Name="entryPuhNro" Placeholder="Puhelinnumero" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="300" />
-            <Entry x:Name="entryEmail" Placeholder="Sähköposti" HorizontalOptions="Center" WidthRequest="300" />
-            <Button Text="Lisää/Päivitä tiedot" Clicked="OnAsiakasSubmitClicked" HorizontalOptions="Center" WidthRequest="300" />
-            <Button Text="Poista tiedot" Clicked="OnAsiakasDeleteClicked" HorizontalOptions="Center" WidthRequest="300" />  
+    <Grid ColumnDefinitions="145, 250"
+      RowDefinitions="*,*,*,*,*,*,*"
+      ColumnSpacing="40"
+      RowSpacing="10"
+      Padding="15"
+      HorizontalOptions="Center">
 
+<!-- Jos lista on liian vaikea niin tässä picker-->
 
-        </VerticalStackLayout>
+           <Picker x:Name="pickerAsiakkaat"
+                    Title="Valitse asiakas"
+                    WidthRequest="250"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    SelectedIndexChanged="OnAsiakasSelectedIndexChanged" />
+
+        <Label Text="Etunimi"
+               TextColor="Blue"
+               FontSize="20"
+               Grid.Column="0"
+               Grid.Row="1"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <Entry x:Name="entryEtuNimi"
+               FontSize="20"
+               Grid.Column="1"
+               Grid.Row="1"
+               BackgroundColor="White"
+               TextColor="Black"/>
+
+        <Label Text="Sukunimi"
+               TextColor="Blue"
+               FontSize="20"
+               Grid.Column="0"
+               Grid.Row="2"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <Entry x:Name="entrySukuNimi"
+               FontSize="20"
+               Grid.Column="1"
+               Grid.Row="2"
+               BackgroundColor="White"
+               TextColor="Black"/>
+
+        <Label Text="Lähiosoite"
+               TextColor="Blue"
+               FontSize="20"
+               Grid.Column="0"
+               Grid.Row="3"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <Entry x:Name="entryLahisoite"
+               FontSize="20"
+               Grid.Column="1"
+               Grid.Row="3"
+               BackgroundColor="White"
+               TextColor="Black"/>
+
+               <Label Text="Postinumero"
+               TextColor="Blue"
+               FontSize="20"
+               Grid.Column="0"
+               Grid.Row="4"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <Entry x:Name="entryPostiNro"
+               FontSize="20"
+               Grid.Column="1"
+               Grid.Row="4"
+               BackgroundColor="White"
+               TextColor="Black"/>
+
+               <Label Text="Puhelinnumero"
+               TextColor="Blue"
+               FontSize="20"
+               Grid.Column="0"
+               Grid.Row="5"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <Entry x:Name="entryPuhNro"
+               FontSize="20"
+               Grid.Column="1"
+               Grid.Row="5"
+               BackgroundColor="White"
+               TextColor="Black"/>
+
+        <Label Text="Sähköposti"
+               TextColor="Blue"
+               FontSize="20"
+               Grid.Column="0"
+               Grid.Row="6"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <Entry x:Name="entryEmail"
+               FontSize="20"
+               Grid.Column="1"
+               Grid.Row="6"
+               BackgroundColor="White"
+               TextColor="Black"/>
+    </Grid>
+
+    <Grid>
 
     </Grid>
 
-    </ScrollView>
+    <HorizontalStackLayout
+    HorizontalOptions="Start"
+    Spacing="20"
+    Padding="10">
+
+    <Button x:Name="LisaaAsiakas"
+            BackgroundColor="White"
+            Text="Lisää asiakas"
+            TextColor="Blue"
+            FontSize="20"
+            BorderColor="Blue"
+            WidthRequest="175"
+            Grid.Column="0"
+            Grid.Row="0"
+            
+            Clicked="OnAsiakasSubmitClicked"
+            />
+            <!-- Huom! Pitää erottaa lisää asiakas ja päivitä tiedot tästä napista, kun ne ovat tässä samassa -->
+            <!-- Clicked="LisaaPalvelu_Clicked" -->
+
+      <Button x:Name="PoistaAsiakas"
+            BackgroundColor="White"
+            Text="Poista Palvelu"
+            TextColor="Blue"
+            FontSize="20"
+            BorderColor="Blue"
+            WidthRequest="175"
+            Grid.Column="1"
+            Grid.Row="0"
+            Clicked="OnAsiakasDeleteClicked" />
+
+
+</HorizontalStackLayout>
+
+ <HorizontalStackLayout
+    HorizontalOptions="Start"
+    Spacing="20"
+    Padding="10">
+
+            <Button x:Name="PaivitaAsiakas"
+            BackgroundColor="White"
+            Text="Päivitä asiakas"
+            TextColor="Blue"
+            FontSize="20"
+            BorderColor="Blue"
+            WidthRequest="175"
+            Grid.Column="0"
+            Grid.Row="1"/>
+            <!-- tähän pitää saada, että päivittää asiakkaan tiedot -->
+            <!-- Clicked="PaivitaPalvelu_Clicked" -->
+
+      <Button x:Name="TyhjennaAsiakas"
+            BackgroundColor="White"
+            Text="Tyhjennä kentät"
+            TextColor="Blue"
+            FontSize="20"
+            BorderColor="Blue"
+            WidthRequest="180"
+            Grid.Column="1"
+            Grid.Row="1"/>
+            <!-- Clicked="TyhjennaAsiakas_Clicked" -->
+</HorizontalStackLayout>
+
+<Grid ColumnDefinitions="*" RowDefinitions="10,*">
+    <Button x:Name="PaivitaLista"
+            BackgroundColor="White"
+            Text="Päivitä lista"
+            TextColor="Blue"
+            FontSize="20"
+            BorderColor="Blue"
+            WidthRequest="180"
+            Grid.Column="0"
+            Grid.Row="1"/>
+            <!-- Clicked="PaivitaLista_Clicked" -->
+</Grid>
+
+ <Frame BorderColor="Blue" BackgroundColor="White" Grid.ColumnSpan="5">
+     <ListView x:Name="AsiakasList" ItemsSource="{Binding Asiakas}"> <!-- Otetaan Binding lähteeksi Asiakas (ei ole vielä tehty esim. ohjelmointi 2 teht. 12) ObservableCollection -->
+         <ListView.ItemTemplate>
+             <DataTemplate>
+                 <ViewCell>
+                     <Grid ColumnDefinitions="*,*,*,*,*,*">
+                         <!-- Sidotaan asiakkaan tiedot omiin label kenttiinsä -->
+                         <Label Text="{Binding Etunimi}" FontSize="20" FontAttributes="Bold" Grid.Column="0"/>
+                         <Label Text="{Binding Sukunimi}" FontSize="20" FontAttributes="Bold" Grid.Column="1"/>
+                         <Label Text="{Binding Lahiosoite}" FontSize="20" Grid.Column="2"/>
+                         <Label Text="{Binding Postinro}" FontSize="20" Grid.Column="3"/>
+                         <Label Text="{Binding Puhnro}" FontSize="20" Grid.Column="4"/>
+                         <Label Text="{Binding Sahkoposti}" FontSize="20" Grid.Column="5"/>
+                     </Grid>
+                 </ViewCell>
+             </DataTemplate>
+         </ListView.ItemTemplate>
+     </ListView>
+ </Frame>
+
+</VerticalStackLayout>
+
+</ScrollView>
 
 </ContentPage>

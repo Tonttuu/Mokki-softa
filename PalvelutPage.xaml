@@ -174,7 +174,7 @@
             WidthRequest="180"
             Grid.Column="0"
             Grid.Row="1"/>
-            <!-- Clicked="TyhjennaPalvelu_Clicked" -->
+            <!-- Clicked="PaivitaLista_Clicked" -->
 </Grid>
 
  <Frame BorderColor="SaddleBrown" BackgroundColor="White" Grid.ColumnSpan="5">

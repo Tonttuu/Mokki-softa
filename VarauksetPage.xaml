@@ -52,7 +52,7 @@
                HorizontalOptions="Center"
                VerticalOptions="Center"/>
 
-        <Picker x:Name="Mökki"
+        <Picker x:Name="Mokki"
                WidthRequest="250"
                Grid.Column="1"
                Grid.Row="2"
@@ -159,7 +159,7 @@
             WidthRequest="175"
             Grid.Column="0"
             Grid.Row="0"/>
-            <!-- Clicked="LisaaPalvelu_Clicked" -->
+            <!-- Clicked="LisaaVaraus_Clicked" -->
 
       <Button x:Name="PoistaVaraus"
             BackgroundColor="White"
@@ -170,7 +170,7 @@
             WidthRequest="175"
             Grid.Column="1"
             Grid.Row="0"/>
-            <!-- Clicked="PoistaPalvelu_Clicked" -->
+            <!-- Clicked="PoistaVaraus_Clicked" -->
 
 </HorizontalStackLayout>
 
@@ -188,7 +188,7 @@
             WidthRequest="175"
             Grid.Column="0"
             Grid.Row="1"/>
-            <!-- Clicked="PaivitaPalvelu_Clicked" -->
+            <!-- Clicked="PaivitaVaraus_Clicked" -->
 
       <Button x:Name="TyhjennaVaraus"
             BackgroundColor="White"
@@ -212,7 +212,7 @@
             WidthRequest="180"
             Grid.Column="0"
             Grid.Row="1"/>
-            <!-- Clicked="TyhjennaPalvelu_Clicked" -->
+            <!-- Clicked="PaivitaLista_Clicked" -->
 </Grid>
 
  <Frame BorderColor="SaddleBrown" BackgroundColor="White" Grid.ColumnSpan="5">
@@ -220,13 +220,15 @@
          <ListView.ItemTemplate>
              <DataTemplate>
                  <ViewCell>
-                     <Grid ColumnDefinitions="*,*,*,*,*">
+                     <Grid ColumnDefinitions="*,*,*,*,*,*,*">
                          <!-- Sidotaan palvelun tiedot omiin label kenttiinsä -->
-                         <Label Text="{Binding Nimi}" FontSize="20" FontAttributes="Bold" Grid.Column="0"/>
-                         <Label Text="{Binding Tyyppi}" FontSize="20" FontAttributes="Bold" Grid.Column="1"/>
-                         <Label Text="{Binding Kuvaus}" FontSize="20" Grid.Column="2"/>
-                         <Label Text="{Binding Alue}" FontSize="20" Grid.Column="3"/>
-                         <Label Text="{Binding Hinta}" FontSize="20" Grid.Column="4"/>
+                         <Label Text="{Binding Asiakas}" FontSize="20" FontAttributes="Bold" Grid.Column="0"/>
+                         <Label Text="{Binding Mokki}" FontSize="20" FontAttributes="Bold" Grid.Column="1"/>
+                         <Label Text="{Binding Alkaa}" FontSize="20" Grid.Column="2"/>
+                         <Label Text="{Binding Paattyy}" FontSize="20" Grid.Column="3"/>
+                         <Label Text="{Binding Varattu}" FontSize="20" Grid.Column="4"/>
+                         <Label Text="{Binding Vahvistettu}" FontSize="20" Grid.Column="5"/>
+                         <Label Text="{Binding Palvelu}" FontSize="20" Grid.Column="6"/>
                      </Grid>
                  </ViewCell>
              </DataTemplate>
