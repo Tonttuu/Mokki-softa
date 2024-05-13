@@ -6,221 +6,253 @@
 
     <ScrollView BackgroundColor="LightSkyBlue">
 
-<VerticalStackLayout
-    Margin="10"
-    Spacing="10"
-    HorizontalOptions="Center">
+     <!-- Pää StackLayOut -->
+        <StackLayout Padding="30,0,30,0" Spacing="25" HorizontalOptions="Center" VerticalOptions="Center" Margin="10">
 
-    <Grid ColumnDefinitions="145, 250"
-      RowDefinitions="*,*,*,*,*,*,*"
-      ColumnSpacing="40"
-      RowSpacing="10"
-      Padding="15"
-      HorizontalOptions="Center">
+            <!-- Logo -->
+            <Label Padding="10" HorizontalOptions="Center" FontSize="50" Margin="0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Village " TextColor="White" FontFamily="Stereofunk" />
+                        <Span Text="Newbies" TextColor="Black" FontFamily="Stereofunk"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
-<!-- Jos lista on liian vaikea niin tässä picker-->
+            <HorizontalStackLayout >
+            <Label Text="Valitse olemassaoleva asiakas:"
+                    TextColor="Black"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Margin="180,0,0,0"/>
+            </HorizontalStackLayout>
 
-           <Picker x:Name="pickerAsiakkaat"
-                    Title="Valitse asiakas"
+            <HorizontalStackLayout>
+              <Picker x:Name="pickerAsiakkaat"
                     WidthRequest="250"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
-                    Grid.Column="1"
-                    Grid.Row="0"
+                    Margin="180,0,0,0"
+                    TextColor="Black"
                     SelectedIndexChanged="OnAsiakasSelectedIndexChanged" />
+            </HorizontalStackLayout>
 
-        <Label Text="Etunimi"
-               TextColor="Blue"
-               FontSize="20"
-               Grid.Column="0"
-               Grid.Row="1"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
+            <!-- HorizontalStackLayout kaikelle tärkeälle (lableit, buttonit, entryt, listview, border) -->
+            <HorizontalStackLayout Padding="30,0,30,0" VerticalOptions="StartAndExpand">
 
-        <Entry x:Name="entryEtuNimi"
-               FontSize="20"
-               Grid.Column="1"
-               Grid.Row="1"
-               BackgroundColor="White"
-               TextColor="Black"/>
+                <!--VerticalStacklayout: Labelit + Entryt-->
+                <VerticalStackLayout Padding="30,0,30,0" VerticalOptions="Center">
+                    <!--Erikseen HorizontalLayoutit labelille ja entrylle-->
+                    <HorizontalStackLayout>
+                        <Label Text="Etunimi: " Padding="0,12,0,0"
+                           TextColor="Black" FontSize="15"/>
+                        <Entry Placeholder="Etunimi" x:Name="entryEtuNimi"
+                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                           WidthRequest="250" Margin="60,0,0,10"
+                           TextColor="Black" AutomationId="entryEtuNimi" BackgroundColor="White"/>
+                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
 
-        <Label Text="Sukunimi"
-               TextColor="Blue"
-               FontSize="20"
-               Grid.Column="0"
-               Grid.Row="2"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Sukunimi: " Padding="0,12,0,0"
+                           TextColor="Black" FontSize="15" />
+                        <Entry Placeholder="Sukunimi" x:Name="entrySukuNimi"
+                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                           WidthRequest="250" Margin="50,0,0,10"
+                           TextColor="Black" AutomationId="entrySukuNimi" BackgroundColor="White"/>
+                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Lähiosoite: " Padding="0,12,0,0" 
+                           TextColor="Black" FontSize="15"/>
+                        <Entry Placeholder="Lähiosoite" x:Name="entryLahisoite"
+                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                           WidthRequest="250" Margin="46,0,0,10"
+                           TextColor="Black" AutomationId="entryLahisoite" BackgroundColor="White" />
+                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
 
-        <Entry x:Name="entrySukuNimi"
-               FontSize="20"
-               Grid.Column="1"
-               Grid.Row="2"
-               BackgroundColor="White"
-               TextColor="Black"/>
-
-        <Label Text="Lähiosoite"
-               TextColor="Blue"
-               FontSize="20"
-               Grid.Column="0"
-               Grid.Row="3"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
-
-        <Entry x:Name="entryLahisoite"
-               FontSize="20"
-               Grid.Column="1"
-               Grid.Row="3"
-               BackgroundColor="White"
-               TextColor="Black"/>
-
-               <Label Text="Postinumero"
-               TextColor="Blue"
-               FontSize="20"
-               Grid.Column="0"
-               Grid.Row="4"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
-
-        <Entry x:Name="entryPostiNro"
-               FontSize="20"
-               Grid.Column="1"
-               Grid.Row="4"
-               BackgroundColor="White"
-               TextColor="Black"/>
-
-               <Label Text="Puhelinnumero"
-               TextColor="Blue"
-               FontSize="20"
-               Grid.Column="0"
-               Grid.Row="5"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
-
-        <Entry x:Name="entryPuhNro"
-               FontSize="20"
-               Grid.Column="1"
-               Grid.Row="5"
-               BackgroundColor="White"
-               TextColor="Black"/>
-
-        <Label Text="Sähköposti"
-               TextColor="Blue"
-               FontSize="20"
-               Grid.Column="0"
-               Grid.Row="6"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
-
-        <Entry x:Name="entryEmail"
-               FontSize="20"
-               Grid.Column="1"
-               Grid.Row="6"
-               BackgroundColor="White"
-               TextColor="Black"/>
-    </Grid>
-
-    <Grid>
-
-    </Grid>
-
-    <HorizontalStackLayout
-    HorizontalOptions="Start"
-    Spacing="20"
-    Padding="10">
-
-    <Button x:Name="LisaaAsiakas"
-            BackgroundColor="White"
-            Text="Lisää asiakas"
-            TextColor="Blue"
-            FontSize="20"
-            BorderColor="Blue"
-            WidthRequest="175"
-            Grid.Column="0"
-            Grid.Row="0"
-            
-            Clicked="OnAsiakasSubmitClicked"
-            />
-            <!-- Huom! Pitää erottaa lisää asiakas ja päivitä tiedot tästä napista, kun ne ovat tässä samassa -->
-            <!-- Clicked="LisaaPalvelu_Clicked" -->
-
-      <Button x:Name="PoistaAsiakas"
-            BackgroundColor="White"
-            Text="Poista Palvelu"
-            TextColor="Blue"
-            FontSize="20"
-            BorderColor="Blue"
-            WidthRequest="175"
-            Grid.Column="1"
-            Grid.Row="0"
-            Clicked="OnAsiakasDeleteClicked" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Postinumero: " Padding="0,12,0,0" 
+                         TextColor="Black" FontSize="15"/>
+                        <Entry Placeholder="Postinumero" x:Name="entryPostiNro"
+                        PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                        WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
+                        TextColor="Black" AutomationId="entryPostiNro" BackgroundColor="White"/>
+                        <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+                        
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Puhelinnumero: " Padding="0,12,0,0" 
+                         TextColor="Black" FontSize="15"/>
+                        <Entry Placeholder="Puhelinnumero" x:Name="entryPuhNro"
+                         PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                         WidthRequest="250" Margin="18,0,0,10" Keyboard="Numeric"
+                         TextColor="Black" AutomationId="entryPuhNro" BackgroundColor="White"/>
+                         <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Sähköposti " Padding="0,12,0,0" 
+                         TextColor="Black" FontSize="15"/>
+                        <Entry Placeholder="Syötä sähköposti" x:Name="entryEmail"
+                         PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                         WidthRequest="250" Margin="52,0,0,10"
+                         TextColor="Black" AutomationId="entryEmail" BackgroundColor="White"/>
+                         <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+                    </HorizontalStackLayout>
 
 
-</HorizontalStackLayout>
+                    <!-- Napit -->
+                    <HorizontalStackLayout>
+                        <Button
+                            Text="Lisää asiakas" x:Name="LisaaAsiakas" WidthRequest="175" Margin="10"
+                            TextColor="Black" Background="White"
+                            BorderColor="Black" BorderWidth="1"
+                            BackgroundColor="White"
+                            Clicked="OnAsiakasSubmitClicked"/>
+                        <!-- Huom! Pitää erottaa lisää asiakas ja päivitä tiedot tästä napista, kun ne ovat tässä samassa -->
 
- <HorizontalStackLayout
-    HorizontalOptions="Start"
-    Spacing="20"
-    Padding="10">
+                        <Button
+                            Text="Poista asiakas"  x:Name="PoistaAsiakas" WidthRequest="175" Margin="10"
+                            TextColor="Black" Background="White"
+                            BorderColor="Black" BorderWidth="1"
+                            BackgroundColor="White"
+                            Clicked="OnAsiakasDeleteClicked" />
 
-            <Button x:Name="PaivitaAsiakas"
-            BackgroundColor="White"
-            Text="Päivitä asiakas"
-            TextColor="Blue"
-            FontSize="20"
-            BorderColor="Blue"
-            WidthRequest="175"
-            Grid.Column="0"
-            Grid.Row="1"/>
-            <!-- tähän pitää saada, että päivittää asiakkaan tiedot -->
-            <!-- Clicked="PaivitaPalvelu_Clicked" -->
+                    </HorizontalStackLayout>
 
-      <Button x:Name="TyhjennaAsiakas"
-            BackgroundColor="White"
-            Text="Tyhjennä kentät"
-            TextColor="Blue"
-            FontSize="20"
-            BorderColor="Blue"
-            WidthRequest="180"
-            Grid.Column="1"
-            Grid.Row="1"/>
-            <!-- Clicked="TyhjennaAsiakas_Clicked" -->
-</HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Button
+                            x:Name="PaivitaAsiakas"
+                            Text="Päivitä asiakas" WidthRequest="175" Margin="10"
+                            TextColor="Black" Background="White"
+                            BorderColor="Black" BorderWidth="1"
+                            BackgroundColor="White"/>
+                             <!-- tähän pitää saada, että päivittää asiakkaan tiedot -->
+                            <!-- Clicked="PaivitaAsiakas_Clicked" -->
 
-<Grid ColumnDefinitions="*" RowDefinitions="10,*">
-    <Button x:Name="PaivitaLista"
-            BackgroundColor="White"
-            Text="Päivitä lista"
-            TextColor="Blue"
-            FontSize="20"
-            BorderColor="Blue"
-            WidthRequest="180"
-            Grid.Column="0"
-            Grid.Row="1"/>
-            <!-- Clicked="PaivitaLista_Clicked" -->
-</Grid>
+                        <Button
+                            x:Name="TyhjennaAsiakas"
+                            Text="Tyhjennä kentät" WidthRequest="175" Margin="10"
+                            TextColor="Black" Background="White"
+                            BorderColor="Black" BorderWidth="1"
+                            BackgroundColor="White"/>
+                            <!-- Clicked="TyhjennaAsiakas_Clicked" -->
 
- <Frame BorderColor="Blue" BackgroundColor="White" Grid.ColumnSpan="5">
-     <ListView x:Name="AsiakasList" ItemsSource="{Binding Asiakas}"> <!-- Otetaan Binding lähteeksi Asiakas (ei ole vielä tehty esim. ohjelmointi 2 teht. 12) ObservableCollection -->
-         <ListView.ItemTemplate>
-             <DataTemplate>
-                 <ViewCell>
-                     <Grid ColumnDefinitions="*,*,*,*,*,*">
-                         <!-- Sidotaan asiakkaan tiedot omiin label kenttiinsä -->
-                         <Label Text="{Binding Etunimi}" FontSize="20" FontAttributes="Bold" Grid.Column="0"/>
-                         <Label Text="{Binding Sukunimi}" FontSize="20" FontAttributes="Bold" Grid.Column="1"/>
-                         <Label Text="{Binding Lahiosoite}" FontSize="20" Grid.Column="2"/>
-                         <Label Text="{Binding Postinro}" FontSize="20" Grid.Column="3"/>
-                         <Label Text="{Binding Puhnro}" FontSize="20" Grid.Column="4"/>
-                         <Label Text="{Binding Sahkoposti}" FontSize="20" Grid.Column="5"/>
-                     </Grid>
-                 </ViewCell>
-             </DataTemplate>
-         </ListView.ItemTemplate>
-     </ListView>
- </Frame>
+                    </HorizontalStackLayout>
 
-</VerticalStackLayout>
+                    <Button 
+                            Text="Päivitä lista" WidthRequest="175" Margin="10"
+                            TextColor="Black" Background="White"
+                            BorderColor="Black" BorderWidth="1"
+                            BackgroundColor="White"/>
+                            <!-- Clicked="PaivitaLista_Clicked" -->
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Etunimi"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="4,0,0,0"/>
+                        <Label Text="Sukunimi"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="30,0,0,0"/>
+                        <Label Text="Lähiosoite"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="30,0,0,0"/>
+                        <Label Text="Postinumero"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="25,0,0,0"/>
+                        <Label Text="Puhelinnumero"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="25,0,0,0"/>
+                        <Label Text="Sähköposti"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="54,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <!-- Border ListView:lle -->
+                    <Border Stroke="Black"
+                            StrokeThickness="1"
+                            Padding="20"
+                            HorizontalOptions="EndAndExpand"
+                            HeightRequest="500"
+                            WidthRequest="750"
+                            MaximumWidthRequest="1000"
+                            BackgroundColor="White">
+
+                        <!-- Pää ListView-->
+                        <ListView x:Name="ItemListView"
+                              HasUnevenRows="True" >
+                              <!-- ItemSelected="ItemListView_ItemSelected" -->
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Padding="10"
+                                              BackgroundColor="Transparent"
+                                              HorizontalOptions="End"
+                                              WidthRequest="750"
+                                              MaximumWidthRequest="1000">
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <!-- Palvelu ID -->
+                                                <ColumnDefinition Width="80" />
+                                                <!-- Alue ID nimi -->
+                                                <ColumnDefinition Width="60" />
+                                                <!-- Nimi -->
+                                                <ColumnDefinition Width="140" />
+                                                <!-- Kuvaus -->
+                                                <ColumnDefinition Width="220" />
+                                                <!-- Hinta -->
+                                                <ColumnDefinition Width="130" />
+                                                <!-- ALV -->
+                                                <ColumnDefinition Width="40" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0"
+                                           Text="{Binding PalveluID}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+                                            <Label Grid.Column="1"
+                                           Text="{Binding AlueID}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+                                            <Label Grid.Column="2"
+                                           Text="{Binding PalveluNimi}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+                                            <Label Grid.Column="3"
+                                           Text="{Binding PalveluKuvaus}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+                                            <Label Grid.Column="4"
+                                           Text="{Binding PalveluHinta}"
+                                           HorizontalOptions="Center"
+                                           TextColor="Black"/>
+                                            <Label Grid.Column="5"
+                                           Text="{Binding PalveluAlv}"
+                                           HorizontalOptions="Center"
+                                           TextColor="Black"/>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Border>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+        </StackLayout>
 
 </ScrollView>
 
