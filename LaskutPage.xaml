@@ -3,5 +3,257 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mokki_softa.LaskutPage">
 
+<ScrollView BackgroundColor="IndianRed">
+        <!-- Pää StackLayOut -->
+        <StackLayout Padding="30,0,30,0" Spacing="25" HorizontalOptions="Center" VerticalOptions="Center" Margin="10">
+
+            <!-- Logo -->
+            <Label Padding="10" HorizontalOptions="Center" FontSize="50" Margin="0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Village " TextColor="White" FontFamily="Stereofunk" />
+                        <Span Text="Newbies" TextColor="Black" FontFamily="Stereofunk"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+             <HorizontalStackLayout >
+            <Label Text="Valitse olemassaoleva lasku:"
+                    TextColor="Black"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Margin="160,0,0,0"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+              <Picker x:Name="pickerLasku"
+                    WidthRequest="250"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Margin="160,0,0,0"
+                    TextColor="Black" />
+                    <!-- SelectedIndexChanged="OnLaskuSelectedIndexChanged" -->
+            </HorizontalStackLayout>
+
+            <!-- HorizontalStackLayout kaikelle tärkeälle (lableit, buttonit, entryt, listview, border) -->
+            <HorizontalStackLayout Padding="30,0,30,0" VerticalOptions="StartAndExpand">
+                <!--VerticalStacklayout: Labelit + Entryt-->
+                <VerticalStackLayout Padding="30,0,30,0" VerticalOptions="Center">
+                    <!--Erikseen HorizontalLayoutit labelille ja entrylle-->
+                    <HorizontalStackLayout>
+                        <Label Text="Lasku ID: " Padding="0,12,0,0"
+                           TextColor="Black" FontSize="15"/>
+                        <Entry Placeholder="Syötä ID" x:Name="LaskuEntry"
+                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                           WidthRequest="250" Margin="35,0,0,10" Keyboard="Numeric"
+                           TextColor="Black" AutomationId="LaskuEntry" BackgroundColor="White"/>
+                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Varaus ID: " Padding="0,12,0,0"
+                           TextColor="Black" FontSize="15" />
+                        <Entry Placeholder="Syötä ID" x:Name="VarausEntry"
+                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                           WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
+                           TextColor="Black" AutomationId="VarausEntry" BackgroundColor="White"/>
+                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Summa: " Padding="0,12,0,0" 
+                           TextColor="Black" FontSize="15"/>
+                        <Entry Placeholder="Syötä summa" x:Name="SummaEntry"
+                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                           WidthRequest="250" Margin="45,0,0,10" Keyboard="Numeric"
+                           TextColor="Black" AutomationId="SummaEntry" BackgroundColor="White" />
+                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="ALV: " Padding="0,12,0,0" 
+                         TextColor="Black" FontSize="15"/>
+                        <Entry Placeholder="Syötä ALV" x:Name="AlvEntry"
+                        PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                        WidthRequest="250" Margin="72,0,0,10" Keyboard="Numeric"
+                        TextColor="Black" AutomationId="AlvEntry" BackgroundColor="White"/>
+                        <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+                        
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Maksun tila: " Padding="0,12,0,0" 
+                         TextColor="Black" FontSize="15"/>
+                         <!--
+                        <Entry Placeholder="Syötä maksun tila" x:Name="MaksuEntry"
+                         PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                         WidthRequest="250" Margin="18,0,0,10"
+                         TextColor="Black" AutomationId="MaksuEntry" BackgroundColor="White"/>
+                         -->
+                         <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+
+                         <!-- Tämä jos on mahdollista toteuttaa -->
+                         <Picker x:Name="MaksunTilaPicker" BackgroundColor="White" TextColor="Black" Margin="18,0,0,10"
+                    WidthRequest="250" >
+                    <!-- SelectedIndexChanged="MaksunTilaPicker_SelectedIndexChanged" -->
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Odottaa maksua</x:String>
+                            <x:String>Maksettu</x:String>
+                            <x:String>Peruttu</x:String>
+                            <x:String>Palautettu</x:String>
+                            <x:String>Käsittelyssä</x:String>
+                            <x:String>Virheellinen</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                    </HorizontalStackLayout>
+                  
+                    <!-- Napit -->
+                    <HorizontalStackLayout>
+                        <Button
+                            Text="Lisää lasku" x:Name="LisaaLasku" WidthRequest="175" Margin="10"
+                            TextColor="Black" Background="White"
+                            BorderColor="Black" BorderWidth="1"
+                            BackgroundColor="White"/>
+                            <!-- Clicked="LisaaLasku_Clicked" -->
+
+                        <Button
+                            Text="Poista lasku"  x:Name="PoistaLasku" WidthRequest="175" Margin="10"
+                            TextColor="Black" Background="White"
+                            BorderColor="Black" BorderWidth="1"
+                            BackgroundColor="White"/>
+                        <!-- Clicked="PoistaLasku_Clicked" -->
+
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout>
+                        <Button
+                            x:Name="PaivitaLasku"
+                            Text="Päivitä lasku" WidthRequest="175" Margin="10"
+                            TextColor="Black" Background="White"
+                            BorderColor="Black" BorderWidth="1"
+                            BackgroundColor="White"/>
+                            <!-- Clicked="PaivitaLasku_Clicked" -->
+
+                        <Button
+                            Text="Tyhjennä kentät" WidthRequest="175" Margin="10"
+                            TextColor="Black" Background="White"
+                            BorderColor="Black" BorderWidth="1"
+                            BackgroundColor="White"/>
+                            <!-- Clicked="TyhjennaLasku_Clicked" -->
+
+                    </HorizontalStackLayout>
+
+                    <Button 
+                            Text="Päivitä lista" WidthRequest="175" Margin="10"
+                            TextColor="Black" Background="White"
+                            BorderColor="Black" BorderWidth="1"
+                            BackgroundColor="White"/>
+                            <!-- Clicked="PaivitaLista_Clicked" -->
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Lasku ID"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="8,0,0,0"/>
+
+                        <Label Text="Varaus ID"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="20,0,0,0"/>
+
+                        <Label Text="Summa"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="25,0,0,0"/>
+
+                        <Label Text="ALV"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="54,0,0,0"/>
+
+                        <Label Text="Maksun tila"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="109,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <!-- Border ListView:lle -->
+                    <Border Stroke="Black"
+                            StrokeThickness="1"
+                            Padding="20"
+                            HorizontalOptions="EndAndExpand"
+                            HeightRequest="500"
+                            WidthRequest="750"
+                            MaximumWidthRequest="1000"
+                            BackgroundColor="White">
+
+                        <!-- Pää ListView-->
+                        <ListView x:Name="ItemListView"
+                              HasUnevenRows="True" >
+                              <!-- ItemSelected="ItemListView_ItemSelected" -->
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Padding="10"
+                                              BackgroundColor="Transparent"
+                                              HorizontalOptions="End"
+                                              WidthRequest="750"
+                                              MaximumWidthRequest="1000">
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <!-- Lasku ID -->
+                                                <ColumnDefinition Width="80" />
+                                                <!-- Varaus ID -->
+                                                <ColumnDefinition Width="60" />
+                                                <!-- Summa -->
+                                                <ColumnDefinition Width="140" />
+                                                <!-- ALV -->
+                                                <ColumnDefinition Width="40" />
+                                                <!-- Varauksen tila (maksettu vai ei) -->
+                                                <ColumnDefinition Width="220" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0"
+                                           Text="{Binding LaskuID}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+
+                                            <Label Grid.Column="1"
+                                           Text="{Binding VarausID}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+
+                                            <Label Grid.Column="2"
+                                           Text="{Binding Summa}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+
+                                            <Label Grid.Column="3"
+                                           Text="{Binding Alv}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+
+                                            <Label Grid.Column="4"
+                                           Text="{Binding VarauksenTila}"
+                                           HorizontalOptions="Center"
+                                           TextColor="Black"/>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Border>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+        </StackLayout>
+    </ScrollView>
 
 </ContentPage>
