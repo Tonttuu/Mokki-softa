@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mokki_softa.AsiakasHallintaPage">
 
+nellinkoodit
 
     <ScrollView BackgroundColor="LightSkyBlue">
 
@@ -254,6 +255,5 @@
             </HorizontalStackLayout>
         </StackLayout>
 
-</ScrollView>
-
+</ScrollView
 </ContentPage>

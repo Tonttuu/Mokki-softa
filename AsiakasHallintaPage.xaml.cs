@@ -137,18 +137,77 @@ private async Task<bool> SaveOrUpdateDataToDatabase(int asiakasId, DatabaseConne
 // Asiakkaan lisäys/tietojen päivitys nappi & tarkistukset
 public async void OnAsiakasSubmitClicked(object sender, EventArgs e)
 {
-    // Tarkistetaan, että kaikki kentät täytetty ja puh nro, posti nro ovat numeerisia.
-if (string.IsNullOrWhiteSpace(entryPostiNro.Text) ||
-    string.IsNullOrWhiteSpace(entryEtuNimi.Text) ||
-    string.IsNullOrWhiteSpace(entrySukuNimi.Text) ||
-    string.IsNullOrWhiteSpace(entryLahisoite.Text) ||
-    string.IsNullOrWhiteSpace(entryEmail.Text) ||
-    string.IsNullOrWhiteSpace(entryPuhNro.Text) ||
-    !int.TryParse(entryPostiNro.Text, out _) ||
-    !int.TryParse(entryPuhNro.Text, out _))
+
+// Tarkistetaan, että kaikki kentät ovat täytettyjä
+if (!AreAllFieldsFilled())
 {
-    await DisplayAlert("Virhe", "Kaikki kentät ovat pakollisia ja postinumeron sekä puhelinnumeron on oltava numeerisia.", "OK");
+    await DisplayAlert("Virhe", "Tarkista, että kaikki kentät ovat täytettyjä.", "OK");
     return;
+}
+
+// Tarkistetaan, että postinumero ja puhelinnumero ovat numeerisia
+if (!ArePostCodeAndPhoneNumeric())
+{
+    await DisplayAlert("Virhe", "Tarkista, että postinumero ja puhelinnumero ovat numeerisia. Postinumeron max pituus 5 ja puhelinnumeron 15.", "OK");
+    return;
+}
+
+// Tarkistetaan, että kenttien pituus on oikea
+if (!AreFieldLengthsValid())
+{
+    await DisplayAlert("Virhe", "Tarkista, että kenttien pituus on oikea.", "OK");
+    return;
+}
+
+// Tarkistetaan, ettei kenttiin ole syötetty SQL-injektioita
+if (ContainsSQLInjection(entryEtuNimi.Text) || ContainsSQLInjection(entrySukuNimi.Text) ||
+    ContainsSQLInjection(entryLahisoite.Text) || ContainsSQLInjection(entryEmail.Text) ||
+    ContainsSQLInjection(entryPuhNro.Text))
+{
+    await DisplayAlert("Virhe", "Tarkista, että kentissä ei ole kiellettyjä erikoismerkkejä.", "OK");
+    return;
+}
+
+// Funktio tarkistaa, että kaikki kentät ovat täytettyjä
+bool AreAllFieldsFilled()
+{
+    return !string.IsNullOrWhiteSpace(entryPostiNro.Text) &&
+           !string.IsNullOrWhiteSpace(entryEtuNimi.Text) &&
+           !string.IsNullOrWhiteSpace(entrySukuNimi.Text) &&
+           !string.IsNullOrWhiteSpace(entryLahisoite.Text) &&
+           !string.IsNullOrWhiteSpace(entryEmail.Text) &&
+           !string.IsNullOrWhiteSpace(entryPuhNro.Text);
+}
+
+// Funktio tarkistaa, että postinumero ja puhelinnumero ovat numeerisia
+bool ArePostCodeAndPhoneNumeric()
+{
+    return int.TryParse(entryPostiNro.Text, out _) && int.TryParse(entryPuhNro.Text, out _);
+}
+
+// Funktio tarkistaa, että kenttien pituus on oikea (max)
+bool AreFieldLengthsValid()
+{
+    return entryPostiNro.Text.Length == 5 && 
+           entryEtuNimi.Text.Length <= 20 && 
+           entrySukuNimi.Text.Length <= 40 && 
+           entryLahisoite.Text.Length <= 40 && 
+           entryEmail.Text.Length <= 50 && 
+           entryPuhNro.Text.Length <= 15;
+}
+
+// Funktio tarkistaa, sisältääkö syöte kiellettyjä SQL-injektiomerkkejä
+bool ContainsSQLInjection(string input)
+{
+    string[] forbiddenChars = { "'", ";", "--", "/*", "*/" }; // Esimerkkejä kielletyistä merkeistä
+    foreach (var forbiddenChar in forbiddenChars)
+    {
+        if (input.Contains(forbiddenChar))
+        {
+            return true; // Palauta true, jos kielletty merkki löytyy
+        }
+    }
+    return false; // Palauta false, jos kiellettyä merkkiä ei löytynyt
 }
 
     var appSettings = ConfigurationProvider.GetAppSettings();
