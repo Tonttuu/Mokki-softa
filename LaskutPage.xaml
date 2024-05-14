@@ -52,7 +52,7 @@
                     <HorizontalStackLayout>
                         <Label Text="Lasku ID: " Padding="0,12,0,0"
                            TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Syötä ID" x:Name="LaskuEntry"
+                        <Entry Placeholder="Syötä laskun ID" x:Name="LaskuEntry"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                            WidthRequest="250" Margin="35,0,0,10" Keyboard="Numeric"
                            TextColor="Black" AutomationId="LaskuEntry" BackgroundColor="White"/>
@@ -62,7 +62,7 @@
                     <HorizontalStackLayout>
                         <Label Text="Varaus ID: " Padding="0,12,0,0"
                            TextColor="Black" FontSize="15" />
-                        <Entry Placeholder="Syötä ID" x:Name="VarausEntry"
+                        <Entry Placeholder="Syötä varauksen ID" x:Name="VarausEntry"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                            WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
                            TextColor="Black" AutomationId="VarausEntry" BackgroundColor="White"/>
@@ -71,7 +71,7 @@
                     <HorizontalStackLayout>
                         <Label Text="Summa: " Padding="0,12,0,0" 
                            TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Syötä summa" x:Name="SummaEntry"
+                        <Entry Placeholder="Syötä laskutettava summa" x:Name="SummaEntry"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                            WidthRequest="250" Margin="45,0,0,10" Keyboard="Numeric"
                            TextColor="Black" AutomationId="SummaEntry" BackgroundColor="White" />
@@ -81,7 +81,7 @@
                     <HorizontalStackLayout>
                         <Label Text="ALV: " Padding="0,12,0,0" 
                          TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Syötä ALV" x:Name="AlvEntry"
+                        <Entry Placeholder="Syötä ALV prosentteina" x:Name="AlvEntry"
                         PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                         WidthRequest="250" Margin="72,0,0,10" Keyboard="Numeric"
                         TextColor="Black" AutomationId="AlvEntry" BackgroundColor="White"/>
@@ -100,7 +100,7 @@
                          <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
 
                          <!-- Tämä jos on mahdollista toteuttaa -->
-                         <Picker x:Name="MaksunTilaPicker" BackgroundColor="White" TextColor="Black" Margin="18,0,0,10"
+                         <Picker x:Name="MaksunTilaPicker" BackgroundColor="IndianRed" TextColor="Black" Margin="18,0,0,10"
                     WidthRequest="250" >
                     <!-- SelectedIndexChanged="MaksunTilaPicker_SelectedIndexChanged" -->
                     <Picker.ItemsSource>
@@ -109,9 +109,7 @@
                             <x:String>Maksettu</x:String>
                             <x:String>Peruttu</x:String>
                             <x:String>Palautettu</x:String>
-                            <x:String>Käsittelyssä</x:String>
-                            <x:String>Virheellinen</x:String>
-                        </x:Array>
+                            </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
 
@@ -120,16 +118,27 @@
                     <!-- Napit -->
                     <HorizontalStackLayout>
                         <Button
-                            Text="Lisää lasku" x:Name="LisaaLasku" WidthRequest="175" Margin="10"
-                            TextColor="Black" Background="White"
-                            BorderColor="Black" BorderWidth="1"
+                            Text="Lisää lasku" 
+                            x:Name="LisaaLasku"
+                            Clicked="LisaaLasku_Clicked"
+                            WidthRequest="175" Margin="10"
+                            TextColor="Black" 
+                            Background="White"
+                            BorderColor="Black" 
+                            BorderWidth="1"
                             BackgroundColor="White"/>
                             <!-- Clicked="LisaaLasku_Clicked" -->
 
                         <Button
-                            Text="Poista lasku"  x:Name="PoistaLasku" WidthRequest="175" Margin="10"
-                            TextColor="Black" Background="White"
-                            BorderColor="Black" BorderWidth="1"
+                            Text="Poista lasku"  
+                            x:Name="PoistaLasku"
+                            Clicked="PoistaLasku_Clicked"
+                            WidthRequest="175" 
+                            Margin="10"
+                            TextColor="Black" 
+                            Background="White"
+                            BorderColor="Black" 
+                            BorderWidth="1"
                             BackgroundColor="White"/>
                         <!-- Clicked="PoistaLasku_Clicked" -->
 
@@ -138,13 +147,20 @@
                     <HorizontalStackLayout>
                         <Button
                             x:Name="PaivitaLasku"
-                            Text="Päivitä lasku" WidthRequest="175" Margin="10"
-                            TextColor="Black" Background="White"
-                            BorderColor="Black" BorderWidth="1"
+                            Clicked="PaivitaLasku_Clicked"
+                            Text="Päivitä lasku" 
+                            WidthRequest="175" 
+                            Margin="10"
+                            TextColor="Black" 
+                            Background="White"
+                            BorderColor="Black" 
+                            BorderWidth="1"
                             BackgroundColor="White"/>
                             <!-- Clicked="PaivitaLasku_Clicked" -->
 
                         <Button
+                            x:Name="TyhjennaKentat"
+                            Clicked="TyhjennaKentat_Clicked"
                             Text="Tyhjennä kentät" WidthRequest="175" Margin="10"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
@@ -154,9 +170,14 @@
                     </HorizontalStackLayout>
 
                     <Button 
-                            Text="Päivitä lista" WidthRequest="175" Margin="10"
-                            TextColor="Black" Background="White"
-                            BorderColor="Black" BorderWidth="1"
+                            x:Name="PaivitaLista"
+                            Clicked="PaivitaLista_Clicked"
+                            Text="Päivitä lista" 
+                            WidthRequest="175" Margin="10"
+                            TextColor="Black" 
+                            Background="White"
+                            BorderColor="Black" 
+                            BorderWidth="1"
                             BackgroundColor="White"/>
                             <!-- Clicked="PaivitaLista_Clicked" -->
 
