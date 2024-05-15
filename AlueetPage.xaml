@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mokki_softa.AlueetPage">
+
+<ScrollView BackgroundColor="LightGreen">
+       
+<VerticalStackLayout
+    Margin="10"
+    Spacing="10"
+    HorizontalOptions="Center">
+
+    <!-- Logo -->
+            <Label Padding="10" HorizontalOptions="Center" FontSize="50" Margin="0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Village " TextColor="White" FontFamily="Stereofunk" />
+                        <Span Text="Newbies" TextColor="Black" FontFamily="Stereofunk"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+    <Grid ColumnDefinitions="145, 250, 350, 10, 145"
+      RowDefinitions="*,*,*,*,*,*,*,*,*,*"
+      ColumnSpacing="40"
+      RowSpacing="10"
+      Padding="15"
+      HorizontalOptions="Center"
+      VerticalOptions="StartAndExpand">
+
+<!-- Jos lista on liian vaikea niin tässä picker-->
+
+            <HorizontalStackLayout >
+            <Label Text="Valitse olemassaoleva alue:"
+                    TextColor="Black"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Margin="195,0,70,0"/>
+            </HorizontalStackLayout>
+
+                <Picker x:Name="pickerAlue"
+                    WidthRequest="250"
+                    TextColor="Black"
+                    Margin="100,60,70,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    SelectedIndexChanged="OnAlueSelectedIndexChanged" />
+
+                <Label Text="Alueen nimi"
+               TextColor="Black"
+               FontSize="15"
+               Padding="12,12,0,0"
+               Grid.Column="0"
+               Grid.Row="2"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"/>
+
+        <Entry Placeholder="Syötä ID" x:Name="entryAlueNimi"
+                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                           WidthRequest="250" Margin="13,0,0,10"
+                           TextColor="Black" AutomationId="entryAlueNimi" BackgroundColor="White"
+                           Grid.Column="1"
+                            Grid.Row="2"/>
+                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+                <Button x:Name="PaivitaAlue"
+            BackgroundColor="White"
+            Text="Päivitä Alue"
+            TextColor="Black"
+            FontSize="20"
+            BorderColor="Black"
+            WidthRequest="175"
+            Grid.Column="3"
+            Grid.Row="5"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="5"
+            Clicked="PaivitaAlue_Clicked" />       
+
+                <Button
+            BackgroundColor="White"
+            Text="Lisää alue"
+            TextColor="Black"
+            FontSize="20"
+            BorderColor="Black"
+            WidthRequest="175"
+            Grid.Column="2"
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="5"
+            Clicked="OnSaveAlueClicked"/>
+
+      <Button x:Name="PoistaAlue"
+            BackgroundColor="White"
+            Text="Poista alue"
+            TextColor="Black"
+            FontSize="20"
+            BorderColor="Black"
+            WidthRequest="175"
+            Grid.Column="3"
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="5"
+            Clicked="PoistaAlue_Clicked" />
+
+                <Button
+            BackgroundColor="White"
+            Text="Tyhjennä kentät"
+            TextColor="Black"
+            FontSize="20"
+            BorderColor="Black"
+            WidthRequest="175"
+            Grid.Column="2"
+            Grid.Row="2"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="5"
+            Clicked="TyhjennaAlue_Clicked" />
+
+                <Button
+            BackgroundColor="White"
+            Text="Päivitä lista"
+            TextColor="Black"
+            FontSize="20"
+            BorderColor="Black"
+            WidthRequest="180"
+            Grid.Column="3"
+            Grid.Row="2"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="5"
+            Clicked="PaivitaLista_Clicked" />
+           
+    </Grid>
+
+
+                    <HorizontalStackLayout Margin="10,0,0,0"
+                    VerticalOptions="StartAndExpand">
+                        <Label Text="Alue ID"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="40,0,0,0"/>
+
+                        <Label Text="Nimi"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="20,0,0,0"/>
+
+                    </HorizontalStackLayout>
+                    <!-- Border ListView:lle -->
+                    <Border Stroke="Black"
+                            StrokeThickness="1"
+                            Padding="20"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            HeightRequest="500"
+                            WidthRequest="1000"
+                            MaximumWidthRequest="2000"
+                            BackgroundColor="White"
+                            Margin="5,5,0,0">
+
+                        <!-- Pää ListView-->
+                        <ListView x:Name="ItemListView"
+                              HasUnevenRows="True" >
+                              <!-- ItemSelected="ItemListView_ItemSelected" -->
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Padding="10"
+                                              BackgroundColor="Transparent"
+                                              HorizontalOptions="End"
+                                              WidthRequest="750"
+                                              MaximumWidthRequest="1000">
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <!-- Alue ID -->
+                                                <ColumnDefinition Width="60" />
+                                                <!-- Alueen nimi -->
+                                                <ColumnDefinition Width="80" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0"
+                                           Text="{Binding AlueID}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+
+                                            <Label Grid.Column="1"
+                                           Text="{Binding AlueNimi}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Border>
+
+
+
+</VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

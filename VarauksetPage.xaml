@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mokki_softa.VarauksetPage">
+
+<ScrollView BackgroundColor="Lavender" >
+<VerticalStackLayout
+    Margin="10"
+    Spacing="10"
+    HorizontalOptions="Center">
+
+    <!-- Logo -->
+            <Label Padding="10" HorizontalOptions="Center" FontSize="50" Margin="0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Village " TextColor="White" FontFamily="Stereofunk" />
+                        <Span Text="Newbies" TextColor="Black" FontFamily="Stereofunk"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+    <Grid ColumnDefinitions="165, 220, 145, 145, 145"
+      RowDefinitions="*,*,*,*,*,*,*,*,*,*,*"
+      ColumnSpacing="40"
+      RowSpacing="10"
+      Padding="15"
+      HorizontalOptions="Center"
+      VerticalOptions="StartAndExpand">
+
+<!-- Jos lista on liian vaikea niin tässä picker-->
+
+            <HorizontalStackLayout >
+            <Label Text="Valitse olemassaoleva varaus:"
+                    TextColor="Black"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Margin="210,0,70,0"/>
+            </HorizontalStackLayout>
+
+           <Picker x:Name="pickerVaraus"
+                    WidthRequest="250"
+                    TextColor="Black"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Margin="100,60,70,0"
+                    Grid.Column="1"
+                    Grid.Row="0"/>
+            
+            <!-- SelectedIndexChanged="OnVarausSelectedIndexChanged" -->
+
+        <Label Text="Varaus ID"
+               TextColor="Black"
+               FontSize="15"
+               Padding="12,12,70,0"
+               Grid.Column="0"
+               Grid.Row="1"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"/>
+
+        <Entry  Placeholder="Syötä ID" x:Name="VarausIdEntry"
+                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                           WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
+                           TextColor="Black" AutomationId="VarausIdEntry" BackgroundColor="White"
+                           Grid.Column="1"
+                            Grid.Row="1"/>
+                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+
+        <Label Text="Mökki ID"
+               TextColor="Black"
+               FontSize="15"
+               Padding="12,12,70,0"
+               Grid.Column="0"
+               Grid.Row="2"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"/>
+
+        <Entry Placeholder="Syötä ID" x:Name="entryMokkiId"
+                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                           WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
+                           TextColor="Black" AutomationId="entryMokkiId" BackgroundColor="White"
+                           Grid.Column="1"
+                            Grid.Row="2"/>
+                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+
+        <Label Text="Varaus päivämäärä"
+               TextColor="Black"
+               FontSize="15"
+               Padding="12,12,0,0"
+               Grid.Column="0"
+               Grid.Row="3"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"/>
+
+        <Entry Placeholder="dd.mm.vvvv" x:Name="entryVarausPvm"
+                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                           WidthRequest="250" Margin="36,0,0,10" Keyboard="Numeric"
+                           TextColor="Black" AutomationId="entryVarausPvm" BackgroundColor="White"
+                            Grid.Column="1"
+                            Grid.Row="3"/>
+                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+
+               <Label Text="Vahvistus"
+               TextColor="Black"
+               FontSize="15"
+               Padding="12,12,75,0"
+               Grid.Column="0"
+               Grid.Row="4"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"/>
+
+        <Entry Placeholder="Vahvistus päivämäärä dd.mm.vvvv" x:Name="entryVahvistusPvm"
+                        PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                        WidthRequest="250" Margin="32,0,0,10" Keyboard="Numeric"
+                        TextColor="Black" AutomationId="entryVahvistusPvm" BackgroundColor="White"
+                         Grid.Column="1"
+                        Grid.Row="4"/>
+                        <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+
+               <Label Text="Varauksen alkupäivämäärä"
+               TextColor="Black"
+               FontSize="15"
+               Padding="0,0,30,0"
+               Grid.Column="0"
+               Grid.Row="5"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"/>
+
+        <Entry Placeholder="dd.mm.vvvv" x:Name="entryVarausAlku"
+                         PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                         WidthRequest="250" Margin="36,0,0,10" Keyboard="Numeric"
+                         TextColor="Black" AutomationId="entryVarausAlku" BackgroundColor="White"
+                         Grid.Column="1"
+                        Grid.Row="5"/>
+                         <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+
+        <Label Text="Varauksen päättymispäivämäärä"
+               TextColor="Black"
+               FontSize="15"
+               Padding="12,0,0,0"
+               Grid.Column="0"
+               Grid.Row="6"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"/>
+
+        <Entry Placeholder="dd.mm.vvvv" x:Name="entryVarausPäättyy"
+                         PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
+                         WidthRequest="250" Margin="47,0,0,10" Keyboard="Numeric"
+                         TextColor="Black" AutomationId="entryVarausPäättyy" BackgroundColor="White"
+                         Grid.Column="1"
+                        Grid.Row="6"/>
+                         <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
+
+        
+    <Button
+            BackgroundColor="White"
+            Text="Lisää varaus"
+            TextColor="Black"
+            FontSize="20"
+            BorderColor="Black"
+            WidthRequest="175"
+            Grid.Column="3"
+            Grid.Row="3"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="5"/>
+
+            <!-- Clicked="OnVarausSubmitClicked" -->
+
+      <Button x:Name="PoistaVaraus"
+            BackgroundColor="White"
+            Text="Poista varaus"
+            TextColor="Black"
+            FontSize="20"
+            BorderColor="Black"
+            WidthRequest="175"
+            Grid.Column="4"
+            Grid.Row="3"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="5"/>
+           <!-- Clicked="OnVarausDeleteClicked" -->
+
+         <Button x:Name="PaivitaVaraus"
+            BackgroundColor="White"
+            Text="Päivitä varaus"
+            TextColor="Black"
+            FontSize="20"
+            BorderColor="Black"
+            WidthRequest="175"
+            Grid.Column="3"
+            Grid.Row="4"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="5"/>
+            <!-- Clicked="PaivitaVaraus_Clicked" -->
+
+      <Button x:Name="TyhjennaVaraus"
+            BackgroundColor="White"
+            Text="Tyhjennä varaus"
+            TextColor="Black"
+            FontSize="20"
+            BorderColor="Black"
+            WidthRequest="180"
+            Grid.Column="4"
+            Grid.Row="4"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="5"/>
+            <!-- Clicked="TyhjennaVaraus_Clicked" -->
+           
+    </Grid>
+
+<Grid ColumnDefinitions="*" RowDefinitions="10,*">
+    <Button x:Name="PaivitaLista"
+            BackgroundColor="White"
+            Text="Päivitä lista"
+            TextColor="Black"
+            FontSize="20"
+            BorderColor="Black"
+            WidthRequest="180"
+            Grid.Column="0"
+            Grid.Row="1"
+            Margin="10,10,0,20"/>
+            <!-- Clicked="PaivitaLista_Clicked" -->
+</Grid>
+
+                    <HorizontalStackLayout Margin="10,0,0,0"
+                    VerticalOptions="StartAndExpand">
+                        <Label Text="Varaus ID"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="0,0,0,0"/>
+
+                        <Label Text="Mökki ID"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="20,0,0,0"/>
+
+                        <Label Text="Varaus Päivämäärä"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="25,0,0,0"/>
+
+                        <Label Text="Vahvistus päivämäärä"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="54,0,0,0"/>
+
+                        <Label Text="Varauksen alku"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="54,0,0,0"/>
+                        
+                        <Label Text="Varauksen päättyminen"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="54,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <!-- Border ListView:lle -->
+                    <Border Stroke="Black"
+                            StrokeThickness="1"
+                            Padding="20"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            HeightRequest="500"
+                            WidthRequest="1000"
+                            MaximumWidthRequest="2000"
+                            BackgroundColor="White"
+                            Margin="5,5,0,0">
+
+                        <!-- Pää ListView-->
+                        <ListView x:Name="ItemListView"
+                              HasUnevenRows="True" >
+                              <!-- ItemSelected="ItemListView_ItemSelected" -->
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Padding="10"
+                                              BackgroundColor="Transparent"
+                                              HorizontalOptions="End"
+                                              WidthRequest="750"
+                                              MaximumWidthRequest="1000">
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <!-- Varaus ID -->
+                                                <ColumnDefinition Width="60" />
+                                                <!-- Mökki ID -->
+                                                <ColumnDefinition Width="60" />
+                                                <!-- Varaus päivämäärä -->
+                                                <ColumnDefinition Width="80" />
+                                                <!-- Vahvistus -->
+                                                <ColumnDefinition Width="80" />
+                                                <!-- Varauksen alkupäivämäärä -->
+                                                <ColumnDefinition Width="100" />
+                                                <!-- Varauksen päättymispäivämäärä -->
+                                                <ColumnDefinition Width="80" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0"
+                                           Text="{Binding MokkiID}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+
+                                            <Label Grid.Column="1"
+                                           Text="{Binding AlueID}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+
+                                            <Label Grid.Column="2"
+                                           Text="{Binding Postinro}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+
+                                            <Label Grid.Column="3"
+                                           Text="{Binding MokkiNimi}"
+                                           HorizontalOptions="Start"
+                                           TextColor="Black"/>
+
+                                            <Label Grid.Column="4"
+                                           Text="{Binding Katuosoite}"
+                                           HorizontalOptions="Center"
+                                           TextColor="Black"/>
+
+                                           <Label Grid.Column="5"
+                                           Text="{Binding Hinta}"
+                                           HorizontalOptions="Center"
+                                           TextColor="Black"/>
+
+                                           <Label Grid.Column="6"
+                                           Text="{Binding Kuvaus}"
+                                           HorizontalOptions="Center"
+                                           TextColor="Black"/>
+
+                                           <Label Grid.Column="7"
+                                           Text="{Binding HenkiloMaara}"
+                                           HorizontalOptions="Center"
+                                           TextColor="Black"/>
+
+                                           <Label Grid.Column="8"
+                                           Text="{Binding Varustelu}"
+                                           HorizontalOptions="Center"
+                                           TextColor="Black"/>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Border>
+
+</VerticalStackLayout>
+
+</ScrollView>
+
+</ContentPage>

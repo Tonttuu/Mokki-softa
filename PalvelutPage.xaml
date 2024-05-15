@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Mokki_softa.AsiakasHallintaPage">
+             x:Class="Mokki_softa.PalvelutPage">
 
-    <ScrollView BackgroundColor="LightSkyBlue">
-
-     <!-- Pää StackLayOut -->
+<ScrollView BackgroundColor="RosyBrown">
+        <!-- Pää StackLayOut -->
         <StackLayout Padding="30,0,30,0" Spacing="25" HorizontalOptions="Center" VerticalOptions="Center" Margin="10">
 
             <!-- Logo -->
@@ -19,84 +18,83 @@
             </Label>
 
             <HorizontalStackLayout >
-            <Label Text="Valitse olemassaoleva asiakas:"
+            <Label Text="Valitse olemassaoleva palvelu:"
                     TextColor="Black"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
-                    Margin="180,0,0,0"/>
+                    Margin="145,0,0,0"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
-              <Picker x:Name="pickerAsiakkaat"
+              <Picker x:Name="pickerPalvelu"
                     WidthRequest="250"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
-                    Margin="180,0,0,0"
-                    TextColor="Black"
-                    SelectedIndexChanged="OnAsiakasSelectedIndexChanged" />
+                    Margin="145,0,0,0"
+                    TextColor="Black" />
+                    <!-- SelectedIndexChanged="OnPalveluSelectedIndexChanged" -->
             </HorizontalStackLayout>
 
             <!-- HorizontalStackLayout kaikelle tärkeälle (lableit, buttonit, entryt, listview, border) -->
             <HorizontalStackLayout Padding="30,0,30,0" VerticalOptions="StartAndExpand">
-
                 <!--VerticalStacklayout: Labelit + Entryt-->
                 <VerticalStackLayout Padding="30,0,30,0" VerticalOptions="Center">
                     <!--Erikseen HorizontalLayoutit labelille ja entrylle-->
                     <HorizontalStackLayout>
-                        <Label Text="Etunimi: " Padding="0,12,0,0"
+                        <Label Text="Palvelu ID: " Padding="0,12,0,0"
                            TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Etunimi" x:Name="entryEtuNimi"
+                        <Entry Placeholder="Syötä ID" x:Name="PalveluEntry"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                           WidthRequest="250" Margin="60,0,0,10"
-                           TextColor="Black" AutomationId="entryEtuNimi" BackgroundColor="White"/>
+                           WidthRequest="250" Margin="13,0,0,10" Keyboard="Numeric"
+                           TextColor="Black" AutomationId="PalveluEntry" BackgroundColor="White"/>
                            <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
 
                     </HorizontalStackLayout>
                     <HorizontalStackLayout>
-                        <Label Text="Sukunimi: " Padding="0,12,0,0"
+                        <Label Text="Alue ID: " Padding="0,12,0,0"
                            TextColor="Black" FontSize="15" />
-                        <Entry Placeholder="Sukunimi" x:Name="entrySukuNimi"
+                        <Entry Placeholder="Syötä ID" x:Name="AlueEntry"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                           WidthRequest="250" Margin="50,0,0,10"
-                           TextColor="Black" AutomationId="entrySukuNimi" BackgroundColor="White"/>
+                           WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
+                           TextColor="Black" AutomationId="AlueEntry" BackgroundColor="White"/>
                            <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
                     </HorizontalStackLayout>
                     <HorizontalStackLayout>
-                        <Label Text="Lähiosoite: " Padding="0,12,0,0" 
+                        <Label Text="Nimi: " Padding="0,12,0,0" 
                            TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Lähiosoite" x:Name="entryLahisoite"
+                        <Entry Placeholder="Syötä nimi" x:Name="NimiEntry"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                            WidthRequest="250" Margin="46,0,0,10"
-                           TextColor="Black" AutomationId="entryLahisoite" BackgroundColor="White" />
+                           TextColor="Black" AutomationId="NimiEntry" BackgroundColor="White" />
                            <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
 
                     </HorizontalStackLayout>
                     <HorizontalStackLayout>
-                        <Label Text="Postinumero: " Padding="0,12,0,0" 
+                        <Label Text="Kuvaus: " Padding="0,12,0,0" 
                          TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Postinumero" x:Name="entryPostiNro"
+                        <Entry Placeholder="Syötä kuvaus" x:Name="KuvausEntry"
                         PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                        WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
-                        TextColor="Black" AutomationId="entryPostiNro" BackgroundColor="White"/>
+                        WidthRequest="250" Margin="30,0,0,10"
+                        TextColor="Black" AutomationId="KuvausEntry" BackgroundColor="White"/>
                         <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
                         
                     </HorizontalStackLayout>
                     <HorizontalStackLayout>
-                        <Label Text="Puhelinnumero: " Padding="0,12,0,0" 
+                        <Label Text="Hinta: " Padding="0,12,0,0" 
                          TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Puhelinnumero" x:Name="entryPuhNro"
+                        <Entry Placeholder="Syötä hinta" x:Name="HintaEntry"
                          PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                         WidthRequest="250" Margin="18,0,0,10" Keyboard="Numeric"
-                         TextColor="Black" AutomationId="entryPuhNro" BackgroundColor="White"/>
+                         WidthRequest="250" Margin="42,0,0,10" Keyboard="Numeric"
+                         TextColor="Black" AutomationId="HintaEntry" BackgroundColor="White"/>
                          <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
                     </HorizontalStackLayout>
                     <HorizontalStackLayout>
-                        <Label Text="Sähköposti " Padding="0,12,0,0" 
+                        <Label Text="ALV: " Padding="0,12,0,0" 
                          TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Syötä sähköposti" x:Name="entryEmail"
+                        <Entry Placeholder="Syötä ALV" x:Name="ALVEntry"
                          PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                         WidthRequest="250" Margin="52,0,0,10"
-                         TextColor="Black" AutomationId="entryEmail" BackgroundColor="White"/>
+                         WidthRequest="250" Margin="52,0,0,10" Keyboard="Numeric"
+                         TextColor="Black" AutomationId="ALVEntry" BackgroundColor="White"/>
                          <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
                     </HorizontalStackLayout>
 
@@ -104,39 +102,36 @@
                     <!-- Napit -->
                     <HorizontalStackLayout>
                         <Button
-                            Text="Lisää asiakas" x:Name="LisaaAsiakas" WidthRequest="175" Margin="10"
+                            Text="Lisää palvelu" x:Name="LisaaPalvelu" WidthRequest="175" Margin="10"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
-                            BackgroundColor="White"
-                            Clicked="OnAsiakasSubmitClicked"/>
-                        <!-- Huom! Pitää erottaa lisää asiakas ja päivitä tiedot tästä napista, kun ne ovat tässä samassa -->
+                            BackgroundColor="White"/>
+                            <!-- Clicked="LisaaPalvelu_Clicked" -->
 
                         <Button
-                            Text="Poista asiakas"  x:Name="PoistaAsiakas" WidthRequest="175" Margin="10"
+                            Text="Poista palvelu"  x:Name="PoistaPalvelu" WidthRequest="175" Margin="10"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
-                            BackgroundColor="White"
-                            Clicked="OnAsiakasDeleteClicked" />
+                            BackgroundColor="White"/>
+                        <!-- Clicked="PoistaPalvelu_Clicked" -->
 
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout>
                         <Button
-                            x:Name="PaivitaAsiakas"
-                            Text="Päivitä asiakas" WidthRequest="175" Margin="10"
+                            x:Name="PaivitaPalvelu"
+                            Text="Päivitä palvelu" WidthRequest="175" Margin="10"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
                             BackgroundColor="White"/>
-                             <!-- tähän pitää saada, että päivittää asiakkaan tiedot -->
-                            <!-- Clicked="PaivitaAsiakas_Clicked" -->
+                            <!-- Clicked="PaivitaPalvelu_Clicked" -->
 
                         <Button
-                            x:Name="TyhjennaAsiakas"
                             Text="Tyhjennä kentät" WidthRequest="175" Margin="10"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
                             BackgroundColor="White"/>
-                            <!-- Clicked="TyhjennaAsiakas_Clicked" -->
+                            <!-- Clicked="TyhjennaPalvelu_Clicked" -->
 
                     </HorizontalStackLayout>
 
@@ -151,27 +146,27 @@
 
                 <VerticalStackLayout>
                     <HorizontalStackLayout>
-                        <Label Text="Etunimi"
+                        <Label Text="Palvelu ID"
                                FontAttributes="Bold"
                                TextColor="Black"
-                               Margin="4,0,0,0"/>
-                        <Label Text="Sukunimi"
+                               Margin="8,0,0,0"/>
+                        <Label Text="Alue ID"
                                FontAttributes="Bold"
                                TextColor="Black"
-                               Margin="30,0,0,0"/>
-                        <Label Text="Lähiosoite"
-                               FontAttributes="Bold"
-                               TextColor="Black"
-                               Margin="30,0,0,0"/>
-                        <Label Text="Postinumero"
+                               Margin="20,0,0,0"/>
+                        <Label Text="Nimi"
                                FontAttributes="Bold"
                                TextColor="Black"
                                Margin="25,0,0,0"/>
-                        <Label Text="Puhelinnumero"
+                        <Label Text="Kuvaus"
                                FontAttributes="Bold"
                                TextColor="Black"
-                               Margin="25,0,0,0"/>
-                        <Label Text="Sähköposti"
+                               Margin="109,0,0,0"/>
+                        <Label Text="Hinta"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Margin="218,0,0,0"/>
+                        <Label Text="ALV"
                                FontAttributes="Bold"
                                TextColor="Black"
                                Margin="54,0,0,0"/>
@@ -252,6 +247,6 @@
                 </VerticalStackLayout>
             </HorizontalStackLayout>
         </StackLayout>
+    </ScrollView>
 
-</ScrollView>
 </ContentPage>
