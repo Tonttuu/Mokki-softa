@@ -39,35 +39,17 @@
                     Margin="195,0,70,0"/>
             </HorizontalStackLayout>
 
-           <Picker x:Name="pickerMokit"
+                <Picker x:Name="pickerMokit"
                     WidthRequest="250"
                     TextColor="Black"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Margin="100,60,70,0"
                     Grid.Column="1"
-                    Grid.Row="0"/>
-            
-            <!-- SelectedIndexChanged="OnMokkiSelectedIndexChanged" -->
+                    Grid.Row="0"
+                    SelectedIndexChanged="OnMokkiSelectedIndexChanged" />
 
-        <Label Text="Mökki ID"
-               TextColor="Black"
-               FontSize="15"
-               Padding="12,12,0,0"
-               Grid.Column="0"
-               Grid.Row="1"
-               HorizontalOptions="Center"
-               VerticalOptions="Start"/>
-
-        <Entry  Placeholder="Syötä ID" x:Name="MokkiIdEntry"
-                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                           WidthRequest="250" Margin="30,0,0,10"
-                           TextColor="Black" AutomationId="MokkiIdEntry" BackgroundColor="White"
-                           Grid.Column="1"
-                            Grid.Row="1"/>
-                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
-
-        <Label Text="Alue ID"
+                <Label Text="Alue ID"
                TextColor="Black"
                FontSize="15"
                Padding="12,12,0,0"
@@ -218,7 +200,7 @@
             Margin="5"
             Clicked="OnMokkiSubmitClicked" />
 
-      <Button x:Name="PoistaMokki"
+                <Button x:Name="PoistaMokki"
             BackgroundColor="White"
             Text="Poista mökki"
             TextColor="Black"
@@ -229,10 +211,10 @@
             Grid.Row="4"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="5"/>
-           <!-- Clicked="OnMokkiDeleteClicked" -->
+            Margin="5"
+            Clicked="OnMokkiDeleteClicked" />
 
-         <Button x:Name="PaivitaMokki"
+                <Button x:Name="PaivitaMokki"
             BackgroundColor="White"
             Text="Päivitä mökki"
             TextColor="Black"
@@ -243,10 +225,11 @@
             Grid.Row="5"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="5"/>
-            <!-- Clicked="PaivitaMokki_Clicked" -->
+            Margin="5"
+            Clicked="PaivitaMokki_Clicked" />
+            
 
-      <Button x:Name="TyhjennaMokki"
+                <Button x:Name="TyhjennaMokki"
             BackgroundColor="White"
             Text="Tyhjennä mökki"
             TextColor="Black"
@@ -257,26 +240,27 @@
             Grid.Row="5"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="5"/>
-            <!-- Clicked="TyhjennaMokki_Clicked" -->
-           
-    </Grid>
+            Margin="5"
+            Clicked="TyhjennaMokki_Clicked" />
 
-<Grid ColumnDefinitions="*" RowDefinitions="10,*">
-    <Button x:Name="PaivitaLista"
-            BackgroundColor="White"
-            Text="Päivitä lista"
-            TextColor="Black"
-            FontSize="20"
-            BorderColor="Black"
-            WidthRequest="180"
-            Grid.Column="0"
-            Grid.Row="1"
-            Margin="10,10,0,20"/>
-            <!-- Clicked="PaivitaLista_Clicked" -->
-</Grid>
+            </Grid>
 
-                    <HorizontalStackLayout Margin="10,0,0,0"
+            <Grid ColumnDefinitions="*" RowDefinitions="10,*">
+                <Button x:Name="PaivitaLista"
+                BackgroundColor="White"
+                Text="Päivitä lista"
+                TextColor="Black"
+                FontSize="20"
+                BorderColor="Black"
+                WidthRequest="180"
+                Grid.Column="0"
+                Grid.Row="1"
+                Margin="10,10,0,20"
+                Clicked="PaivitaLista_Clicked"/>
+
+            </Grid>
+
+            <HorizontalStackLayout Margin="10,0,0,0"
                     VerticalOptions="StartAndExpand">
                         <Label Text="Mökki ID"
                                FontAttributes="Bold"
