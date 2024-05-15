@@ -59,7 +59,7 @@
 
         <Entry  Placeholder="Syötä ID" x:Name="AsiakasIdEntry"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                           WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
+                           WidthRequest="250" Margin="30,0,0,10"
                            TextColor="Black" AutomationId="AsiakasIdEntry" BackgroundColor="White"
                            Grid.Column="1"
                             Grid.Row="1"/>
@@ -76,7 +76,7 @@
 
         <Entry Placeholder="Syötä ID" x:Name="entryMokkiId"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                           WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
+                           WidthRequest="250" Margin="30,0,0,10"
                            TextColor="Black" AutomationId="entryMokkiId" BackgroundColor="White"
                            Grid.Column="1"
                             Grid.Row="2"/>
@@ -214,7 +214,8 @@
             Grid.Row="4"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="5"/>
+            Margin="5"
+            Clicked="PaivitaVaraus_Clicked" />
             <!-- Clicked="PaivitaVaraus_Clicked" -->
 
       <Button x:Name="TyhjennaVaraus"

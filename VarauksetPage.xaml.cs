@@ -12,6 +12,7 @@ namespace Mokki_softa
             var dbConnector = new DatabaseConnector(appSettings);
             LoadVarausIntoPicker(dbConnector); // varaukset Pickeriin
              // PaivitaLista.Clicked += async (sender, e) => await HaeVaraukset();
+             // pickerVaraukset.SelectedIndexChanged += OnVarausSelectedIndexChanged;
         }
         
         // Uuden varauksen tietojen talletus
@@ -58,7 +59,7 @@ namespace Mokki_softa
             if (!int.TryParse(AsiakasIdEntry.Text, out int asiakasId) ||
                 !int.TryParse(entryMokkiId.Text, out int mokkiId))
             {
-                await DisplayAlert("Virhe", "Varaus ID:n, AsiakasID:n sekä Mökki ID:n täytyy olla numeerisia.", "OK");
+                await DisplayAlert("Virhe", "Tarkista, että kaikki kentät ovat täytettyjä. Lisäksi AsiakasID:n ja Mökki ID:n täytyy olla numeerisia.", "OK");
                 return;
             }
 
@@ -67,6 +68,35 @@ namespace Mokki_softa
             {
                 await DisplayAlert("Virhe", "Valitse päivämäärät kaikkiin kenttiin.", "OK");
                 return;
+            }
+
+            // Funktio tarkistaa, sisältääkö syöte kiellettyjä SQL-injektiomerkkejä
+            bool ContainsSQLInjection(string input)
+            {
+                string[] forbiddenChars = { "'", ";", "--", "/*", "*/" }; // Esimerkkejä kielletyistä merkeistä
+                foreach (var forbiddenChar in forbiddenChars)
+                {
+                    if (input.Contains(forbiddenChar))
+                    {
+                        return true; // Palauta true, jos kielletty merkki löytyy
+                    }
+                }
+                return false; // Palauta false, jos kiellettyä merkkiä ei löytynyt
+            }
+
+            // Tarkistetaan, ettei kenttiin ole syötetty SQL-injektioita
+            if (ContainsSQLInjection(AsiakasIdEntry.Text) || ContainsSQLInjection(AsiakasIdEntry.Text) ||
+                ContainsSQLInjection(entryMokkiId.Text) || ContainsSQLInjection(entryMokkiId.Text))
+            {
+                await DisplayAlert("Virhe", "Tarkista, että kentissä ei ole kiellettyjä erikoismerkkejä.", "OK");
+                return;
+            }
+
+            // Funktio tarkistaa, että kenttien pituus on oikea (max)
+            bool AreFieldLengthsValid()
+            {
+                return AsiakasIdEntry.Text.Length <= 10 && 
+                    entryMokkiId.Text.Length <= 10;
             }
 
             var varaus = new Varaus
@@ -93,6 +123,8 @@ namespace Mokki_softa
             if (isSuccess)
             {
                 await DisplayAlert("Onnistui!", "Varauksen tiedot lisätty", "OK");
+                 await LoadVarausIntoPicker(dbConnector); // Päivitetään pickerin data
+                 ClearFields(); // Tyhjennetään käyttöliittymän kentät
             }
             else
             {
@@ -100,6 +132,51 @@ namespace Mokki_softa
             }
 
         }
+
+        private async Task<bool> UpdateVarausToDatabase(int varausId, DatabaseConnector dbConnector)
+        {
+            try
+            {
+                using var conn = dbConnector.GetConnection();
+                await conn.OpenAsync();
+
+                string checkQuery = "SELECT COUNT(*) FROM varaus WHERE varaus_id = @varausId";
+                using var checkCmd = new MySqlCommand(checkQuery, conn);
+                checkCmd.Parameters.AddWithValue("@varausId", varausId);
+                long count = (long)await checkCmd.ExecuteScalarAsync();
+
+                if (count > 0)
+                {
+
+                    // Update existing varaus data
+                    string updateQuery = "UPDATE varaus SET asiakas_id = @asiakas_id, mokki_id = @mokki_id, varattu_pvm = @varattu_pvm, vahvistus_pvm = @vahvistus_pvm, varattu_alkupvm = @varattu_alkupvm, varattu_loppupvm = @varattu_loppupvm";
+                    updateQuery += " WHERE mokki_id = @mokkiId";
+
+                    using var updateCmd = new MySqlCommand(updateQuery, conn);
+                    updateCmd.Parameters.AddWithValue("@asiakas_Id", AsiakasIdEntry.Text);
+                    updateCmd.Parameters.AddWithValue("@mokki_id", entryMokkiId.Text);
+                    updateCmd.Parameters.AddWithValue("@varattu_pvm", varausDatePicker.Date);
+                    updateCmd.Parameters.AddWithValue("@vahvistus_pvm", vahvistusDatePicker.Date);
+                    updateCmd.Parameters.AddWithValue("@varattu_alkupvm", alkuDatePicker.Date);
+                    updateCmd.Parameters.AddWithValue("@varattu_loppupvm", loppuDatePicker.Date);
+                    updateCmd.Parameters.AddWithValue("@varausId", varausId);
+
+                    int rowsAffected = await updateCmd.ExecuteNonQueryAsync();
+
+                    return rowsAffected > 0;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Virhe mökin tietojen päivityksessä: {ex.Message}");
+                return false;
+            }
+        }
+        
 
         // varauksen tietojen poisto KESKEN
         private async Task<bool> RemoveVarausData(int varausId, DatabaseConnector dbConnector)
@@ -129,10 +206,10 @@ namespace Mokki_softa
 
         }
 
-        // Varauksen tietojen poisto KESKEN TEE TÄMÄ EKA!!!!
+        // Varauksen tietojen poisto KESKEN TEE TÄMÄ!!!!
         public async void OnVarausDeleteClicked(object sender, EventArgs e)
         {
-              /*      if (pickerVaraukset.SelectedItem == null)
+            if (pickerVaraukset.SelectedItem == null)
             {
                 await DisplayAlert("Virhe", "Valitse ensin varaus poistettavaksi.", "OK");
                 return;
@@ -156,9 +233,14 @@ namespace Mokki_softa
                 else
                 {
                     await DisplayAlert("Virhe", "Varauksen tietojen poisto epäonnistui.", "OK");
-                } */
+                }
 
         } 
+
+        public async void PaivitaVaraus_Clicked(object sender, EventArgs e)
+        {
+
+        }
 
          public async void PaivitaLista_Clicked(object sender, EventArgs e)
         {
@@ -223,7 +305,54 @@ namespace Mokki_softa
             {
                 await DisplayAlert("Virhe", $"Virhe asiakkaiden lataamisessa Pickeriin: {ex.Message}", "OK");
             }
-        } 
+        }
+
+        // EI TOiMi, kesken
+        /* private async void OnVarausSelectedIndexChanged(object sender, EventArgs e)
+        {
+            var appSettings = ConfigurationProvider.GetAppSettings();
+            var dbConnector = new DatabaseConnector(appSettings);
+
+            if (pickerVaraukset.SelectedItem != null)
+            {
+                // Otetaan valitusta itemistä asiakkaan id, etunimi ja sukunimi
+                string selectedItem = (string)pickerVaraukset.SelectedItem;
+                int varausId = int.Parse(selectedItem.Split(':')[0]);
+                await LoadVarausData(varausId, dbConnector);
+            }
+        } */
+        
+        // Näytä pickeristä valitun varauksen tiedot entry-kentissä
+        private async Task LoadVarausData(int varausId, DatabaseConnector dbConnector)
+        {
+            try
+            {
+                using var conn = dbConnector.GetConnection();
+                await conn.OpenAsync();
+
+                string query = "SELECT * FROM varaus WHERE varaus_id = @varausId";
+
+                using var cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@varausId", varausId);
+
+                using var reader = await cmd.ExecuteReaderAsync();
+                if (reader.Read())
+                {
+                    // Asetetaan asiakastiedot käyttöliittymään
+                    AsiakasIdEntry.Text = reader["asiakas_id"].ToString();
+                    entryMokkiId.Text = reader["mokki_id"].ToString();
+                    varausDatePicker.Date = reader.GetDateTime("varattu_pvm");
+                    vahvistusDatePicker.Date = reader.GetDateTime("vahvistus_pvm");
+                    alkuDatePicker.Date = reader.GetDateTime("varattu_alkupvm");
+                    loppuDatePicker.Date = reader.GetDateTime("varattu_loppupvm");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Virhe", $"Virhe asiakkaiden lataamisessa: {ex.Message}", "OK");
+            }
+        }
       
     }
    
