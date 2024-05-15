@@ -5,35 +5,40 @@ using static System.Net.Mime.MediaTypeNames;
 namespace Mokki_softa
 {
     // Ti: 4h
-    // Ke: 
+    // Ke: 1.75h
     // To: 
     public partial class LaskutPage : ContentPage
     {
         public LaskutPage()
         {
             InitializeComponent();
-            // pickerLasku p‰ivitys aina sivun avatessa
+            var appSettings = ConfigurationProvider.GetAppSettings();
+            var dbConnector = new DatabaseConnector(appSettings);
+            // Sivun avautuessa p‰ivitet‰‰n pickeri
+            LoadReceiptsIntoPicker(dbConnector);
+            
+            // samoin listan p‰ivitys (jos toteutetaan)
         }
 
         //  Lis‰‰ lasku:
         //  nappia painetaan -> tarkistus -> mahdollinen ilmoitus -> tietokantaan lis‰‰minen -> ilmoitus
         private async void LisaaLasku_Clicked(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(LaskuEntry.Text) &&
-                !string.IsNullOrWhiteSpace(VarausEntry.Text) &&
+            // Tarkistetaan, ett‰ kent‰t eiv‰t ole tyhj‰t
+            if (!string.IsNullOrWhiteSpace(VarausEntry.Text) &&
                 !string.IsNullOrWhiteSpace(SummaEntry.Text) &&
                 !string.IsNullOrWhiteSpace(AlvEntry.Text) &&
                 MaksunTilaPicker.SelectedIndex != -1)
             {
-                if (int.TryParse(LaskuEntry.Text, out int LaskuID) &&
-                   int.TryParse(VarausEntry.Text, out int VarausID) &&
+                // Tarkistetaan, ett‰ tiedot ovat numeereisia
+                if (int.TryParse(VarausEntry.Text, out int VarausID) &&
                    int.TryParse(SummaEntry.Text, out int Summa) &&
-                   int.TryParse(AlvEntry.Text, out int ALV))
+                   double.TryParse(AlvEntry.Text, out double ALV))
                 {
                     // Tiedon tallentaminen tietokantaan
                     try
                     {
-
+                        // tarkista, ett‰ varausID on olemassa ja laskuID luodaan se, mik‰ seuraavana
                         await DisplayAlert("Onnistui", "Tiedon tallentaminen tietokantaan onnistui", "OK");
                     }
                     catch (Exception ex)
@@ -57,23 +62,24 @@ namespace Mokki_softa
         //  nappia painetaan -> tarkistus -> mahdollinen ilmoitus -> tietokannan p‰ivitt‰minen -> ilmoitus
         private async void PaivitaLasku_Clicked(object sender, EventArgs e)
         {
-            if (pickerLasku.SelectedIndex != -1)
+            // Tarkistetaan, ett‰ pickerist‰ on valittu lasku
+            if (LaskuPicker.SelectedIndex != -1)
             {
-                if (!string.IsNullOrWhiteSpace(LaskuEntry.Text) &&
-                !string.IsNullOrWhiteSpace(VarausEntry.Text) &&
+                // Tarkistetaan, ett‰ kent‰t eiv‰t ole tyhj‰t
+                if (!string.IsNullOrWhiteSpace(VarausEntry.Text) &&
                 !string.IsNullOrWhiteSpace(SummaEntry.Text) &&
                 !string.IsNullOrWhiteSpace(AlvEntry.Text) &&
                 MaksunTilaPicker.SelectedIndex != -1)
                 {
-                    if (int.TryParse(LaskuEntry.Text, out int LaskuID) &&
-                       int.TryParse(VarausEntry.Text, out int VarausID) &&
+                    // Tarkistetaan, ett‰ tiedot ovat numeerisia
+                    if (int.TryParse(VarausEntry.Text, out int VarausID) &&
                        int.TryParse(SummaEntry.Text, out int Summa) &&
                        int.TryParse(AlvEntry.Text, out int ALV))
                     {
                         // Tiedon p‰ivitt‰minen tietokantaan
                         try
                         {
-
+                            // tarkista, ett‰ varausID ja laskuID ovat olemassa, ei voi luoda uutta
                             await DisplayAlert("Onnistui", "Tiedon tallentaminen tietokantaan onnistui", "OK");
                         }
                         catch (Exception ex)
@@ -102,8 +108,7 @@ namespace Mokki_softa
         //  nappia painetaan -> tyhjennet‰‰n kent‰t
         private void TyhjennaKentat_Clicked(object sender, EventArgs e)
         {
-                pickerLasku.SelectedIndex = -1;
-                LaskuEntry.Text = string.Empty;
+                LaskuPicker.SelectedIndex = -1;
                 VarausEntry.Text = string.Empty;
                 SummaEntry.Text = string.Empty;
                 AlvEntry.Text = string.Empty;
@@ -121,31 +126,99 @@ namespace Mokki_softa
         //  nappia painetaan -> poistetaan rivi tietokannasta -> ilmoitus
         private async void PoistaLasku_Clicked(object sender, EventArgs e)
         {
-            if (pickerLasku.SelectedIndex != -1)
+            // Tarkistetaan, ett‰ pickerist‰ on valittu lasku
+            if (LaskuPicker.SelectedIndex != -1)
             {
-                int.TryParse(LaskuEntry.Text, out int LaskuID);
-                if (pickerLasku.SelectedIndex != LaskuID - 1)
+                // Tiedon p‰ivitt‰minen tietokantaan
+                try
                 {
-                        // Tiedon p‰ivitt‰minen tietokantaan
-                        try
-                        {
 
-                            await DisplayAlert("Onnistui", "Tiedon poistaminen tietokannasta onnistui", "OK");
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine($"Tiedon poistaminen tietokannasta ep‰onnistui: {ex.Message}");
-                        }
-
+                    await DisplayAlert("Onnistui", "Tiedon poistaminen tietokannasta onnistui", "OK");
                 }
-                else
+                catch (Exception ex)
                 {
-                    await DisplayAlert("Virhe", "Yrit‰t poistaa v‰‰r‰‰ laskua", "OK");
+                    Console.WriteLine($"Tiedon poistaminen tietokannasta ep‰onnistui: {ex.Message}");
                 }
             }
             else
             {
                 await DisplayAlert("Virhe", "Valitse lasku, jonka haluat poistaa", "OK");
+            }
+        }
+
+        // Ladataan tiedot pickeriin
+        private async Task LoadReceiptsIntoPicker(DatabaseConnector dbConnector)
+        {
+            try
+            {
+                using var conn = dbConnector.GetConnection();
+                await conn.OpenAsync();
+
+                string query = "SELECT lasku_id, varaus_id, summa FROM lasku";
+
+                using var cmd = new MySqlCommand(query, conn);
+                using var reader = await cmd.ExecuteReaderAsync();
+
+                List<string> receiptNames = new List<string>();
+                while (reader.Read())
+                {
+                    int laskuId = reader.GetInt32("lasku_id");
+                    int varausId = reader.GetInt32("varaus_id");
+                    int summa = reader.GetInt32("summa");
+                    // Lis‰t‰‰n lasku id ja varausid ja summa listaan
+                    receiptNames.Add($"{laskuId}: {varausId} {summa}");
+                }
+
+                LaskuPicker.ItemsSource = receiptNames;
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Virhe", $"Virhe kuittien lataamisessa Pickeriin: {ex.Message}", "OK");
+            }
+        }
+
+        // Ladataan valitun kuitin tiedot entry kenttiin
+        private async Task LoadReceiptData(int laskuId, DatabaseConnector dbConnector)
+        {
+            try
+            {
+                using var conn = dbConnector.GetConnection();
+                await conn.OpenAsync();
+
+                string query = "SELECT * FROM lasku WHERE lasku_id = @laskuId";
+
+                using var cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@laskuId", laskuId);
+
+                using var reader = await cmd.ExecuteReaderAsync();
+                if (reader.Read())
+                {
+                    // Asetetaan laskutiedot k‰yttˆliittym‰‰n
+                    VarausEntry.Text = reader.GetString("varaus_id");
+                    SummaEntry.Text = reader.GetString("summa");
+                    AlvEntry.Text = reader.GetString("alv");
+                    MaksunTilaPicker.SelectedIndex = int.Parse(reader.GetString("maksettu"));
+
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Virhe", $"Virhe kuittien lataamisessa: {ex.Message}", "OK");
+            }
+        }
+
+        // Pickeriss‰ valittaessa kuitti, haetaan sen tiedot
+        private async void LaskuPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var appSettings = ConfigurationProvider.GetAppSettings();
+            var dbConnector = new DatabaseConnector(appSettings);
+
+            if (LaskuPicker.SelectedItem != null)
+            {
+                // Otetaan valitusta itemist‰ asiakkaan id, etunimi ja sukunimi
+                string selectedItem = (string)LaskuPicker.SelectedItem;
+                int laskuId = int.Parse(selectedItem.Split(':')[0]);
+                await LoadReceiptData(laskuId, dbConnector);
             }
         }
     }

@@ -26,13 +26,13 @@
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
-              <Picker x:Name="pickerLasku"
+                <Picker x:Name="LaskuPicker"
                     WidthRequest="250"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Margin="160,0,0,0"
-                    TextColor="Black" />
-                    <!-- SelectedIndexChanged="OnLaskuSelectedIndexChanged" -->
+                    TextColor="Black" 
+                    SelectedIndexChanged="LaskuPicker_SelectedIndexChanged"/>
             </HorizontalStackLayout>
 
             <!-- HorizontalStackLayout kaikelle tärkeälle (labelit, buttonit, entryt, listview, border) -->
@@ -49,16 +49,6 @@
                                 Padding="0,0,0,10"/>
                     </HorizontalStackLayout>
 
-                    <HorizontalStackLayout>
-                        <Label Text="Lasku ID: " Padding="0,12,0,0"
-                           TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Syötä laskun ID" x:Name="LaskuEntry"
-                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                           WidthRequest="250" Margin="35,0,0,10" Keyboard="Numeric"
-                           TextColor="Black" AutomationId="LaskuEntry" BackgroundColor="White"/>
-                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
-
-                    </HorizontalStackLayout>
                     <HorizontalStackLayout>
                         <Label Text="Varaus ID: " Padding="0,12,0,0"
                            TextColor="Black" FontSize="15" />
