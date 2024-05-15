@@ -229,7 +229,7 @@ namespace Mokki_softa
             var appSettings = ConfigurationProvider.GetAppSettings();
             var dbConnector = new DatabaseConnector(appSettings);
 
-                // Uusi asiakas, lisää uudet tiedot tietokantaan
+                // Uusi mökki, lisää uudet tiedot tietokantaan
                 bool isSuccess = await SaveNewMokkiToDatabase(dbConnector);
                 if (isSuccess)
                 {
@@ -285,7 +285,7 @@ namespace Mokki_softa
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Virhe asiakkaan tietojen poistamisessa: {ex.Message}");
+                Console.WriteLine($"Virhe mökin tietojen poistamisessa: {ex.Message}");
                 return false;
             }
         }
@@ -385,7 +385,6 @@ namespace Mokki_softa
 
             if (pickerMokit.SelectedItem != null)
             {
-                // Otetaan valitusta itemistä asiakkaan id, etunimi ja sukunimi
                 string selectedItem = (string)pickerMokit.SelectedItem;
                 int mokkiId = int.Parse(selectedItem.Split(':')[0]);
                 await LoadMokkiData(mokkiId, dbConnector);
