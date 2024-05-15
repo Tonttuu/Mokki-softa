@@ -55,8 +55,7 @@ namespace Mokki_softa
         {
             
             // Numeeristen kenttien tarkistus, sanitoidaan syöttöä
-            if (!int.TryParse(VarausIdEntry.Text, out int varausId) ||
-                !int.TryParse(AsiakasIdEntry.Text, out int asiakasId) ||
+            if (!int.TryParse(AsiakasIdEntry.Text, out int asiakasId) ||
                 !int.TryParse(entryMokkiId.Text, out int mokkiId))
             {
                 await DisplayAlert("Virhe", "Varaus ID:n, AsiakasID:n sekä Mökki ID:n täytyy olla numeerisia.", "OK");
@@ -72,7 +71,6 @@ namespace Mokki_softa
 
             var varaus = new Varaus
             {
-                VarausId = varausId,
                 MokkiId = mokkiId,
                 AsiakasId = asiakasId,
                 VarattuPvm = varausDatePicker.Date,
@@ -94,7 +92,7 @@ namespace Mokki_softa
             bool isSuccess = await SaveNewVarausData(varaus, dbConnector);
             if (isSuccess)
             {
-                await DisplayAlert("Onnistui!", "Tiedot lisätty", "OK");
+                await DisplayAlert("Onnistui!", "Varauksen tiedot lisätty", "OK");
             }
             else
             {
@@ -131,36 +129,36 @@ namespace Mokki_softa
 
         }
 
-        // Varauksen tietojen poisto KESKEN
+        // Varauksen tietojen poisto KESKEN TEE TÄMÄ EKA!!!!
         public async void OnVarausDeleteClicked(object sender, EventArgs e)
         {
-            if (pickerVaraukset.SelectedItem == null)
-    {
-        await DisplayAlert("Virhe", "Valitse ensin varaus poistettavaksi.", "OK");
-        return;
-    }
+              /*      if (pickerVaraukset.SelectedItem == null)
+            {
+                await DisplayAlert("Virhe", "Valitse ensin varaus poistettavaksi.", "OK");
+                return;
+            }
 
-    // Otetaan valitusta itemistä vain varauksen id (KESKEN)
-    string selectedItem = (string)pickerVaraukset.SelectedItem;
-    int varausId = int.Parse(selectedItem.Split(':')[0]);
+            // Otetaan valitusta itemistä vain varauksen id (KESKEN)
+            string selectedItem = (string)pickerVaraukset.SelectedItem;
+            int varausId = int.Parse(selectedItem.Split(':')[0]);
 
-    var appSettings = ConfigurationProvider.GetAppSettings();
-    var dbConnector = new DatabaseConnector(appSettings);
+            var appSettings = ConfigurationProvider.GetAppSettings();
+            var dbConnector = new DatabaseConnector(appSettings);
 
-        bool isSuccess = await RemoveVarausData(varausId, dbConnector);
-        if (isSuccess)
-        {
-            await DisplayAlert("Onnistui!", "Varauksen tiedot poistettu!", "OK");
-            await LoadVarausIntoPicker(dbConnector);
-            // Kenttien tyhjennys
-             ClearFields();
-        }
-        else
-        {
-            await DisplayAlert("Virhe", "Varauksen tietojen poisto epäonnistui.", "OK");
-        }
+                bool isSuccess = await RemoveVarausData(varausId, dbConnector);
+                if (isSuccess)
+                {
+                    await DisplayAlert("Onnistui!", "Varauksen tiedot poistettu!", "OK");
+                    await LoadVarausIntoPicker(dbConnector);
+                    // Kenttien tyhjennys
+                    ClearFields();
+                }
+                else
+                {
+                    await DisplayAlert("Virhe", "Varauksen tietojen poisto epäonnistui.", "OK");
+                } */
 
-        }
+        } 
 
          public async void PaivitaLista_Clicked(object sender, EventArgs e)
         {
@@ -170,7 +168,6 @@ namespace Mokki_softa
         // tyhjentää kentät
         private void ClearFields()
         {
-            VarausIdEntry.Text = string.Empty;
             entryMokkiId.Text = string.Empty;
             AsiakasIdEntry.Text = string.Empty;
             varausDatePicker.Date = DateTime.Today;
@@ -186,8 +183,8 @@ namespace Mokki_softa
             base.OnAppearing();
 
             // Asetetaan DatePickerien minimi- ja maksimipäivämäärät
-            varausDatePicker.MaximumDate = DateTime.Today;
-            varausDatePicker.MinimumDate = DateTime.Today;
+            varausDatePicker.MaximumDate = DateTime.Now;
+            varausDatePicker.MinimumDate = DateTime.Now;
             vahvistusDatePicker.MinimumDate = DateTime.Today;
             vahvistusDatePicker.MaximumDate = DateTime.Today.AddDays(7);
             alkuDatePicker.MinimumDate = DateTime.Today;
@@ -217,7 +214,7 @@ namespace Mokki_softa
                     int asiakas_Id = reader.GetInt32("asiakas_id");
                     int mokki_Id = reader.GetInt32("mokki_id");
                     // Lisätään varauksen, asiakkaan ja mökin id:t listaan
-                    reservation.Add($"{varaus_Id}: {asiakas_Id} {mokki_Id}");
+                    reservation.Add($"Varaus {varaus_Id}: Asiakas ID: {asiakas_Id} Mökki ID: {mokki_Id}");
                 }
 
                 pickerVaraukset.ItemsSource = reservation;

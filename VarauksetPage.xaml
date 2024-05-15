@@ -48,7 +48,7 @@
             
             <!-- SelectedIndexChanged="OnVarausSelectedIndexChanged" -->
 
-        <Label Text="Varaus ID"
+        <Label Text="Asiakas ID"
                TextColor="Black"
                FontSize="15"
                Padding="12,12,70,0"
@@ -57,15 +57,15 @@
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
-        <Entry  Placeholder="Syötä ID" x:Name="VarausIdEntry"
+        <Entry  Placeholder="Syötä ID" x:Name="AsiakasIdEntry"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                            WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
-                           TextColor="Black" AutomationId="VarausIdEntry" BackgroundColor="White"
+                           TextColor="Black" AutomationId="AsiakasIdEntry" BackgroundColor="White"
                            Grid.Column="1"
                             Grid.Row="1"/>
                            <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
 
-        <Label Text="Asiakas ID"
+        <Label Text="Mökki ID"
                TextColor="Black"
                FontSize="15"
                Padding="12,12,70,0"
@@ -74,29 +74,12 @@
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
-        <Entry  Placeholder="Syötä ID" x:Name="AsiakasIdEntry"
-                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                           WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
-                           TextColor="Black" AutomationId="AsiakasIdEntry" BackgroundColor="White"
-                           Grid.Column="1"
-                            Grid.Row="2"/>
-                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
-
-        <Label Text="Mökki ID"
-               TextColor="Black"
-               FontSize="15"
-               Padding="12,12,70,0"
-               Grid.Column="0"
-               Grid.Row="3"
-               HorizontalOptions="Center"
-               VerticalOptions="Start"/>
-
         <Entry Placeholder="Syötä ID" x:Name="entryMokkiId"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                            WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
                            TextColor="Black" AutomationId="entryMokkiId" BackgroundColor="White"
                            Grid.Column="1"
-                            Grid.Row="3"/>
+                            Grid.Row="2"/>
                            <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
 
         <Label Text="Varaus päivämäärä"
@@ -104,7 +87,7 @@
                FontSize="15"
                Padding="12,12,0,0"
                Grid.Column="0"
-               Grid.Row="4"
+               Grid.Row="3"
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
             
@@ -112,7 +95,7 @@
                         WidthRequest="250" Margin="32,0,0,10"
                         TextColor="Black"
                         Grid.Column="1"
-                        Grid.Row="4"/>
+                        Grid.Row="3"/>
 
         <!-- <Entry Placeholder="dd.mm.vvvv" x:Name="entryVarausPvm"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
@@ -127,7 +110,7 @@
                FontSize="15"
                Padding="12,12,75,0"
                Grid.Column="0"
-               Grid.Row="5"
+               Grid.Row="4"
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
@@ -135,7 +118,7 @@
                         WidthRequest="250" Margin="32,0,0,10"
                         TextColor="Black"
                         Grid.Column="1"
-                        Grid.Row="5"/>
+                        Grid.Row="4"/>
 
        <!-- <Entry Placeholder="Vahvistus päivämäärä dd.mm.vvvv" x:Name="entryVahvistusPvm"
                         PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
@@ -150,14 +133,14 @@
                FontSize="15"
                Padding="0,0,30,0"
                Grid.Column="0"
-               Grid.Row="6"
+               Grid.Row="5"
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
                <DatePicker x:Name="alkuDatePicker"
                 WidthRequest="250" Margin="36,0,0,10" TextColor="Black"
                 Grid.Column="1"
-                Grid.Row="6" />
+                Grid.Row="5" />
 
         <!-- <Entry Placeholder="dd.mm.vvvv" x:Name="entryVarausAlku"
                          PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
@@ -172,14 +155,14 @@
                FontSize="15"
                Padding="12,0,0,0"
                Grid.Column="0"
-               Grid.Row="7"
+               Grid.Row="6"
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
         <DatePicker x:Name="loppuDatePicker"
              WidthRequest="250" Margin="47,0,0,10" TextColor="Black"
              Grid.Column="1"
-             Grid.Row="7"/>
+             Grid.Row="6"/>
 
         <!-- <Entry Placeholder="dd.mm.vvvv" x:Name="entryVarausPäättyy"
                          PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
