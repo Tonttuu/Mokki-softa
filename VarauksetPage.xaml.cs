@@ -12,7 +12,7 @@ namespace Mokki_softa
             var dbConnector = new DatabaseConnector(appSettings);
             LoadVarausIntoPicker(dbConnector); // varaukset Pickeriin
              // PaivitaLista.Clicked += async (sender, e) => await HaeVaraukset();
-             // pickerVaraukset.SelectedIndexChanged += OnVarausSelectedIndexChanged;
+             pickerVaraukset.SelectedIndexChanged += OnVarausSelectedIndexChanged;
         }
         
         // Uuden varauksen tietojen talletus
@@ -133,6 +133,8 @@ namespace Mokki_softa
 
         }
 
+        // TÄTÄ PITÄISI SAADA KUTSUTTUA JONNEKIN
+
         private async Task<bool> UpdateVarausToDatabase(int varausId, DatabaseConnector dbConnector)
         {
             try
@@ -150,7 +152,7 @@ namespace Mokki_softa
 
                     // Update existing varaus data
                     string updateQuery = "UPDATE varaus SET asiakas_id = @asiakas_id, mokki_id = @mokki_id, varattu_pvm = @varattu_pvm, vahvistus_pvm = @vahvistus_pvm, varattu_alkupvm = @varattu_alkupvm, varattu_loppupvm = @varattu_loppupvm";
-                    updateQuery += " WHERE mokki_id = @mokkiId";
+                    updateQuery += " WHERE varaus_id = @varausId";
 
                     using var updateCmd = new MySqlCommand(updateQuery, conn);
                     updateCmd.Parameters.AddWithValue("@asiakas_Id", AsiakasIdEntry.Text);
@@ -172,7 +174,7 @@ namespace Mokki_softa
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Virhe mökin tietojen päivityksessä: {ex.Message}");
+                Console.WriteLine($"Virhe varauksen tietojen päivityksessä: {ex.Message}");
                 return false;
             }
         }
@@ -206,7 +208,7 @@ namespace Mokki_softa
 
         }
 
-        // Varauksen tietojen poisto KESKEN TEE TÄMÄ!!!!
+        // Varauksen tietojen poisto
         public async void OnVarausDeleteClicked(object sender, EventArgs e)
         {
             if (pickerVaraukset.SelectedItem == null)
@@ -215,7 +217,7 @@ namespace Mokki_softa
                 return;
             }
 
-            // Otetaan valitusta itemistä vain varauksen id (KESKEN)
+            // Otetaan valitusta itemistä vain varauksen id
             string selectedItem = (string)pickerVaraukset.SelectedItem;
             int varausId = int.Parse(selectedItem.Split(':')[0]);
 
@@ -239,7 +241,24 @@ namespace Mokki_softa
 
         public async void PaivitaVaraus_Clicked(object sender, EventArgs e)
         {
+             // Otetaan valitusta itemistä vain varauksen id
+            string selectedItem = (string)pickerVaraukset.SelectedItem;
+            int varausId = int.Parse(selectedItem.Split(':')[0]); //Virhe tässä JOS vaihtaa päivämääriä!!!!
 
+            var appSettings = ConfigurationProvider.GetAppSettings();
+            var dbConnector = new DatabaseConnector(appSettings);
+
+           
+            bool isSuccess = await UpdateVarausToDatabase(varausId, dbConnector);
+            if (isSuccess)
+            {
+                await DisplayAlert("Onnistui!", "Varauksen tiedot päivitetty!", "OK");
+                await LoadVarausIntoPicker(dbConnector); // Päivitetään pickerin tiedot
+            }
+            else
+            {
+                await DisplayAlert("Virhe", "Varauksen tietojen päivitys epäonnistui.", "OK");
+            }
         }
 
          public async void PaivitaLista_Clicked(object sender, EventArgs e)
@@ -296,7 +315,7 @@ namespace Mokki_softa
                     int asiakas_Id = reader.GetInt32("asiakas_id");
                     int mokki_Id = reader.GetInt32("mokki_id");
                     // Lisätään varauksen, asiakkaan ja mökin id:t listaan
-                    reservation.Add($"Varaus {varaus_Id}: Asiakas ID: {asiakas_Id} Mökki ID: {mokki_Id}");
+                    reservation.Add($"{varaus_Id}: Asiakas ID {asiakas_Id} Mökki ID {mokki_Id}");
                 }
 
                 pickerVaraukset.ItemsSource = reservation;
@@ -308,7 +327,8 @@ namespace Mokki_softa
         }
 
         // EI TOiMi, kesken
-        /* private async void OnVarausSelectedIndexChanged(object sender, EventArgs e)
+
+         private async void OnVarausSelectedIndexChanged(object sender, EventArgs e)
         {
             var appSettings = ConfigurationProvider.GetAppSettings();
             var dbConnector = new DatabaseConnector(appSettings);
@@ -320,7 +340,7 @@ namespace Mokki_softa
                 int varausId = int.Parse(selectedItem.Split(':')[0]);
                 await LoadVarausData(varausId, dbConnector);
             }
-        } */
+        } 
         
         // Näytä pickeristä valitun varauksen tiedot entry-kentissä
         private async Task LoadVarausData(int varausId, DatabaseConnector dbConnector)
