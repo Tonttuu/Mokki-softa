@@ -38,35 +38,17 @@
                     Margin="195,0,70,0"/>
             </HorizontalStackLayout>
 
-           <Picker x:Name="pickerAlue"
+                <Picker x:Name="pickerAlue"
                     WidthRequest="250"
                     TextColor="Black"
                     Margin="100,60,70,0"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Grid.Column="1"
-                    Grid.Row="0"/>
-            
-            <!-- SelectedIndexChanged="OnAlueSelectedIndexChanged" -->
+                    Grid.Row="0"
+                    SelectedIndexChanged="OnAlueSelectedIndexChanged" />
 
-        <Label Text="Alue ID"
-               TextColor="Black"
-               FontSize="15"
-               Padding="12,12,0,0"
-               Grid.Column="0"
-               Grid.Row="1"
-               HorizontalOptions="Center"
-               VerticalOptions="Start"/>
-
-        <Entry  Placeholder="Syötä ID" x:Name="AlueEntry"
-                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                           WidthRequest="250" Margin="13,0,0,10"
-                           TextColor="Black" AutomationId="AlueEntry" BackgroundColor="White"
-                           Grid.Column="1"
-                           Grid.Row="1"/>
-                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
-
-        <Label Text="Alueen nimi"
+                <Label Text="Alueen nimi"
                TextColor="Black"
                FontSize="15"
                Padding="12,12,0,0"
@@ -82,8 +64,21 @@
                            Grid.Column="1"
                             Grid.Row="2"/>
                            <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
-        
-    <Button
+                <Button x:Name="PaivitaAlue"
+            BackgroundColor="White"
+            Text="Päivitä Alue"
+            TextColor="Black"
+            FontSize="20"
+            BorderColor="Black"
+            WidthRequest="175"
+            Grid.Column="3"
+            Grid.Row="5"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="5"
+            Clicked="PaivitaAlue_Clicked" />       
+
+                <Button
             BackgroundColor="White"
             Text="Lisää alue"
             TextColor="Black"
@@ -108,10 +103,10 @@
             Grid.Row="1"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="5"/>
-           <!-- Clicked="PoistaAlue_Clicked" -->
+            Margin="5"
+            Clicked="PoistaAlue_Clicked" />
 
-         <Button
+                <Button
             BackgroundColor="White"
             Text="Tyhjennä kentät"
             TextColor="Black"
@@ -122,10 +117,10 @@
             Grid.Row="2"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="5"/>
-            <!-- Clicked="TyhjennaAlue_Clicked" -->
+            Margin="5"
+            Clicked="TyhjennaAlue_Clicked" />
 
-      <Button
+                <Button
             BackgroundColor="White"
             Text="Päivitä lista"
             TextColor="Black"
@@ -136,8 +131,8 @@
             Grid.Row="2"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="5"/>
-             <!-- Clicked="PaivitaLista_Clicked" -->
+            Margin="5"
+            Clicked="PaivitaLista_Clicked" />
            
     </Grid>
 
