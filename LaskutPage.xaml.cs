@@ -177,7 +177,7 @@ namespace Mokki_softa
             }
         }
 
-        // Ladataan valitun kuitin tiedot entry kenttiin
+        // Ladataan valitun kuitin tiedot entry kenttiin ja pickeriin
         private async Task LoadReceiptData(int laskuId, DatabaseConnector dbConnector)
         {
             try
