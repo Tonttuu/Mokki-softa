@@ -7,7 +7,7 @@ namespace Mokki_softa
 {
     // Ti: 4h
     // Ke: 4h
-    // To: 4h
+    // To: 5h
     public partial class LaskutPage : ContentPage
     {
         public LaskutPage()
@@ -54,7 +54,7 @@ namespace Mokki_softa
                         // Tiedon tallentaminen / päivittäminen tietokantaan
                         var appSettings = ConfigurationProvider.GetAppSettings();
                         var dbConnector = new DatabaseConnector(appSettings);
-                        
+
                         if (LaskuPicker.SelectedItem != null)
                         {
                             // Otetaan valitusta itemistä vain laskun id
