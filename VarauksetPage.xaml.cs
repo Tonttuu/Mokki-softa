@@ -243,7 +243,7 @@ namespace Mokki_softa
         {
              // Otetaan valitusta itemistä vain varauksen id
             string selectedItem = (string)pickerVaraukset.SelectedItem;
-            int varausId = int.Parse(selectedItem.Split(':')[0]); //Virhe tässä JOS vaihtaa päivämääriä!!!!
+            int varausId = int.Parse(selectedItem.Split(':')[0]); //Virhe tässä JOS vaihtaa varauksen alkupäivämäärää!!!!
 
             var appSettings = ConfigurationProvider.GetAppSettings();
             var dbConnector = new DatabaseConnector(appSettings);
