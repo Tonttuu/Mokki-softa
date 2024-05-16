@@ -57,7 +57,7 @@
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
-        <Entry Placeholder="Syötä ID" x:Name="entryAlueNimi"
+        <Entry Placeholder="Syötä alueen nimi" x:Name="entryAlueNimi"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                            WidthRequest="250" Margin="13,0,0,10"
                            TextColor="Black" AutomationId="entryAlueNimi" BackgroundColor="White"
