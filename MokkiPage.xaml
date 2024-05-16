@@ -20,7 +20,7 @@
                 </Label.FormattedText>
             </Label>
 
-    <Grid ColumnDefinitions="145, 250, 145, 145, 145"
+            <Grid ColumnDefinitions="145, 250, 145, 145, 145"
       RowDefinitions="*,*,*,*,*,*,*,*,*,*,*"
       ColumnSpacing="40"
       RowSpacing="10"

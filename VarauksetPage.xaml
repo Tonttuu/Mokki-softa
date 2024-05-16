@@ -37,7 +37,7 @@
                     Margin="210,0,70,0"/>
             </HorizontalStackLayout>
 
-           <Picker x:Name="pickerVaraus"
+           <Picker x:Name="pickerVaraukset"
                     WidthRequest="250"
                     TextColor="Black"
                     HorizontalOptions="Center"
@@ -48,7 +48,7 @@
             
             <!-- SelectedIndexChanged="OnVarausSelectedIndexChanged" -->
 
-        <Label Text="Varaus ID"
+        <Label Text="Asiakas ID"
                TextColor="Black"
                FontSize="15"
                Padding="12,12,70,0"
@@ -57,10 +57,10 @@
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
-        <Entry  Placeholder="Syötä ID" x:Name="VarausIdEntry"
+        <Entry  Placeholder="Syötä ID" x:Name="AsiakasIdEntry"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                           WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
-                           TextColor="Black" AutomationId="VarausIdEntry" BackgroundColor="White"
+                           WidthRequest="250" Margin="30,0,0,10"
+                           TextColor="Black" AutomationId="AsiakasIdEntry" BackgroundColor="White"
                            Grid.Column="1"
                             Grid.Row="1"/>
                            <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
@@ -76,7 +76,7 @@
 
         <Entry Placeholder="Syötä ID" x:Name="entryMokkiId"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                           WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
+                           WidthRequest="250" Margin="30,0,0,10"
                            TextColor="Black" AutomationId="entryMokkiId" BackgroundColor="White"
                            Grid.Column="1"
                             Grid.Row="2"/>
@@ -90,13 +90,19 @@
                Grid.Row="3"
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
+            
+        <DatePicker  x:Name="varausDatePicker"
+                        WidthRequest="250" Margin="32,0,0,10"
+                        TextColor="Black"
+                        Grid.Column="1"
+                        Grid.Row="3"/>
 
-        <Entry Placeholder="dd.mm.vvvv" x:Name="entryVarausPvm"
+        <!-- <Entry Placeholder="dd.mm.vvvv" x:Name="entryVarausPvm"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                           WidthRequest="250" Margin="36,0,0,10" Keyboard="Numeric"
+                           WidthRequest="250" Margin="36,0,0,10"
                            TextColor="Black" AutomationId="entryVarausPvm" BackgroundColor="White"
                             Grid.Column="1"
-                            Grid.Row="3"/>
+                            Grid.Row="4"/> -->
                            <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
 
                <Label Text="Vahvistus"
@@ -108,12 +114,18 @@
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
-        <Entry Placeholder="Vahvistus päivämäärä dd.mm.vvvv" x:Name="entryVahvistusPvm"
+        <DatePicker  x:Name="vahvistusDatePicker"
+                        WidthRequest="250" Margin="32,0,0,10"
+                        TextColor="Black"
+                        Grid.Column="1"
+                        Grid.Row="4"/>
+
+       <!-- <Entry Placeholder="Vahvistus päivämäärä dd.mm.vvvv" x:Name="entryVahvistusPvm"
                         PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                        WidthRequest="250" Margin="32,0,0,10" Keyboard="Numeric"
+                        WidthRequest="250" Margin="32,0,0,10"
                         TextColor="Black" AutomationId="entryVahvistusPvm" BackgroundColor="White"
                          Grid.Column="1"
-                        Grid.Row="4"/>
+                        Grid.Row="5"/> -->
                         <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
 
                <Label Text="Varauksen alkupäivämäärä"
@@ -125,12 +137,17 @@
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
-        <Entry Placeholder="dd.mm.vvvv" x:Name="entryVarausAlku"
+               <DatePicker x:Name="alkuDatePicker"
+                WidthRequest="250" Margin="36,0,0,10" TextColor="Black"
+                Grid.Column="1"
+                Grid.Row="5" />
+
+        <!-- <Entry Placeholder="dd.mm.vvvv" x:Name="entryVarausAlku"
                          PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                         WidthRequest="250" Margin="36,0,0,10" Keyboard="Numeric"
+                         WidthRequest="250" Margin="36,0,0,10"
                          TextColor="Black" AutomationId="entryVarausAlku" BackgroundColor="White"
                          Grid.Column="1"
-                        Grid.Row="5"/>
+                        Grid.Row="6"/> -->
                          <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
 
         <Label Text="Varauksen päättymispäivämäärä"
@@ -142,12 +159,17 @@
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
-        <Entry Placeholder="dd.mm.vvvv" x:Name="entryVarausPäättyy"
+        <DatePicker x:Name="loppuDatePicker"
+             WidthRequest="250" Margin="47,0,0,10" TextColor="Black"
+             Grid.Column="1"
+             Grid.Row="6"/>
+
+        <!-- <Entry Placeholder="dd.mm.vvvv" x:Name="entryVarausPäättyy"
                          PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                         WidthRequest="250" Margin="47,0,0,10" Keyboard="Numeric"
+                         WidthRequest="250" Margin="47,0,0,10"
                          TextColor="Black" AutomationId="entryVarausPäättyy" BackgroundColor="White"
                          Grid.Column="1"
-                        Grid.Row="6"/>
+                        Grid.Row="7"/> -->
                          <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
 
         
@@ -162,7 +184,8 @@
             Grid.Row="3"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="5"/>
+            Margin="5"
+            Clicked="OnVarausSubmitClicked"/>
 
             <!-- Clicked="OnVarausSubmitClicked" -->
 
@@ -177,8 +200,8 @@
             Grid.Row="3"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="5"/>
-           <!-- Clicked="OnVarausDeleteClicked" -->
+            Margin="5"
+            Clicked="OnVarausDeleteClicked" />
 
          <Button x:Name="PaivitaVaraus"
             BackgroundColor="White"
@@ -191,12 +214,13 @@
             Grid.Row="4"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="5"/>
+            Margin="5"
+            Clicked="PaivitaVaraus_Clicked" />
             <!-- Clicked="PaivitaVaraus_Clicked" -->
 
       <Button x:Name="TyhjennaVaraus"
             BackgroundColor="White"
-            Text="Tyhjennä varaus"
+            Text="Tyhjennä kentät"
             TextColor="Black"
             FontSize="20"
             BorderColor="Black"
@@ -205,7 +229,8 @@
             Grid.Row="4"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="5"/>
+            Margin="5"
+            Clicked="TyhjennaVaraus_Clicked"/>
             <!-- Clicked="TyhjennaVaraus_Clicked" -->
            
     </Grid>
@@ -220,7 +245,8 @@
             WidthRequest="180"
             Grid.Column="0"
             Grid.Row="1"
-            Margin="10,10,0,20"/>
+            Margin="10,10,0,20"
+            Clicked="PaivitaLista_Clicked"/>
             <!-- Clicked="PaivitaLista_Clicked" -->
 </Grid>
 
@@ -270,7 +296,7 @@
 
                         <!-- Pää ListView-->
                         <ListView x:Name="ItemListView"
-                              HasUnevenRows="True" >
+                            HasUnevenRows="True" >
                               <!-- ItemSelected="ItemListView_ItemSelected" -->
 
                             <ListView.ItemTemplate>

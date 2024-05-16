@@ -104,31 +104,23 @@
                     <!-- Napit -->
                     <HorizontalStackLayout>
                         <Button
-                            Text="Lisää asiakas" x:Name="LisaaAsiakas" WidthRequest="175" Margin="10"
+                            Text="Lisää asiakas / Päivitä asiakas" x:Name="LisaaAsiakas" WidthRequest="225" Margin="100,20,0,0"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
                             BackgroundColor="White"
                             Clicked="OnAsiakasSubmitClicked"/>
-                        <!-- Huom! Pitää erottaa lisää asiakas ja päivitä tiedot tästä napista, kun ne ovat tässä samassa -->
 
-                        <Button
+
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout>
+
+                    <Button
                             Text="Poista asiakas"  x:Name="PoistaAsiakas" WidthRequest="175" Margin="10"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
                             BackgroundColor="White"
                             Clicked="OnAsiakasDeleteClicked" />
-
-                    </HorizontalStackLayout>
-
-                    <HorizontalStackLayout>
-                        <Button
-                            x:Name="PaivitaAsiakas"
-                            Text="Päivitä asiakas" WidthRequest="175" Margin="10"
-                            TextColor="Black" Background="White"
-                            BorderColor="Black" BorderWidth="1"
-                            BackgroundColor="White"/>
-                             <!-- tähän pitää saada, että päivittää asiakkaan tiedot -->
-                            <!-- Clicked="PaivitaAsiakas_Clicked" -->
 
                         <Button
                             x:Name="TyhjennaAsiakas"
