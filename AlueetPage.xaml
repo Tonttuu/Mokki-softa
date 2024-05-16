@@ -6,7 +6,7 @@
 <ScrollView BackgroundColor="LightGreen">
        
 <VerticalStackLayout
-    Margin="10"
+    Margin="5"
     Spacing="10"
     HorizontalOptions="Center">
 
@@ -32,20 +32,22 @@
 
             <HorizontalStackLayout >
             <Label Text="Valitse olemassaoleva alue:"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="StartAndExpand"
                     TextColor="Black"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    Margin="195,0,70,0"/>
+                    Margin="195,0,0,0"/>
+            
             </HorizontalStackLayout>
+
 
                 <Picker x:Name="pickerAlue"
                     WidthRequest="250"
                     TextColor="Black"
-                    Margin="100,60,70,0"
+                    Margin="80,10,70,0"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Grid.Column="1"
-                    Grid.Row="0"
+                    Grid.Row="1"
                     SelectedIndexChanged="OnAlueSelectedIndexChanged" />
 
                 <Label Text="Alueen nimi"
@@ -70,9 +72,9 @@
             TextColor="Black"
             FontSize="20"
             BorderColor="Black"
-            WidthRequest="175"
-            Grid.Column="3"
-            Grid.Row="5"
+            WidthRequest="180"
+            Grid.Column="2"
+            Grid.Row="2"
             HorizontalOptions="Center"
             VerticalOptions="Center"
             Margin="5"
@@ -84,7 +86,7 @@
             TextColor="Black"
             FontSize="20"
             BorderColor="Black"
-            WidthRequest="175"
+            WidthRequest="180"
             Grid.Column="2"
             Grid.Row="1"
             HorizontalOptions="Center"
@@ -98,7 +100,7 @@
             TextColor="Black"
             FontSize="20"
             BorderColor="Black"
-            WidthRequest="175"
+            WidthRequest="180"
             Grid.Column="3"
             Grid.Row="1"
             HorizontalOptions="Center"
@@ -112,29 +114,30 @@
             TextColor="Black"
             FontSize="20"
             BorderColor="Black"
-            WidthRequest="175"
-            Grid.Column="2"
-            Grid.Row="2"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            Margin="5"
-            Clicked="TyhjennaAlue_Clicked" />
-
-                <Button
-            BackgroundColor="White"
-            Text="Päivitä lista"
-            TextColor="Black"
-            FontSize="20"
-            BorderColor="Black"
             WidthRequest="180"
             Grid.Column="3"
             Grid.Row="2"
             HorizontalOptions="Center"
             VerticalOptions="Center"
             Margin="5"
-            Clicked="PaivitaLista_Clicked" />
+            Clicked="TyhjennaAlue_Clicked" />
            
     </Grid>
+
+    <Grid ColumnDefinitions="*" RowDefinitions="10,*">
+    <Button x:Name="PaivitaLista"
+            BackgroundColor="White"
+            Text="Päivitä lista"
+            TextColor="Black"
+            FontSize="20"
+            BorderColor="Black"
+            WidthRequest="180"
+            Grid.Column="0"
+            Grid.Row="1"
+            Margin="10,10,0,20"
+            Clicked="PaivitaLista_Clicked"/>
+            <!-- Clicked="PaivitaLista_Clicked" -->
+</Grid>
 
 
                     <HorizontalStackLayout Margin="10,0,0,0"

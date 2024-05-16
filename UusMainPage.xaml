@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Mokki_softa.UusMainPage">
+             x:Class="Mokki_softa.UusMainPage" >
 
-<ScrollView>
+<ScrollView BackgroundColor="White">
+
+<VerticalStackLayout Margin="10"
+    Spacing="10"
+    HorizontalOptions="Center">
+
+ <!-- Logo -->
+            <Label Padding="10" HorizontalOptions="Center" FontSize="50" Margin="0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Village " TextColor="Black" FontFamily="Stereofunk" />
+                        <Span Text="Newbies" TextColor="Black" FontFamily="Stereofunk"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+    <Label FontSize="25" Text="Tervetuloa Village Newbies mökinvarausjärjestelmään"
+    Padding="10" TextColor="Black" VerticalOptions="Center"/>
+
+    <Label FontSize="15" Text="Ohjeet:" Padding="10" TextColor="Black" VerticalOptions="Start"/>
+
+    <Label FontSize="15" Text="Luo ensin asiakashallintaan asiakas. Varausta ei voi luoda ennen kuin asiakas on luotu."
+     TextColor="Black" VerticalOptions="Start"/>
+
+    <Label FontSize="15" Text="Seuraavaksi voit luoda alueen ja sen jälkeen mökin tai palvelun."
+     TextColor="Black" VerticalOptions="Start"/>
+
+    <Label FontSize="15" Text="Mökkiä ja palvelua ei voi luoda ennen kuin niille on alue määritelty."
+     TextColor="Black" VerticalOptions="Start"/>
+
+    <Label FontSize="15" Text="Varauksen voi luoda olemassaoleville asiakkaille ja mökeille."
+    TextColor="Black" VerticalOptions="Start"/>
+
+    <Label FontSize="15" Text="Laskun voi tehdä vasta tehdyn varauksen jälkeen." TextColor="Black" VerticalOptions="Start"/>
+
+    <Label FontSize="15" Text="Jokaisellla sivulla näkyy selkeästi syöttökentät joihin voi lisätä tarvittavat tiedot. Kun olet valmis niin paina kyseisten tietojen lisäys-nappia."
+     TextColor="Black" VerticalOptions="Start"/>
+
+    <Label FontSize="15" Text="Tarpeelliset tiedot pitäisi tulla pickeriin näkyville." TextColor="Black" VerticalOptions="Start"/>
+
+    <Label FontSize="15" Text="Tietoja on mahdollista lisätä, muokata/päivittää ja poistaa. Tarvittaessa kentät on mahdollista tyhjentää."
+     TextColor="Black" VerticalOptions="Start"/>
+
+    </VerticalStackLayout>
 
 </ScrollView>
 
