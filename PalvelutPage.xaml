@@ -26,13 +26,13 @@
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
-              <Picker x:Name="pickerPalvelu"
+                <Picker x:Name="pickerPalvelu"
                     WidthRequest="250"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Margin="145,0,0,0"
-                    TextColor="Black" />
-                    <!-- SelectedIndexChanged="OnPalveluSelectedIndexChanged" -->
+                    TextColor="Black"
+                    SelectedIndexChanged="OnPalveluSelectedIndexChanged" />
             </HorizontalStackLayout>
 
             <!-- HorizontalStackLayout kaikelle tärkeälle (lableit, buttonit, entryt, listview, border) -->
@@ -40,16 +40,6 @@
                 <!--VerticalStacklayout: Labelit + Entryt-->
                 <VerticalStackLayout Padding="30,0,30,0" VerticalOptions="Center">
                     <!--Erikseen HorizontalLayoutit labelille ja entrylle-->
-                    <HorizontalStackLayout>
-                        <Label Text="Palvelu ID: " Padding="0,12,0,0"
-                           TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Syötä ID" x:Name="PalveluEntry"
-                           PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                           WidthRequest="250" Margin="13,0,0,10" Keyboard="Numeric"
-                           TextColor="Black" AutomationId="PalveluEntry" BackgroundColor="White"/>
-                           <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
-
-                    </HorizontalStackLayout>
                     <HorizontalStackLayout>
                         <Label Text="Alue ID: " Padding="0,12,0,0"
                            TextColor="Black" FontSize="15" />
@@ -105,15 +95,17 @@
                             Text="Lisää palvelu" x:Name="LisaaPalvelu" WidthRequest="175" Margin="10"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
-                            BackgroundColor="White"/>
-                            <!-- Clicked="LisaaPalvelu_Clicked" -->
+                            BackgroundColor="White"
+                            Clicked="OnPalveluSubmitClicked"/>
+                            
 
                         <Button
                             Text="Poista palvelu"  x:Name="PoistaPalvelu" WidthRequest="175" Margin="10"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
-                            BackgroundColor="White"/>
-                        <!-- Clicked="PoistaPalvelu_Clicked" -->
+                            BackgroundColor="White"
+                            Clicked="OnPalveluDeleteClicked"/>
+                        
 
                     </HorizontalStackLayout>
 
@@ -123,15 +115,15 @@
                             Text="Päivitä palvelu" WidthRequest="175" Margin="10"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
-                            BackgroundColor="White"/>
-                            <!-- Clicked="PaivitaPalvelu_Clicked" -->
+                            BackgroundColor="White"
+                            Clicked="PaivitaPalvelu_Clicked" />
 
                         <Button
                             Text="Tyhjennä kentät" WidthRequest="175" Margin="10"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
-                            BackgroundColor="White"/>
-                            <!-- Clicked="TyhjennaPalvelu_Clicked" -->
+                            BackgroundColor="White"
+                            Clicked="TyhjennaPalvelu_Clicked" />
 
                     </HorizontalStackLayout>
 
@@ -139,8 +131,8 @@
                             Text="Päivitä lista" WidthRequest="175" Margin="10"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
-                            BackgroundColor="White"/>
-                            <!-- Clicked="PaivitaLista_Clicked" -->
+                            BackgroundColor="White"
+                            Clicked="PaivitaLista_Clicked" />
 
                 </VerticalStackLayout>
 
