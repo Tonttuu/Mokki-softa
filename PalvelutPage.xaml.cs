@@ -15,7 +15,6 @@ namespace Mokki_softa
             LoadPalvelutIntoPicker(dbConnector);
         }
 
-        // ei toimi, varmaan kirjoitusvirhe mitä en huomaa
         private async Task<bool> UpdatePalveluToDatabase(int palveluId, DatabaseConnector dbConnector)
         {
             try
@@ -40,7 +39,7 @@ namespace Mokki_softa
                     updateCmd.Parameters.AddWithValue("@kuvaus", KuvausEntry.Text);
                     updateCmd.Parameters.AddWithValue("@hinta", HintaEntry.Text);
                     updateCmd.Parameters.AddWithValue("@alv", ALVEntry.Text);
-                    
+                    updateCmd.Parameters.AddWithValue("@palveluId", palveluId);
 
                     int rowsAffected = await updateCmd.ExecuteNonQueryAsync();
 
@@ -296,18 +295,18 @@ namespace Mokki_softa
                 using var conn = dbConnector.GetConnection();
                 await conn.OpenAsync();
 
-                string insertQuery = "INSERT INTO palvelu (alue_id, nimi, kuvaus, hinta, alv) VALUES (@alue_id, @nimi, @kuvaus, @hinta, @alv)";
+                string insertQuery = "INSERT INTO palvelu (alue_id, nimi, kuvaus, hinta, alv)" + 
+                                     "VALUES (@alue_Id, @nimi, @kuvaus, @hinta, @alv)";
 
 
                 using var insertCmd = new MySqlCommand(insertQuery, conn);
-                insertCmd.Parameters.AddWithValue("@alue_id", AlueEntry.Text);
+                insertCmd.Parameters.AddWithValue("@alue_Id", AlueEntry.Text);
                 insertCmd.Parameters.AddWithValue("@nimi", NimiEntry.Text);
                 insertCmd.Parameters.AddWithValue("@kuvaus", KuvausEntry.Text);
                 insertCmd.Parameters.AddWithValue("@hinta", HintaEntry.Text);
                 insertCmd.Parameters.AddWithValue("@alv", ALVEntry.Text);
                 
                 int rowsAffected = await insertCmd.ExecuteNonQueryAsync();
-
 
                 return rowsAffected > 0;
             }

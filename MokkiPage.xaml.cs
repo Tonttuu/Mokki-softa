@@ -314,9 +314,9 @@ namespace Mokki_softa
                 await conn.OpenAsync();
 
                 string insertQuery = "INSERT INTO mokki (alue_id, postinro, mokkinimi, katuosoite, hinta, kuvaus, henkilomaara, varustelu) " +
-                               "VALUES (@alue_Id, @postinro, @mokkinimi, @katuosoite, @hinta, @kuvaus, @henkilomaara, @varustelu)";
+                                     "VALUES (@alue_Id, @postinro, @mokkinimi, @katuosoite, @hinta, @kuvaus, @henkilomaara, @varustelu)";
 
-               
+                
                 using var insertCmd = new MySqlCommand(insertQuery, conn);
                 insertCmd.Parameters.AddWithValue("@alue_Id", entryAlueId.Text);
                 insertCmd.Parameters.AddWithValue("@postinro", entryPostinro.Text);
