@@ -45,7 +45,7 @@
                     <HorizontalStackLayout>
                         <Label Text="Etunimi: " Padding="0,12,0,0"
                            TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Etunimi" x:Name="entryEtuNimi"
+                        <Entry Placeholder="Syötä etunimi" x:Name="entryEtuNimi"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                            WidthRequest="250" Margin="60,0,0,10"
                            TextColor="Black" AutomationId="entryEtuNimi" BackgroundColor="White"/>
@@ -55,7 +55,7 @@
                     <HorizontalStackLayout>
                         <Label Text="Sukunimi: " Padding="0,12,0,0"
                            TextColor="Black" FontSize="15" />
-                        <Entry Placeholder="Sukunimi" x:Name="entrySukuNimi"
+                        <Entry Placeholder="Syötä sukunimi" x:Name="entrySukuNimi"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                            WidthRequest="250" Margin="50,0,0,10"
                            TextColor="Black" AutomationId="entrySukuNimi" BackgroundColor="White"/>
@@ -64,7 +64,7 @@
                     <HorizontalStackLayout>
                         <Label Text="Lähiosoite: " Padding="0,12,0,0" 
                            TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Lähiosoite" x:Name="entryLahisoite"
+                        <Entry Placeholder="Syötä lähiosoite" x:Name="entryLahisoite"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                            WidthRequest="250" Margin="46,0,0,10"
                            TextColor="Black" AutomationId="entryLahisoite" BackgroundColor="White" />
@@ -74,9 +74,9 @@
                     <HorizontalStackLayout>
                         <Label Text="Postinumero: " Padding="0,12,0,0" 
                          TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Postinumero" x:Name="entryPostiNro"
+                        <Entry Placeholder="Syötä postinumero" x:Name="entryPostiNro"
                         PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                        WidthRequest="250" Margin="30,0,0,10" Keyboard="Numeric"
+                        WidthRequest="250" Margin="26,0,0,10" Keyboard="Numeric"
                         TextColor="Black" AutomationId="entryPostiNro" BackgroundColor="White"/>
                         <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
                         
@@ -84,9 +84,9 @@
                     <HorizontalStackLayout>
                         <Label Text="Puhelinnumero: " Padding="0,12,0,0" 
                          TextColor="Black" FontSize="15"/>
-                        <Entry Placeholder="Puhelinnumero" x:Name="entryPuhNro"
+                        <Entry Placeholder="Syötä puhelinnumero" x:Name="entryPuhNro"
                          PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                         WidthRequest="250" Margin="18,0,0,10" Keyboard="Numeric"
+                         WidthRequest="250" Margin="12,0,0,10" Keyboard="Numeric"
                          TextColor="Black" AutomationId="entryPuhNro" BackgroundColor="White"/>
                          <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
                     </HorizontalStackLayout>
@@ -95,7 +95,7 @@
                          TextColor="Black" FontSize="15"/>
                         <Entry Placeholder="Syötä sähköposti" x:Name="entryEmail"
                          PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                         WidthRequest="250" Margin="52,0,0,10"
+                         WidthRequest="250" Margin="46,0,0,10"
                          TextColor="Black" AutomationId="entryEmail" BackgroundColor="White"/>
                          <!-- Completed="EntryCompleted" Unfocused="EntryUnfocused" -->
                     </HorizontalStackLayout>
@@ -127,7 +127,8 @@
                             Text="Tyhjennä kentät" WidthRequest="175" Margin="10"
                             TextColor="Black" Background="White"
                             BorderColor="Black" BorderWidth="1"
-                            BackgroundColor="White"/>
+                            BackgroundColor="White"
+                            Clicked="TyhjennaAsiakas_Clicked"/>
                             <!-- Clicked="TyhjennaAsiakas_Clicked" -->
 
                     </HorizontalStackLayout>

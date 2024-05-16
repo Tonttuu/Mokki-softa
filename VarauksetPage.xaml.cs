@@ -275,7 +275,7 @@ namespace Mokki_softa
             vahvistusDatePicker.Date = DateTime.Today;
             alkuDatePicker.Date = DateTime.Today;
             loppuDatePicker.Date = DateTime.Today;
-            // Pickerissä -1, katso S harjoitustyö
+            pickerVaraukset.SelectedIndex = -1;
         }
 
         

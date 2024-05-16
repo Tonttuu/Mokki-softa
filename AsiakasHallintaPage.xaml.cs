@@ -50,6 +50,7 @@ private void ClearFields()
     entryPostiNro.Text = string.Empty;
     entryPuhNro.Text = string.Empty;
     entryEmail.Text = string.Empty;
+    pickerAsiakkaat.SelectedIndex = -1;
 }
 
 
@@ -132,6 +133,10 @@ private async Task<bool> SaveOrUpdateDataToDatabase(int asiakasId, DatabaseConne
     }
 }
 
+public async void TyhjennaAsiakas_Clicked(object sender, EventArgs e)
+{
+    ClearFields();
+}
 
 
 // Asiakkaan lisäys/tietojen päivitys nappi & tarkistukset

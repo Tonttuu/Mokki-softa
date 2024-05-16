@@ -75,7 +75,7 @@
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
-        <Entry Placeholder="Postinumero" x:Name="entryPostinro"
+        <Entry Placeholder="Syötä postinumero" x:Name="entryPostinro"
                            PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                            WidthRequest="250" Margin="36,0,0,10"
                            TextColor="Black" AutomationId="entryPostinro" BackgroundColor="White"
@@ -92,7 +92,7 @@
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
-        <Entry Placeholder="Mökin nimi" x:Name="entryMokkiNimi"
+        <Entry Placeholder="Syötä mökin nimi" x:Name="entryMokkiNimi"
                         PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                         WidthRequest="250" Margin="32,0,0,10"
                         TextColor="Black" AutomationId="entryMokkiNimi" BackgroundColor="White"
@@ -109,7 +109,7 @@
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
-        <Entry Placeholder="Katuosoite" x:Name="entryKatuosoite"
+        <Entry Placeholder="Syötä katuosoite" x:Name="entryKatuosoite"
                          PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                          WidthRequest="250" Margin="36,0,0,10"
                          TextColor="Black" AutomationId="entryKatuosoite" BackgroundColor="White"
@@ -128,7 +128,7 @@
 
         <Entry Placeholder="Syötä hinta" x:Name="entryHinta"
                          PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
-                         WidthRequest="250" Margin="47,0,0,10" Keyboard="Numeric"
+                         WidthRequest="250" Margin="43,0,0,10" Keyboard="Numeric"
                          TextColor="Black" AutomationId="entryHinta" BackgroundColor="White"
                          Grid.Column="1"
                         Grid.Row="6"/>
@@ -143,7 +143,7 @@
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
-        <Entry Placeholder="Kuvaus" x:Name="entryKuvaus"
+        <Entry Placeholder="Anna kuvaus mökistä" x:Name="entryKuvaus"
                          PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                          WidthRequest="250" Margin="42,0,0,10"
                          TextColor="Black" AutomationId="entryKuvaus" BackgroundColor="White"
@@ -160,7 +160,7 @@
                HorizontalOptions="Center"
                VerticalOptions="Start"/>
 
-        <Entry Placeholder="Henkilömäärä" x:Name="entryHenkilomaara"
+        <Entry Placeholder="Syötä henkilömäärä" x:Name="entryHenkilomaara"
                          PlaceholderColor="DimGrey" ClearButtonVisibility="WhileEditing"
                          WidthRequest="250" Margin="42,0,0,10"
                          TextColor="Black" AutomationId="entryHenkilomaara" BackgroundColor="White"
@@ -231,7 +231,7 @@
 
                 <Button x:Name="TyhjennaMokki"
             BackgroundColor="White"
-            Text="Tyhjennä mökki"
+            Text="Tyhjennä kentät"
             TextColor="Black"
             FontSize="20"
             BorderColor="Black"
